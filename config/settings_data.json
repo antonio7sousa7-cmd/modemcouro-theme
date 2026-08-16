@@ -12,9 +12,9 @@
     "logo": "shopify://shop_images/modemcouro_logo_azul.png",
     "logo_width": 90,
     "favicon": "shopify://shop_images/modemcouro_logo_azul.png",
-    "type_header_font": "roboto_n4",
-    "heading_scale": 100,
-    "type_body_font": "roboto_n4",
+    "type_header_font": "fraunces_n4",
+    "heading_scale": 115,
+    "type_body_font": "work_sans_n4",
     "body_scale": 100,
     "page_width": 1200,
     "spacing_sections": 0,
@@ -123,7 +123,7 @@
     "predictive_search_show_vendor": false,
     "predictive_search_show_price": false,
     "currency_code_enabled": true,
-    "cart_type": "notification",
+    "cart_type": "drawer",
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
@@ -183,44 +183,44 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#ffffff",
+          "background": "#faf7f2",
           "background_gradient": "",
-          "text": "#121212",
-          "button": "#121212",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#121212",
-          "shadow": "#121212"
+          "text": "#1c1a17",
+          "button": "#1c1a17",
+          "button_label": "#faf7f2",
+          "secondary_button_label": "#1c1a17",
+          "shadow": "#1c1a17"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#f3f3f3",
+          "background": "#f0ebe3",
           "background_gradient": "",
-          "text": "#121212",
-          "button": "#121212",
-          "button_label": "#f3f3f3",
-          "secondary_button_label": "#121212",
-          "shadow": "#121212"
+          "text": "#1c1a17",
+          "button": "#1c1a17",
+          "button_label": "#f0ebe3",
+          "secondary_button_label": "#1c1a17",
+          "shadow": "#1c1a17"
         }
       },
       "scheme-3": {
         "settings": {
-          "background": "#242833",
+          "background": "#2a2119",
           "background_gradient": "",
-          "text": "#ffffff",
-          "button": "#ffffff",
-          "button_label": "#000000",
-          "secondary_button_label": "#ffffff",
+          "text": "#f5f1ea",
+          "button": "#f5f1ea",
+          "button_label": "#2a2119",
+          "secondary_button_label": "#f5f1ea",
           "shadow": "#121212"
         }
       },
       "scheme-4": {
         "settings": {
-          "background": "#121212",
+          "background": "#161310",
           "background_gradient": "",
           "text": "#ffffff",
           "button": "#ffffff",
-          "button_label": "#121212",
+          "button_label": "#161310",
           "secondary_button_label": "#ffffff",
           "shadow": "#121212"
         }
@@ -232,6 +232,17 @@
           "text": "#ffffff",
           "button": "#ffffff",
           "button_label": "#334fb4",
+          "secondary_button_label": "#ffffff",
+          "shadow": "#121212"
+        }
+      },
+      "scheme-6": {
+        "settings": {
+          "background": "#1f3a2e",
+          "background_gradient": "",
+          "text": "#ffffff",
+          "button": "#ffffff",
+          "button_label": "#1f3a2e",
           "secondary_button_label": "#ffffff",
           "shadow": "#121212"
         }

@@ -1,0 +1,289 @@
+{%- style -%}
+  #CategoryGrid-{{ section.id }} .category-grid__list {
+    gap: var(--grid-desktop-vertical-spacing) var(--grid-desktop-horizontal-spacing);
+  }
+
+  #CategoryGrid-{{ section.id }} .category-grid__item-link {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: var(--product-card-corner-radius);
+  }
+
+  #CategoryGrid-{{ section.id }} .category-grid__media {
+    position: relative;
+    aspect-ratio: {{ section.settings.image_ratio }};
+    overflow: hidden;
+    background-color: rgba(var(--color-foreground), 0.04);
+  }
+
+  #CategoryGrid-{{ section.id }} .category-grid__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-long, 0.5s) ease;
+  }
+
+  #CategoryGrid-{{ section.id }} .category-grid__item-link:hover .category-grid__media img {
+    transform: scale(1.04);
+  }
+
+  #CategoryGrid-{{ section.id }} .category-grid__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, {{ section.settings.overlay_opacity | divided_by: 100.0 }});
+    pointer-events: none;
+  }
+
+  #CategoryGrid-{{ section.id }} .category-grid__label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  #CategoryGrid-{{ section.id }} .category-grid__label span {
+    color: #ffffff;
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    font-weight: var(--font-body-weight-bold);
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div id="CategoryGrid-{{ section.id }}" class="category-grid page-width section-{{ section.id }}-padding isolate">
+    {%- unless section.settings.heading == blank -%}
+      <div class="title-wrapper-with-link title-wrapper--no-top-margin">
+        <h2 class="category-grid__heading inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
+    {%- endunless -%}
+
+    {%- if section.settings.subheading != blank -%}
+      <p class="category-grid__subheading">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    <ul
+      class="category-grid__list grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
+      role="list"
+    >
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign category_image = block.settings.image
+          if category_image == blank and block.settings.collection != blank
+            assign category_image = block.settings.collection.featured_image
+          endif
+
+          assign category_title = block.settings.title
+          if category_title == blank and block.settings.collection != blank
+            assign category_title = block.settings.collection.title
+          endif
+          assign category_title_safe = category_title | escape
+
+          assign category_url = '#'
+          if block.settings.collection != blank
+            assign category_url = block.settings.collection.url
+          endif
+        -%}
+        <li
+          class="category-grid__item grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {{ block.shopify_attributes }}
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+        >
+          <a href="{{ category_url }}" class="category-grid__item-link full-unstyled-link">
+            <div class="category-grid__media">
+              {%- if category_image != blank -%}
+                {{
+                  category_image
+                  | image_url: width: 1100
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '350, 500, 700, 900, 1100',
+                    sizes: '(min-width: 990px) 25vw, (min-width: 750px) 50vw, 100vw',
+                    alt: category_title_safe
+                }}
+              {%- else -%}
+                {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+              <div class="category-grid__overlay"></div>
+              <div class="category-grid__label">
+                <span>{{ category_title_safe | default: 'Categoria' }}</span>
+              </div>
+            </div>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Grid de categorias",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 12,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Explore por categoria",
+      "label": "Título"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Pequeno" },
+        { "value": "h1", "label": "Médio" },
+        { "value": "h0", "label": "Grande" }
+      ],
+      "default": "h1",
+      "label": "Tamanho do título"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "Encontre sempre a peça certa"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        { "value": "1/1", "label": "Quadrado" },
+        { "value": "3/4", "label": "Retrato" },
+        { "value": "4/3", "label": "Paisagem" }
+      ],
+      "default": "3/4",
+      "label": "Proporção da imagem"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 30,
+      "label": "Opacidade do overlay"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "Colunas no desktop"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        { "value": "1", "label": "1 coluna" },
+        { "value": "2", "label": "2 colunas" }
+      ],
+      "default": "2",
+      "label": "Colunas no telemóvel"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Espaçamento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaçamento superior",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaçamento inferior",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categoria",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Coleção"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem (opcional)",
+          "info": "Se vazio, usa a imagem de destaque da coleção"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título (opcional)",
+          "info": "Se vazio, usa o nome da coleção"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grid de categorias",
+      "blocks": [
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" }
+      ]
+    }
+  ]
+}
+{% endschema %}

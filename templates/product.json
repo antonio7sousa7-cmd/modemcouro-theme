@@ -1,0 +1,131 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible_tab_epCQwM": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Pele 100% genuína",
+            "icon": "leather",
+            "content": "<ul><li><strong>Confeccionado em pele 100% genuína de alta qualidade</strong>, garantindo durabilidade e resistência a desgaste abrasões, calor e líquidos.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_RVHTFm": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Design Prático e Funcional",
+            "icon": "eye",
+            "content": "<ul><li><strong>Bolsos Estrategicamente Localizados: </strong>Compartimentos interiores oferecendo espaço para guardar pequenos objetos e organizar os seus essenciais.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_bPT7K7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Acabamento Resistente e Impecável",
+            "icon": "fire",
+            "content": "<p>Feito em couro macio e resistente, proporciona conforto durante o dia todo.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "collapsible_tab_epCQwM",
+        "collapsible_tab_RVHTFm",
+        "collapsible_tab_bPT7K7"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": false,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "hover",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Também poderá gostar",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}

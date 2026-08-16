@@ -1,0 +1,138 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "collapsible_tab_epCQwM": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Materiais Premium",
+            "icon": "leather",
+            "content": "<ul><li>Confeccionado em pele genuína de alta qualidade, tratada para garantir resistência, flexibilidade e um toque macio.</li><li>A malha interna adiciona conforto extra, tornando o casaco em pele ideal para os dias frios.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_RVHTFm": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Design Prático e Prático",
+            "icon": "eye",
+            "content": "<ul><li><strong>Recorte Clássico: </strong>O corte ajustado ao corpo confere um visual elegante e moderno, sem perder a praticidade.</li><li><strong>Fecho Central: </strong>Fecho metálico de alta qualidade proporciona segurança e facilidade de uso, além de conferir um toque de estilo ao design.</li><li><strong>Detalhes Estruturados: </strong>Costuras reforçadas e acabamentos precisos garantem um ajuste perfeito e duradouro.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_bPT7K7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Funcionalidade e Conforto",
+            "icon": "fire",
+            "content": "<ul><li><strong>Forro Interno em Malha: </strong>Inclui forro interno leve e respirável, ideal para manter o corpo aquecido nos dias frios sem comprometer no conforto.</li><li><strong>Bolsos Laterais e interior: </strong>Bolsos funcionais oferecem espaço suficiente para guardar pequenos objetos, como carteira ou telemóvel.</li></ul>",
+            "page": ""
+          }
+        },
+        "custom_liquid_3fV9q6": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n .table_component {overflow:auto;width:100%;} .table_component table {border:1px solid #dededf;height:100%;width:100%;table-layout:fixed;border-collapse:collapse;border-spacing:1px;text-align:center;} .table_component caption {caption-side:top;text-align:left;} .table_component th {border:1px solid #dededf;background-color:#354ea4;color:#ffffff;padding:5px;} .table_component td {border:1px solid #dededf;background-color:#ffffff;color:#000000;padding:5px;}\n</style>\n<div class=\"table_component\" role=\"region\" tabindex=\"0\"><table><caption>Tabela de Tamanhos</caption><thead><tr><th>Zona</th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th></tr></thead><tbody><tr><td>Peito</td><td>55</td><td>57</td><td>59</td><td>61</td><td>63</td><td>65</td></tr><tr><td>Fundo</td><td>44</td><td>46</td><td>48</td><td>50</td><td>52</td><td>54</td></tr><tr><td>Manga</td><td>68</td><td>69</td><td>70</td><td>71</td><td>72</td><td>73</td></tr><tr><td>Costas</td><td>66</td><td>67</td><td>68</td><td>69</td><td>70</td><td>71</td></tr></tbody></table>"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "collapsible_tab_epCQwM",
+        "collapsible_tab_RVHTFm",
+        "collapsible_tab_bPT7K7",
+        "custom_liquid_3fV9q6"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": false,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "hover",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}

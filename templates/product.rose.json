@@ -1,0 +1,145 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "custom_liquid_ji8iBw": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
+        "collapsible_tab_epCQwM": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Materiais Premium",
+            "icon": "leather",
+            "content": "<ul><li>Confeccionado em pele macia e resistente, tratada para garantir durabilidade e brilho natural.</li><li>Acabamento impecável com costuras precisas e zíperes metálicos robustos.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_RVHTFm": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Design Moderno e Versátil",
+            "icon": "eye",
+            "content": "<ul><li><strong>Cor Vermelha Intensa: </strong>Tonalidade profunda que se destaca em qualquer look, desde casual até mais formal.</li><li><strong>Recorte Curto: </strong>Linhas limpas e ajustadas ao corpo, adequadas a silhuetas femininas.</li><li><strong>Detalhes Funcionais: </strong>Dois bolsos frontais discretos e gola clássica com botões prateados.</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_bPT7K7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Conforto e Flexibilidade",
+            "icon": "star",
+            "content": "<ul><li><strong>Corte Estruturado: </strong>Modela o corpo sem restringir movimentos, graças à elasticidade da pele.</li><li><strong>Forro Interior: </strong>Tecido leve e respirável, ideal para estações intermediárias.</li></ul>",
+            "page": ""
+          }
+        },
+        "custom_liquid_AdDqtJ": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n .table_component {overflow:auto;width:100%;} .table_component table {border:1px solid #dededf;height:100%;width:100%;table-layout:fixed;border-collapse:collapse;border-spacing:1px;text-align:center;} .table_component caption {caption-side:top;text-align:left;} .table_component th {border:1px solid #dededf;background-color:#354ea4;color:#ffffff;padding:5px;} .table_component td {border:1px solid #dededf;background-color:#ffffff;color:#000000;padding:5px;}\n</style>\n<div class=\"table_component\" role=\"region\" tabindex=\"0\"><table><caption>Tabela de Tamanhos</caption><thead><tr><th>Zona</th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th></tr></thead><tbody><tr><td>Peito</td><td>51</td><td>53</td><td>55</td><td>57</td><td>59</td></tr><tr><td>Fundo</td><td>48</td><td>50</td><td>52</td><td>54</td><td>56</td></tr><tr><td>Manga</td><td>56</td><td>57</td><td>58</td><td>59</td><td>60</td></tr><tr><td>Costas</td><td>48</td><td>49</td><td>50</td><td>51</td><td>52</td></tr></tbody></table>"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "custom_liquid_ji8iBw",
+        "collapsible_tab_epCQwM",
+        "collapsible_tab_RVHTFm",
+        "collapsible_tab_bPT7K7",
+        "custom_liquid_AdDqtJ"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "small",
+        "constrain_to_viewport": false,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "hover",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Também poderá gostar",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}

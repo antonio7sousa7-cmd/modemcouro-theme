@@ -1,0 +1,53 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "custom_css": [],
+      "settings": {}
+    },
+    "rich_text_GBka8Q": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_djBd6X": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "h1"
+          }
+        },
+        "text_GjHA9G": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Não sabemos como veio aqui parar, mas pode clicar no botão para conhecer as outras peças.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_djBd6X",
+        "text_GjHA9G"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_GBka8Q"
+  ]
+}

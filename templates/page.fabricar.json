@@ -1,0 +1,87 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_79Ydyk": {
+      "type": "image-banner",
+      "settings": {
+        "image": "shopify://shop_images/woman-portrait-on-pink-brick.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "multirow_HPfRUt": {
+      "type": "multirow",
+      "blocks": {
+        "row_wh7ULP": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/materiais-de-alta-qualidade.jpg",
+            "caption": "",
+            "heading": "Materiais de Alta Qualidade",
+            "text": "<p>Trabalhamos com os melhores tipos de couro e cabedal sintético disponíveis no mercado, garantindo resistência, conforto e beleza em todos os produtos.<br/></p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "row_T4AH6P": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/person-working-on-fashion-design-on-a-tablet.jpg",
+            "caption": "",
+            "heading": "Design Personalizado",
+            "text": "<p>Desenvolvemos peças únicas, adaptadas ao seu estilo ou às necessidades específicas do seu negócio. Desde bolsas até estofados corporativos, tudo é feito sob medida.<br/><br/></p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_wh7ULP",
+        "row_T4AH6P"
+      ],
+      "settings": {
+        "image_height": "small",
+        "desktop_image_width": "small",
+        "image_layout": "alternate-left",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "row_color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "image_banner_79Ydyk",
+    "main",
+    "multirow_HPfRUt"
+  ]
+}

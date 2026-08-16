@@ -1,0 +1,299 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_VpaKHP": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_y9j7tT": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_0031.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "<strong>Mod'Em Couro</strong>",
+            "heading_size": "h1",
+            "subheading": "<strong>Mais de 35 anos de experiência no fabrico de vestuário em couro</strong>",
+            "button_label": "COMPRAR AGORA",
+            "link": "shopify://collections/all",
+            "button_style_secondary": true,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-3"
+          }
+        },
+        "slide_HeNpE8": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/dark-haired-man-in-brown-leather-jacket.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "<strong>Coleção de Casacos de Couro de Homem</strong>",
+            "heading_size": "h2",
+            "subheading": "",
+            "button_label": "COMPRAR AGORA",
+            "link": "shopify://collections/casacos",
+            "button_style_secondary": true,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-3"
+          }
+        },
+        "slide_YyAFcU": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/model-with-leather-jacket-over-shoulders.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "<strong>Tem um Design Específico?</strong>",
+            "heading_size": "h2",
+            "subheading": "<strong>Fabricamos as suas ideias à medida</strong>",
+            "button_label": "CONHEÇA O SERVIÇO",
+            "link": "shopify://pages/fabricar",
+            "button_style_secondary": true,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-3"
+          }
+        }
+      },
+      "block_order": [
+        "slide_y9j7tT",
+        "slide_HeNpE8",
+        "slide_YyAFcU"
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "adapt_image",
+        "slider_visual": "dots",
+        "auto_rotate": true,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": false,
+        "accessibility_info": "Banner a apresentar a marca de Produtos de couro - Mod'em Couro"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "best-selling-products",
+        "products_to_show": 10,
+        "title": "Mais vendidos",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 5,
+        "enable_desktop_slider": true,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_PzCR7g": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_cHMkcw": {
+          "type": "heading",
+          "settings": {
+            "heading": "Mod'em Couro é uma Fábrica Portuguesa de Confeção de Produtos em Pele e Couro",
+            "heading_size": "h1"
+          }
+        },
+        "text_Rqg7LX": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Desde 1989, a <strong>MOD'EM COURO</strong> destaca-se no mercado pela excelência na fabricação, venda e reparação de produtos em pele e couro. Com décadas de experiência no fabrico para marcas conceituadas e uma equipa altamente qualificada, oferecemos soluções personalizadas para atender às necessidades dos nossos clientes, desde pequenos reparos até grandes projetos de fabricação.</p><p><strong>A nossa missão é transformar as peles e o couro em arte, combinando tradição e inovação para entregar peças únicas e duradouras. </strong></p><p>Explore o nosso site e descubra o produto ideal para si ou como podemos ajudar a sua empresa a alcançar resultados excepcionais com produtos de alta qualidade.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cHMkcw",
+        "text_Rqg7LX"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "ss_feature_1_hznDc6": {
+      "type": "ss-feature-1",
+      "blocks": {
+        "image_Vb8etk": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Envios Rápidos",
+            "feature_text": "",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_dJmwVn": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Fabrico em Portugal",
+            "feature_text": "",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_nhmqwX": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Devoluções sem complicações",
+            "feature_text": "",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_TAMBXM": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Pele Genuína",
+            "feature_text": "",
+            "feature_url": "",
+            "hide_image": false
+          }
+        }
+      },
+      "block_order": [
+        "image_Vb8etk",
+        "image_dJmwVn",
+        "image_nhmqwX",
+        "image_TAMBXM"
+      ],
+      "settings": {
+        "feature_row": 4,
+        "feature_row_mobile": 1,
+        "feature_gap": 20,
+        "feature_gap_mobile": 20,
+        "feature_padding_horizontal": 0,
+        "feature_padding_vertical": 0,
+        "feature_radius": 16,
+        "feature_border_thickness": 0,
+        "feature_shadow": false,
+        "feature_heading_custom": false,
+        "feature_heading_font": "josefin_sans_n4",
+        "feature_heading_size": 14,
+        "feature_heading_size_mobile": 12,
+        "feature_heading_height": 130,
+        "feature_heading_mt": 8,
+        "feature_text_custom": false,
+        "feature_text_font": "josefin_sans_n4",
+        "feature_text_size": 12,
+        "feature_text_size_mobile": 12,
+        "feature_text_height": 130,
+        "feature_text_mt": 4,
+        "feature_icon_size": 42,
+        "feature_icon_size_mobile": 42,
+        "feature_bg": "#ffffff",
+        "feature_border_color": "#000000",
+        "feature_shadow_color": "#000000",
+        "feature_heading_color": "#000000",
+        "feature_text_color": "#000000",
+        "feature_icon_color": "#000000",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "multicolumn_ace83n": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_3AjNgq": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/vender-banner.jpg",
+            "title": "VENDER",
+            "text": "<p>Explore a nossa linha exclusiva de produtos de couro. </p><p></p><p>Qualidade e elegância duradoura.</p>",
+            "link_label": "Ver Produtos",
+            "link": "shopify://collections/all"
+          }
+        },
+        "column_4tPpnL": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/reparar-banner.jpg",
+            "title": "REPARAR",
+            "text": "<p>Devolvemos vida aos seus produtos.</p><p>Reparos precisos, pintura e restauração das suas peças de couro.</p><p></p>",
+            "link_label": "Conheça o serviço",
+            "link": "shopify://pages/reparar"
+          }
+        },
+        "column_cVxYhM": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/fabricar-banner.jpg",
+            "title": "FABRICAR",
+            "text": "<p>Transformamos ideias em realidade.</p><p>Criação personalizada de peças em couro.</p>",
+            "link_label": "Saiba mais",
+            "link": "shopify://pages/fabricar"
+          }
+        }
+      },
+      "block_order": [
+        "column_3AjNgq",
+        "column_4tPpnL",
+        "column_cVxYhM"
+      ],
+      "settings": {
+        "title": "O que Fazemos",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-3",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "slideshow_VpaKHP",
+    "featured_collection",
+    "rich_text_PzCR7g",
+    "ss_feature_1_hznDc6",
+    "multicolumn_ace83n"
+  ]
+}

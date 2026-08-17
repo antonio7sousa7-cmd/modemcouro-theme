@@ -25,7 +25,7 @@
       "settings": {
         "color_scheme": "scheme-3",
         "newsletter_enable": true,
-        "newsletter_heading": "Fique a par das nossas Novidades",
+        "newsletter_heading": "Newsletter",
         "enable_follow_on_shop": false,
         "show_social": true,
         "enable_country_selector": true,

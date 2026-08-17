@@ -45,24 +45,43 @@
     height: auto;
   }
 
+  #ShopTheLook-{{ section.id }} .shop-the-look__products-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(var(--color-foreground), 0.03);
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+    padding: 3.2rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    #ShopTheLook-{{ section.id }} .shop-the-look__products-panel {
+      align-self: stretch;
+    }
+  }
+
   #ShopTheLook-{{ section.id }} .shop-the-look__products {
     display: flex;
     flex-direction: column;
-    gap: 2.4rem;
   }
 
   #ShopTheLook-{{ section.id }} .shop-the-look__product {
     display: flex;
     align-items: center;
-    gap: 1.6rem;
+    gap: 2rem;
     text-decoration: none;
     color: rgb(var(--color-foreground));
+    padding: 2rem 0;
+  }
+
+  #ShopTheLook-{{ section.id }} .shop-the-look__product:not(:first-child) {
+    border-top: 1px solid rgba(var(--color-foreground), 0.08);
   }
 
   #ShopTheLook-{{ section.id }} .shop-the-look__product-media {
     flex-shrink: 0;
-    width: 8rem;
-    height: 8rem;
+    width: 9.6rem;
+    height: 9.6rem;
     overflow: hidden;
     background-color: rgba(var(--color-foreground), 0.04);
   }
@@ -74,8 +93,14 @@
   }
 
   #ShopTheLook-{{ section.id }} .shop-the-look__product-title {
-    font-size: 1.5rem;
-    margin: 0 0 0.4rem;
+    font-size: 1.6rem;
+    margin: 0 0 0.6rem;
+  }
+
+  #ShopTheLook-{{ section.id }} .shop-the-look__empty {
+    margin: 0;
+    color: rgba(var(--color-foreground), 0.6);
+    font-size: 1.4rem;
   }
 {%- endstyle -%}
 
@@ -108,33 +133,39 @@
         {%- endif -%}
       </div>
 
-      <div class="shop-the-look__products">
-        {%- for block in section.blocks -%}
-          {%- assign product = block.settings.product -%}
-          <a
-            href="{{ product.url | default: '#' }}"
-            class="shop-the-look__product"
-            {{ block.shopify_attributes }}
-          >
-            <div class="shop-the-look__product-media">
-              {%- if product.featured_image != blank -%}
-                {{
-                  product.featured_image
-                  | image_url: width: 200
-                  | image_tag: loading: 'lazy', widths: '100, 160, 200'
-                }}
-              {%- else -%}
-                {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
-              {%- endif -%}
-            </div>
-            <div class="shop-the-look__product-info">
-              <p class="shop-the-look__product-title">{{ product.title | escape | default: 'Produto' }}</p>
-              {%- if product != blank -%}
-                {% render 'price', product: product %}
-              {%- endif -%}
-            </div>
-          </a>
-        {%- endfor -%}
+      <div class="shop-the-look__products-panel">
+        {%- if section.blocks.size > 0 -%}
+          <div class="shop-the-look__products">
+            {%- for block in section.blocks -%}
+              {%- assign product = block.settings.product -%}
+              <a
+                href="{{ product.url | default: '#' }}"
+                class="shop-the-look__product"
+                {{ block.shopify_attributes }}
+              >
+                <div class="shop-the-look__product-media">
+                  {%- if product.featured_image != blank -%}
+                    {{
+                      product.featured_image
+                      | image_url: width: 200
+                      | image_tag: loading: 'lazy', widths: '100, 160, 200'
+                    }}
+                  {%- else -%}
+                    {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </div>
+                <div class="shop-the-look__product-info">
+                  <p class="shop-the-look__product-title">{{ product.title | escape | default: 'Produto' }}</p>
+                  {%- if product != blank -%}
+                    {% render 'price', product: product %}
+                  {%- endif -%}
+                </div>
+              </a>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <p class="shop-the-look__empty">Escolhe os produtos deste look no editor de temas.</p>
+        {%- endif -%}
       </div>
     </div>
   </div>

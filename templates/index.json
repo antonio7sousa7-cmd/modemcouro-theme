@@ -238,14 +238,24 @@
             "text": "<p>Desde 1989, a <strong>MOD'EM COURO</strong> destaca-se no mercado pela excelência na fabricação, venda e reparação de produtos em pele e couro. Com décadas de experiência no fabrico para marcas conceituadas e uma equipa altamente qualificada, oferecemos soluções personalizadas para atender às necessidades dos nossos clientes, desde pequenos reparos até grandes projetos de fabricação.</p><p><strong>A nossa missão é transformar as peles e o couro em arte, combinando tradição e inovação para entregar peças únicas e duradouras. </strong></p><p>Explore o nosso site e descubra o produto ideal para si ou como podemos ajudar a sua empresa a alcançar resultados excecionais com produtos de alta qualidade.</p>",
             "text_style": "body"
           }
+        },
+        "button_story": {
+          "type": "button",
+          "settings": {
+            "button_label": "Conhecer a nossa história",
+            "button_link": "",
+            "button_style_secondary": true
+          }
         }
       },
       "block_order": [
         "heading_story",
-        "text_story"
+        "text_story",
+        "button_story"
       ],
       "settings": {
         "image": "shopify://shop_images/model-with-leather-jacket-over-shoulders.jpg",
+        "height": "medium",
         "desktop_image_width": "medium",
         "layout": "image_first",
         "image_behavior": "none",

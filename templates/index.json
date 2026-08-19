@@ -255,8 +255,8 @@
       ],
       "settings": {
         "image": "shopify://shop_images/model-with-leather-jacket-over-shoulders.jpg",
-        "height": "medium",
-        "desktop_image_width": "medium",
+        "height": "large",
+        "desktop_image_width": "large",
         "layout": "image_first",
         "image_behavior": "none",
         "content_layout": "no-overlap",
@@ -265,8 +265,8 @@
         "mobile_content_alignment": "left",
         "section_color_scheme": "scheme-3",
         "color_scheme": "scheme-3",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "shop_the_look_1": {
@@ -325,7 +325,7 @@
         "email_form_newsletter"
       ],
       "settings": {
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-3",
         "full_width": true,
         "padding_top": 64,
         "padding_bottom": 64
@@ -483,13 +483,13 @@
   },
   "order": [
     "slideshow_VpaKHP",
+    "ss_feature_1_hznDc6",
     "category_grid_1",
     "multicolumn_ace83n",
     "featured_collection",
     "image_with_text_story",
     "shop_the_look_1",
     "newsletter_1",
-    "ss_feature_1_hznDc6",
     "instagram_gallery_1"
   ]
 }

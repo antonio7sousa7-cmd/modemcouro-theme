@@ -1,0 +1,273 @@
+{%- liquid
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+-%}
+{% style %}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+    }
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row-media {
+    order: 1;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row--reverse .ss-brand-story__row-media {
+    aspect-ratio: 3 / 2;
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row-media img,
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row-media .placeholder-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row-text {
+    order: 2;
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row-heading {
+    margin: 0;
+    font-family: var(--font-body-family);
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    font-size: 3rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row-body {
+    margin: 2.5rem 0 0;
+    font-size: 1.6rem;
+    line-height: 1.85;
+    color: rgb(var(--color-foreground));
+    max-width: 42rem;
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row-body p {
+    margin: 0 0 1.6rem;
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 3rem;
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgb(var(--color-foreground));
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.35);
+    padding-bottom: 0.3rem;
+    transition: border-color var(--duration-short, 0.25s) ease;
+  }
+
+  .ss-brand-story-{{ section.id }} .ss-brand-story__row-cta:hover {
+    border-color: rgb(var(--color-foreground));
+  }
+
+  @media screen and (min-width: 750px) {
+    .ss-brand-story-{{ section.id }} .ss-brand-story__rows {
+      gap: 10rem;
+    }
+
+    .ss-brand-story-{{ section.id }} .ss-brand-story__row {
+      display: grid;
+      grid-template-columns: 38% 62%;
+      align-items: center;
+      gap: 10rem;
+    }
+
+    .ss-brand-story-{{ section.id }} .ss-brand-story__row--reverse {
+      grid-template-columns: 62% 38%;
+    }
+
+    .ss-brand-story-{{ section.id }} .ss-brand-story__row--reverse .ss-brand-story__row-media {
+      order: 2;
+    }
+
+    .ss-brand-story-{{ section.id }} .ss-brand-story__row--reverse .ss-brand-story__row-text {
+      order: 1;
+    }
+
+    .ss-brand-story-{{ section.id }} .ss-brand-story__row-heading {
+      font-size: 4.2rem;
+    }
+
+    .ss-brand-story-{{ section.id }} .ss-brand-story__row--reverse .ss-brand-story__row-text {
+      margin-left: auto;
+    }
+  }
+{% endstyle %}
+
+{%- capture media_sizes -%}
+  (min-width: {{ settings.page_width }}px) {{ settings.page_width | times: 0.38 | round }}px,
+  (min-width: 750px) 38vw,
+  100vw
+{%- endcapture -%}
+
+<div class="ss-brand-story-{{ section.id }} section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="ss-brand-story__rows">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'story_row' -%}
+          {%- assign is_reverse = false -%}
+          {%- assign row_remainder = forloop.index0 | modulo: 2 -%}
+          {%- if row_remainder == 1 -%}
+            {%- assign is_reverse = true -%}
+          {%- endif -%}
+          <div
+            class="ss-brand-story__row{% if is_reverse %} ss-brand-story__row--reverse{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="ss-brand-story__row-media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1500
+                  | image_tag: sizes: media_sizes, widths: '375, 550, 750, 1100, 1500', loading: 'lazy'
+                }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="ss-brand-story__row-text">
+              {%- if block.settings.heading != blank -%}
+                <h2 class="ss-brand-story__row-heading">{{ block.settings.heading }}</h2>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="ss-brand-story__row-body">{{ block.settings.text }}</div>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank -%}
+                <a
+                  {% if block.settings.button_link == blank %}
+                    role="link"
+                    aria-disabled="true"
+                  {% else %}
+                    href="{{ block.settings.button_link }}"
+                  {% endif %}
+                  class="ss-brand-story__row-cta"
+                >
+                  {{ block.settings.button_label | escape }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SS Brand Story",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaçamento superior",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaçamento inferior",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story_row",
+      "name": "Bloco de história",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título (opcional)"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Texto do bloco</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto do link (opcional)"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SS Brand Story",
+      "blocks": [
+        { "type": "story_row" },
+        { "type": "story_row" }
+      ]
+    }
+  ]
+}
+{% endschema %}

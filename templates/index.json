@@ -223,50 +223,37 @@
       }
     },
     "image_with_text_story": {
-      "type": "image-with-text",
+      "type": "ss-brand-story",
       "blocks": {
-        "heading_story": {
-          "type": "heading",
+        "story_row_1": {
+          "type": "story_row",
           "settings": {
+            "image": "shopify://shop_images/model-with-leather-jacket-over-shoulders.jpg",
             "heading": "Mod'em Couro é uma Fábrica Portuguesa de Confeção de Produtos em Pele e Couro",
-            "heading_size": "h1"
+            "text": "<p>Desde 1989, a <strong>MOD'EM COURO</strong> destaca-se no mercado pela excelência na fabricação, venda e reparação de produtos em pele e couro. Com décadas de experiência no fabrico para marcas conceituadas e uma equipa altamente qualificada, oferecemos soluções personalizadas para atender às necessidades dos nossos clientes, desde pequenos reparos até grandes projetos de fabricação.</p>",
+            "button_label": "",
+            "button_link": ""
           }
         },
-        "text_story": {
-          "type": "text",
+        "story_row_2": {
+          "type": "story_row",
           "settings": {
-            "text": "<p>Desde 1989, a <strong>MOD'EM COURO</strong> destaca-se no mercado pela excelência na fabricação, venda e reparação de produtos em pele e couro. Com décadas de experiência no fabrico para marcas conceituadas e uma equipa altamente qualificada, oferecemos soluções personalizadas para atender às necessidades dos nossos clientes, desde pequenos reparos até grandes projetos de fabricação.</p><p><strong>A nossa missão é transformar as peles e o couro em arte, combinando tradição e inovação para entregar peças únicas e duradouras. </strong></p><p>Explore o nosso site e descubra o produto ideal para si ou como podemos ajudar a sua empresa a alcançar resultados excecionais com produtos de alta qualidade.</p>",
-            "text_style": "body"
-          }
-        },
-        "button_story": {
-          "type": "button",
-          "settings": {
+            "image": "shopify://shop_images/dark-haired-man-in-brown-leather-jacket.jpg",
+            "heading": "",
+            "text": "<p><strong>A nossa missão é transformar as peles e o couro em arte, combinando tradição e inovação para entregar peças únicas e duradouras.</strong></p><p>Explore o nosso site e descubra o produto ideal para si ou como podemos ajudar a sua empresa a alcançar resultados excecionais com produtos de alta qualidade.</p>",
             "button_label": "Conhecer a nossa história",
-            "button_link": "",
-            "button_style_secondary": true
+            "button_link": ""
           }
         }
       },
       "block_order": [
-        "heading_story",
-        "text_story",
-        "button_story"
+        "story_row_1",
+        "story_row_2"
       ],
       "settings": {
-        "image": "shopify://shop_images/model-with-leather-jacket-over-shoulders.jpg",
-        "height": "large",
-        "desktop_image_width": "large",
-        "layout": "image_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "scheme-3",
-        "color_scheme": "scheme-3",
-        "padding_top": 72,
-        "padding_bottom": 72
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     },
     "shop_the_look_1": {

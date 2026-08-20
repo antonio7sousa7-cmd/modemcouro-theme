@@ -68,7 +68,8 @@
   }
 
   .feature-{{ section.id }} .box__title {
-    margin: 0px;
+    margin: 0px auto;
+    max-width: 16rem;
     font-family: var(--font-heading-family);
     font-style: var(--font-heading-style);
     font-size: {{ feature_heading_size_mobile }}px;
@@ -78,6 +79,7 @@
     text-transform: unset;
     font-weight: var(--font-heading-weight);
     margin-top: {{section.settings.feature_heading_mt}}px;
+    text-wrap: balance;
   }
 
   .feature-{{ section.id }} .box__description {
@@ -100,7 +102,7 @@
     border: {{ feature_border_thickness }}px solid {{ feature_border_color }};
     border-radius: {{ feature_radius }}px;
     box-shadow: inset 0 0 0 1px rgba(var(--color-foreground), 0.08);
-    padding: {{ feature_padding_vertical | times: 0.75 | round: 0 | at_least: 24 }}px {{ feature_padding_horizontal | times: 0.75 | round: 0 | at_least: 16 }}px;
+    padding: {{ feature_padding_vertical | times: 0.75 | round: 0 | at_least: 32 }}px {{ feature_padding_horizontal | times: 0.75 | round: 0 | at_least: 20 }}px;
     gap: {{ feature_gap_mobile }}px;
   }
 
@@ -111,7 +113,7 @@
     position: relative;
     text-align: center;
     text-decoration: none;
-    gap: 1.4rem;
+    gap: 2rem;
   }
 
   .feature-{{ section.id }} .box__content-wrapper {
@@ -123,15 +125,17 @@
     align-items: center;
     justify-content: center;
     flex: 0 0 {{ feature_icon_size_mobile }}px;
+    width: {{ feature_icon_size_mobile }}px;
     height: {{ feature_icon_size_mobile }}px;
     border-radius: 50%;
-    background: rgba(var(--color-foreground), 0.05);
+    background: rgba(var(--color-foreground), 0.08);
+    box-shadow: inset 0 0 0 1px rgba(var(--color-foreground), 0.07);
     transition: background-color var(--duration-short, 0.25s) ease;
   }
 
   .feature-{{ section.id }} a.box:hover .box__image,
   .feature-{{ section.id }} a.box:focus-visible .box__image {
-    background: rgba(var(--color-foreground), 0.09);
+    background: rgba(var(--color-foreground), 0.13);
   }
 
   .feature-{{ section.id }} a.box:focus-visible {
@@ -176,13 +180,14 @@
 
     .feature-{{ section.id }} .wrapper-box {
       grid-template-columns: repeat({{ feature_row }}, 1fr);
-      padding: {{ feature_padding_vertical | at_least: 40 }}px {{ feature_padding_horizontal | at_least: 32 }}px;
+      padding: {{ feature_padding_vertical | at_least: 56 }}px {{ feature_padding_horizontal | at_least: 40 }}px;
       gap: {{ feature_gap }}px;
     }
 
     .feature-{{ section.id }} .box {
       flex: 1 0 auto;
       padding: 0 1.6rem;
+      gap: 2.4rem;
     }
 
     .feature-{{ section.id }} .box:not(:first-child) {
@@ -203,6 +208,7 @@
 
     .section-{{ section.id }}-settings .box__image {
       flex: 0 0 {{ feature_icon_size }}px;
+      width: {{ feature_icon_size }}px;
       height: {{ feature_icon_size }}px;
     }
   }
@@ -511,7 +517,7 @@
         "step": 2,
         "unit": "px",
         "label": "Size",
-        "default": 42
+        "default": 84
       },
       {
         "type": "range",
@@ -521,7 +527,7 @@
         "step": 2,
         "unit": "px",
         "label": "Size - mobile",
-        "default": 42
+        "default": 64
       },
       {
         "type":"header",

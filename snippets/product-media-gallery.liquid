@@ -42,6 +42,84 @@
   endif
 -%}
 
+{%- style -%}
+  #GalleryViewer-{{ section.id }} .ss-gallery-viewport {
+    position: relative;
+  }
+
+  #GalleryViewer-{{ section.id }} #Slider-Gallery-{{ section.id }} {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #GalleryViewer-{{ section.id }} #Slider-Gallery-{{ section.id }}::-webkit-scrollbar {
+    display: none;
+    height: 0;
+  }
+
+  #GalleryViewer-{{ section.id }} #Slider-Gallery-{{ section.id }} .product__media-item {
+    display: block;
+    min-width: 100%;
+    width: 100%;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+  }
+
+  #GalleryViewer-{{ section.id }} .ss-gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    color: #1c1a17;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.25s ease, background-color 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  #GalleryViewer-{{ section.id }} .ss-gallery-nav--prev {
+    left: 1.2rem;
+  }
+
+  #GalleryViewer-{{ section.id }} .ss-gallery-nav--next {
+    right: 1.2rem;
+  }
+
+  #GalleryViewer-{{ section.id }} .ss-gallery-nav .icon {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  #GalleryViewer-{{ section.id }} .ss-gallery-nav:hover {
+    background: rgba(255, 255, 255, 1);
+  }
+
+  #GalleryViewer-{{ section.id }} .ss-gallery-viewport:hover .ss-gallery-nav:not([disabled]) {
+    opacity: 1;
+  }
+
+  @media screen and (max-width: 749px) {
+    #GalleryViewer-{{ section.id }} .ss-gallery-nav:not([disabled]) {
+      opacity: 1;
+      width: 3.6rem;
+      height: 3.6rem;
+    }
+  }
+{%- endstyle -%}
+
 <media-gallery
   id="MediaGallery-{{ section.id }}"
   role="region"
@@ -56,6 +134,7 @@
     <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
       {{ 'accessibility.skip_to_product_info' | t }}
     </a>
+    <div class="ss-gallery-viewport">
     <ul
       id="Slider-Gallery-{{ section.id }}"
       class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile"
@@ -125,33 +204,36 @@
         {%- endunless -%}
       {%- endfor -%}
     </ul>
+      {%- if media_count > 1 -%}
+        <button
+          type="button"
+          class="slider-button slider-button--prev ss-gallery-nav ss-gallery-nav--prev"
+          name="previous"
+          aria-label="{{ 'general.slider.previous_slide' | t }}"
+        >
+          <span class="svg-wrapper">
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </span>
+        </button>
+        <button
+          type="button"
+          class="slider-button slider-button--next ss-gallery-nav ss-gallery-nav--next"
+          name="next"
+          aria-label="{{ 'general.slider.next_slide' | t }}"
+        >
+          <span class="svg-wrapper">
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </span>
+        </button>
+      {%- endif -%}
+    </div>
     <div class="slider-buttons quick-add-hidden{% if hide_mobile_slider %} small-hide{% endif %}">
-      <button
-        type="button"
-        class="slider-button slider-button--prev"
-        name="previous"
-        aria-label="{{ 'general.slider.previous_slide' | t }}"
-      >
-        <span class="svg-wrapper">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
-        </span>
-      </button>
       <div class="slider-counter caption">
         <span class="slider-counter--current">1</span>
         <span aria-hidden="true"> / </span>
         <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
         <span class="slider-counter--total">{{ media_count }}</span>
       </div>
-      <button
-        type="button"
-        class="slider-button slider-button--next"
-        name="next"
-        aria-label="{{ 'general.slider.next_slide' | t }}"
-      >
-        <span class="svg-wrapper">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
-        </span>
-      </button>
     </div>
   </slider-component>
   {%- if first_3d_model -%}

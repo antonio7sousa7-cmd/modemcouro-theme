@@ -70,6 +70,13 @@
     scroll-snap-align: center;
   }
 
+  @media screen and (min-width: 990px) {
+    #GalleryViewer-{{ section.id }} .ss-zoom-hover-image {
+      transition: transform 0.2s ease-out;
+      will-change: transform;
+    }
+  }
+
   #GalleryViewer-{{ section.id }} .ss-gallery-nav {
     position: absolute;
     top: 50%;
@@ -119,6 +126,8 @@
     }
   }
 {%- endstyle -%}
+
+<script src="{{ 'product-zoom-hover.js' | asset_url }}" defer="defer"></script>
 
 <media-gallery
   id="MediaGallery-{{ section.id }}"

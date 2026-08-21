@@ -17,7 +17,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "🇵🇹 Fabrico em Portugal | 📦 Envios gratuitos |🔒 Pagamento seguro | ↩️ Devoluções simples",
+            "text": "🇵🇹 Fabrico em Portugal",
             "link": ""
           }
         }
@@ -30,7 +30,10 @@
         "change_slides_speed": 5,
         "color_scheme": "scheme-5",
         "show_line_separator": true,
-        "show_social": false,
+        "show_social": true,
+        "trust_message_shipping": "Envios gratuitos",
+        "trust_message_secure": "Pagamento seguro",
+        "trust_message_returns": "Devoluções simples",
         "enable_country_selector": false,
         "enable_language_selector": false
       }

@@ -117,20 +117,54 @@
             "image": "",
             "title": "Mais Vendidos"
           }
+        },
+        "category_5": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/vender-banner.jpg",
+            "title": "Carteiras"
+          }
+        },
+        "category_6": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/reparar-banner.jpg",
+            "title": "Cintos"
+          }
+        },
+        "category_7": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/fabricar-banner.jpg",
+            "title": "Calçado"
+          }
+        },
+        "category_8": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/IMG_0031.jpg",
+            "title": "Acessórios"
+          }
         }
       },
       "block_order": [
         "category_1",
         "category_2",
         "category_3",
-        "category_4"
+        "category_4",
+        "category_5",
+        "category_6",
+        "category_7",
+        "category_8"
       ],
       "settings": {
         "heading": "Explore por Categoria",
         "heading_size": "h1",
         "subheading": "Encontre sempre a peça certa em pele e couro",
-        "image_ratio": "3/4",
-        "overlay_opacity": 30,
         "columns_desktop": 4,
         "columns_mobile": "2",
         "color_scheme": "scheme-1",
@@ -251,7 +285,7 @@
         "story_row_2"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
         "padding_top": 96,
         "padding_bottom": 96
       }

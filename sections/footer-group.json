@@ -22,11 +22,64 @@
     },
     "footer": {
       "type": "footer",
+      "blocks": {
+        "brand_trust_1": {
+          "type": "brand_trust",
+          "settings": {
+            "slogan": "<p>Mais de 35 anos de experiência no fabrico de vestuário em couro.</p>",
+            "badge_1_title": "Fabrico Português",
+            "badge_1_subtitle": "Feito à mão em Portugal",
+            "badge_2_title": "Pagamento Seguro",
+            "badge_2_subtitle": "Transações encriptadas",
+            "badge_3_title": "Devoluções Simples",
+            "badge_3_subtitle": "Processo fácil e rápido"
+          }
+        },
+        "mega_menu_1": {
+          "type": "mega_menu",
+          "settings": {
+            "heading": "Deixe-se Inspirar",
+            "column_1_heading": "Casacos",
+            "column_1_menu": "main-menu",
+            "column_2_heading": "Coletes",
+            "column_2_menu": "main-menu",
+            "column_3_heading": "Malas & Acessórios",
+            "column_3_menu": "main-menu",
+            "column_4_heading": "Ajuda",
+            "column_4_menu": "footer"
+          }
+        },
+        "link_list_1": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Loja",
+            "menu": "main-menu"
+          }
+        },
+        "link_list_2": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Empresa",
+            "menu": "footer"
+          }
+        },
+        "social_payments_1": {
+          "type": "social_payments",
+          "settings": {
+            "social_heading": "Comunidade",
+            "payment_heading": "Pagamento Seguro"
+          }
+        }
+      },
+      "block_order": [
+        "brand_trust_1",
+        "mega_menu_1",
+        "link_list_1",
+        "link_list_2",
+        "social_payments_1"
+      ],
       "settings": {
         "color_scheme": "scheme-3",
-        "newsletter_enable": true,
-        "newsletter_heading": "Newsletter",
-        "enable_follow_on_shop": false,
         "show_social": true,
         "enable_country_selector": true,
         "enable_language_selector": true,

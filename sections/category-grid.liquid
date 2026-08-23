@@ -54,16 +54,19 @@
     border-radius: 30px;
     padding: 8px 24px;
     pointer-events: none;
+    max-width: calc(100% - 16px);
   }
 
   #CategoryGrid-{{ section.id }} .category-grid__label span {
-    display: inline-block;
+    display: block;
+    overflow: hidden;
     color: #ffffff;
     font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem);
     letter-spacing: 0.08rem;
     text-transform: uppercase;
     font-weight: var(--font-body-weight-bold);
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   #CategoryGrid-{{ section.id }} .category-grid__item-link:focus-visible {

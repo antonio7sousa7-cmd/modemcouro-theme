@@ -27,7 +27,7 @@
   }
 
   .ss-mega-footer-{{ section.id }} {
-    --ss-footer-accent: #b8934f;
+    --ss-footer-title: #334fb4;
     --ss-footer-text: rgba(var(--color-foreground), 0.85);
     --ss-footer-text-strong: rgb(var(--color-foreground));
   }
@@ -51,7 +51,7 @@
 
   .ss-mega-footer-{{ section.id }} .ss-mega-footer__block-heading {
     margin: 0 0 1.6rem;
-    color: var(--ss-footer-accent);
+    color: var(--ss-footer-title);
     font-size: 1.3rem;
     letter-spacing: 0.08rem;
     text-transform: uppercase;
@@ -97,7 +97,7 @@
     justify-content: center;
     width: 3.6rem;
     height: 3.6rem;
-    color: var(--ss-footer-accent);
+    color: var(--ss-footer-title);
   }
 
   .ss-mega-footer-{{ section.id }} .ss-trust-badge__icon img,
@@ -111,7 +111,7 @@
   .ss-mega-footer-{{ section.id }} .ss-trust-badge__title {
     display: block;
     margin: 0;
-    color: var(--ss-footer-accent);
+    color: var(--ss-footer-title);
     font-size: 1.4rem;
     font-weight: var(--font-heading-weight, 700);
     letter-spacing: 0.02rem;
@@ -134,24 +134,9 @@
 
   .ss-mega-footer-{{ section.id }} .ss-mega-menu__heading {
     margin: 0 0 2.4rem;
-    color: var(--ss-footer-accent);
+    color: var(--ss-footer-title);
     font-size: 1.5rem;
     letter-spacing: 0.1rem;
-    text-transform: uppercase;
-    font-weight: var(--font-heading-weight, 700);
-  }
-
-  .ss-mega-footer-{{ section.id }} .ss-mega-menu__columns {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  .ss-mega-footer-{{ section.id }} .ss-mega-menu__column-heading {
-    margin: 0 0 1.2rem;
-    color: var(--ss-footer-text-strong);
-    font-size: 1.3rem;
-    letter-spacing: 0.04rem;
     text-transform: uppercase;
     font-weight: var(--font-heading-weight, 700);
   }
@@ -203,14 +188,22 @@
     padding: 0.6rem;
   }
 
+  .ss-mega-footer-{{ section.id }} .ss-footer-payment__list .ss-payment-badge {
+    min-height: 1.6rem;
+  }
+
+  .ss-mega-footer-{{ section.id }} .ss-payment-badge__text {
+    font-size: 1.1rem;
+    font-weight: var(--font-heading-weight, 700);
+    letter-spacing: 0.02rem;
+    color: var(--ss-footer-text-strong);
+    white-space: nowrap;
+  }
+
   @media screen and (min-width: 990px) {
     .ss-mega-footer-{{ section.id }} .ss-mega-footer {
       grid-template-columns: 25% 75%;
       gap: 6rem;
-    }
-
-    .ss-mega-footer-{{ section.id }} .ss-mega-menu__columns {
-      grid-template-columns: repeat(4, 1fr);
     }
 
     .ss-mega-footer-{{ section.id }} .ss-footer-bottom-row {
@@ -232,10 +225,11 @@
         {%- for block in section.blocks -%}
           {%- if block.type == 'brand_trust' -%}
             <div class="ss-footer-brand" {{ block.shopify_attributes }}>
-              {%- if block.settings.logo != blank -%}
+              {%- assign footer_logo = block.settings.logo | default: settings.logo -%}
+              {%- if footer_logo != blank -%}
                 <a href="{{ routes.root_url }}" class="ss-footer-brand__logo">
                   {{
-                    block.settings.logo
+                    footer_logo
                     | image_url: width: 400
                     | image_tag: loading: 'lazy', widths: '100, 150, 200, 300, 400', alt: shop.name
                   }}
@@ -252,7 +246,7 @@
                         assign badge_icon = block.settings.badge_1_icon
                         assign badge_title = block.settings.badge_1_title
                         assign badge_subtitle = block.settings.badge_1_subtitle
-                        assign badge_fallback_icon = 'icon-truck.svg'
+                        assign badge_fallback_icon = 'icon-leather.svg'
                       when 2
                         assign badge_icon = block.settings.badge_2_icon
                         assign badge_title = block.settings.badge_2_title
@@ -294,49 +288,24 @@
       <div class="ss-footer-nav">
         {%- for block in section.blocks -%}
           {%- if block.type == 'mega_menu' -%}
-            <div class="ss-mega-menu" {{ block.shopify_attributes }}>
-              {%- if block.settings.heading != blank -%}
-                <h2 class="ss-mega-menu__heading">{{ block.settings.heading | escape }}</h2>
-              {%- endif -%}
-              <div class="ss-mega-menu__columns">
-                {%- for i in (1..4) -%}
-                  {%- liquid
-                    case i
-                      when 1
-                        assign column_heading = block.settings.column_1_heading
-                        assign column_menu = block.settings.column_1_menu
-                      when 2
-                        assign column_heading = block.settings.column_2_heading
-                        assign column_menu = block.settings.column_2_menu
-                      when 3
-                        assign column_heading = block.settings.column_3_heading
-                        assign column_menu = block.settings.column_3_menu
-                      when 4
-                        assign column_heading = block.settings.column_4_heading
-                        assign column_menu = block.settings.column_4_menu
-                    endcase
-                  -%}
-                  {%- if column_heading != blank or column_menu != blank -%}
-                    <div class="ss-mega-menu__column">
-                      {%- if column_heading != blank -%}
-                        <h3 class="ss-mega-menu__column-heading">{{ column_heading | escape }}</h3>
-                      {%- endif -%}
-                      {%- if column_menu != blank -%}
-                        <ul class="ss-mega-menu__list">
-                          {%- for link in column_menu.links -%}
-                            <li>
-                              <a href="{{ link.url }}" class="link link--text{% if link.active %} list-menu__item--active{% endif %}">
-                                {{ link.title | escape }}
-                              </a>
-                            </li>
-                          {%- endfor -%}
-                        </ul>
-                      {%- endif -%}
-                    </div>
-                  {%- endif -%}
-                {%- endfor -%}
+            {%- if block.settings.heading != blank or block.settings.menu != blank -%}
+              <div class="ss-mega-menu" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}
+                  <h2 class="ss-mega-menu__heading">{{ block.settings.heading | escape }}</h2>
+                {%- endif -%}
+                {%- if block.settings.menu != blank -%}
+                  <ul class="ss-mega-menu__list">
+                    {%- for link in block.settings.menu.links -%}
+                      <li>
+                        <a href="{{ link.url }}" class="link link--text{% if link.active %} list-menu__item--active{% endif %}">
+                          {{ link.title | escape }}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
               </div>
-            </div>
+            {%- endif -%}
           {%- endif -%}
         {%- endfor -%}
 
@@ -370,18 +339,25 @@
                       {%- render 'social-icons' -%}
                     </div>
                   {%- endif -%}
-                  {%- if section.settings.payment_enable and shop.enabled_payment_types.size > 0 -%}
+                  {%- if section.settings.payment_enable -%}
                     <div class="ss-footer-payment">
                       {%- if block.settings.payment_heading != blank -%}
                         <h2 class="ss-mega-footer__block-heading">{{ block.settings.payment_heading | escape }}</h2>
                       {%- endif -%}
                       <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
                       <ul class="ss-footer-payment__list" role="list">
-                        {%- for type in shop.enabled_payment_types -%}
-                          <li class="list-payment__item">
-                            {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-                          </li>
-                        {%- endfor -%}
+                        <li class="list-payment__item">
+                          {{ 'visa' | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                        </li>
+                        <li class="list-payment__item">
+                          {{ 'master' | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                        </li>
+                        <li class="list-payment__item ss-payment-badge">
+                          <span class="ss-payment-badge__text">MB WAY</span>
+                        </li>
+                        <li class="list-payment__item ss-payment-badge">
+                          <span class="ss-payment-badge__text">Multibanco</span>
+                        </li>
                       </ul>
                     </div>
                   {%- endif -%}
@@ -460,7 +436,8 @@
         {
           "type": "image_picker",
           "id": "logo",
-          "label": "Logótipo"
+          "label": "Logótipo",
+          "info": "Se vazio, usa o logótipo definido em Definições do tema > Logótipo."
         },
         {
           "type": "richtext",
@@ -540,64 +517,13 @@
         {
           "type": "text",
           "id": "heading",
-          "label": "Título",
-          "default": "Deixe-se Inspirar"
-        },
-        {
-          "type": "header",
-          "content": "Coluna 1"
-        },
-        {
-          "type": "text",
-          "id": "column_1_heading",
-          "label": "Título da coluna"
+          "label": "Título"
         },
         {
           "type": "link_list",
-          "id": "column_1_menu",
-          "label": "Menu"
-        },
-        {
-          "type": "header",
-          "content": "Coluna 2"
-        },
-        {
-          "type": "text",
-          "id": "column_2_heading",
-          "label": "Título da coluna"
-        },
-        {
-          "type": "link_list",
-          "id": "column_2_menu",
-          "label": "Menu"
-        },
-        {
-          "type": "header",
-          "content": "Coluna 3"
-        },
-        {
-          "type": "text",
-          "id": "column_3_heading",
-          "label": "Título da coluna"
-        },
-        {
-          "type": "link_list",
-          "id": "column_3_menu",
-          "label": "Menu"
-        },
-        {
-          "type": "header",
-          "content": "Coluna 4"
-        },
-        {
-          "type": "text",
-          "id": "column_4_heading",
-          "label": "Título da coluna"
-        },
-        {
-          "type": "link_list",
-          "id": "column_4_menu",
-          "label": "Menu"
+          "id": "menu",
+          "label": "Menu",
+          "info": "Recomendado: um menu dedicado apenas às coleções principais (ex.: Casacos, Malas, Vestidos)."
         }
       ]
     },

@@ -37,17 +37,7 @@
         },
         "mega_menu_1": {
           "type": "mega_menu",
-          "settings": {
-            "heading": "Deixe-se Inspirar",
-            "column_1_heading": "Casacos",
-            "column_1_menu": "main-menu",
-            "column_2_heading": "Coletes",
-            "column_2_menu": "main-menu",
-            "column_3_heading": "Malas & Acessórios",
-            "column_3_menu": "main-menu",
-            "column_4_heading": "Ajuda",
-            "column_4_menu": "footer"
-          }
+          "settings": {}
         },
         "link_list_1": {
           "type": "link_list",

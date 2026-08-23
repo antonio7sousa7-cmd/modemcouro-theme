@@ -107,6 +107,33 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Premium dropdown menu */
+  .header .header__submenu.global-settings-popup {
+    background-color: #faf7f2;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .header .header__submenu.list-menu {
+    padding: 1.6rem 0;
+  }
+
+  .header .header__submenu .header__menu-item {
+    padding: 1.2rem 2.4rem;
+    border-radius: 0.4rem;
+    transition: background-color var(--duration-short, 0.25s) ease, color var(--duration-short, 0.25s) ease;
+  }
+
+  .header .header__submenu .header__menu-item:hover {
+    background-color: rgba(var(--color-foreground), 0.05);
+    color: rgb(var(--color-foreground));
+  }
+
+  /* Match cart icon size to the other header icons (search, account) */
+  .header .header__icon--cart .icon {
+    height: 2rem;
+    width: 2rem;
+  }
 {%- endstyle -%}
 
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>

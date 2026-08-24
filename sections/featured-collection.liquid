@@ -67,6 +67,14 @@
     }
   }
 
+  /* Mostra 3 produtos completos + um pouco do 4º no desktop */
+  @media screen and (min-width: 990px) {
+    #collection-{{ section.id }} .grid--3-col-desktop .grid__item {
+      width: calc(28% - var(--grid-desktop-horizontal-spacing) * 2 / 3);
+      max-width: calc(28% - var(--grid-desktop-horizontal-spacing) * 2 / 3);
+    }
+  }
+
   @media screen and (min-width: 750px) and (max-width: 989px) {
     #collection-{{ section.id }} .grid__item {
       width: calc(60% - var(--grid-desktop-horizontal-spacing));

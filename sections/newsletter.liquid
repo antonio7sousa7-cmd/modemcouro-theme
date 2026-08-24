@@ -13,6 +13,20 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .section-{{ section.id }}-padding h2 {
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .section-{{ section.id }}-padding h2 {
+      font-size: 26px;
+    }
+  }
 {%- endstyle -%}
 
 <div class="newsletter center {% if section.settings.full_width == false %}newsletter--narrow page-width{% endif %}">

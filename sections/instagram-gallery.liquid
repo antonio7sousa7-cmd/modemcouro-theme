@@ -11,6 +11,28 @@
     }
   }
 
+  .section-{{ section.id }}-padding h2 {
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .section-{{ section.id }}-padding h2 {
+      font-size: 26px;
+    }
+  }
+
+  #InstagramGallery-{{ section.id }} .title-wrapper-with-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
   #InstagramGallery-{{ section.id }} .instagram-gallery__list {
     gap: var(--grid-mobile-vertical-spacing) var(--grid-mobile-horizontal-spacing);
   }

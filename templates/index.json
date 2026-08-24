@@ -221,7 +221,7 @@
         "columns_desktop": 3,
         "column_alignment": "left",
         "background_style": "primary",
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-2",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 56,
@@ -285,7 +285,7 @@
         "story_row_2"
       ],
       "settings": {
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-2",
         "padding_top": 96,
         "padding_bottom": 96
       }
@@ -346,7 +346,7 @@
         "email_form_newsletter"
       ],
       "settings": {
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-2",
         "full_width": true,
         "padding_top": 64,
         "padding_bottom": 64

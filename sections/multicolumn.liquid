@@ -13,6 +13,28 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .section-{{ section.id }}-padding .title {
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .section-{{ section.id }}-padding .title {
+      font-size: 26px;
+    }
+  }
+
+  .section-{{ section.id }}-padding .multicolumn__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 {%- endstyle -%}
 
 {%- liquid

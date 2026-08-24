@@ -179,6 +179,27 @@
     fill: rgb(var(--color-foreground));
   }
 
+  @media (max-width: 768px) {
+    .feature-{{ section.id }} .wrapper-box {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .feature-{{ section.id }} .wrapper-box::-webkit-scrollbar {
+      display: none;
+    }
+
+    .feature-{{ section.id }} .box {
+      flex: 0 0 60%;
+      scroll-snap-align: center;
+    }
+  }
+
   @media(min-width: 768px) {
 
     .section-{{ section.id }} {

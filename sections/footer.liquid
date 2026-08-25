@@ -50,7 +50,7 @@
 
   .ss-mega-footer-{{ section.id }} .ss-mega-footer__block-heading {
     margin: 0 0 1.6rem;
-    color: #ffffff;
+    color: var(--ss-footer-text-strong);
     font-size: 1.3rem;
     letter-spacing: 0.08rem;
     text-transform: uppercase;
@@ -106,7 +106,7 @@
     justify-content: center;
     width: 3.6rem;
     height: 3.6rem;
-    color: #ffffff;
+    color: var(--ss-footer-text-strong);
   }
 
   .ss-mega-footer-{{ section.id }} .ss-trust-badge__icon img,
@@ -120,7 +120,7 @@
   .ss-mega-footer-{{ section.id }} .ss-trust-badge__title {
     display: block;
     margin: 0;
-    color: #ffffff;
+    color: var(--ss-footer-text-strong);
     font-size: 1.4rem;
     font-weight: 700;
     letter-spacing: 0.02rem;
@@ -143,7 +143,7 @@
 
   .ss-mega-footer-{{ section.id }} .ss-mega-menu__heading {
     margin: 0 0 2.4rem;
-    color: #ffffff;
+    color: var(--ss-footer-text-strong);
     font-size: 1.5rem;
     letter-spacing: 0.1rem;
     text-transform: uppercase;
@@ -158,6 +158,13 @@
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
+  }
+
+  .ss-mega-footer-{{ section.id }} .ss-mega-menu__list a,
+  .ss-mega-footer-{{ section.id }} .ss-footer-linklist__list a {
+    display: inline-block;
+    padding: 1.2rem 0;
+    margin: -1.2rem 0;
   }
 
   .ss-mega-footer-{{ section.id }} .ss-footer-bottom-row {

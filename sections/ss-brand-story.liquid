@@ -59,7 +59,7 @@
     text-transform: none;
     letter-spacing: 0.02em;
     line-height: 1.15;
-    font-size: 3rem;
+    font-size: calc(var(--font-heading-scale) * 3rem);
     color: rgb(var(--color-foreground));
   }
 
@@ -119,7 +119,7 @@
     }
 
     .ss-brand-story-{{ section.id }} .ss-brand-story__row-heading {
-      font-size: 4.2rem;
+      font-size: calc(var(--font-heading-scale) * 4rem);
     }
   }
 {% endstyle %}

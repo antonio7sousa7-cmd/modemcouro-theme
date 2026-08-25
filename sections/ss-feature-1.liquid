@@ -73,7 +73,7 @@
     font-family: var(--font-heading-family);
     font-style: var(--font-heading-style);
     font-size: {{ feature_heading_size_mobile }}px;
-    color: #2a2119;
+    color: rgb(var(--color-foreground));
     line-height: {{ feature_heading_height }}%;
     letter-spacing: 0.05em;
     text-transform: unset;
@@ -90,7 +90,7 @@
   .feature-{{ section.id }} .box__description * {
     margin: 0px;
     font-size: {{ feature_text_size_mobile }}px;
-    color: rgba(42, 33, 25, 0.72);
+    color: rgba(var(--color-foreground), 0.72);
     line-height: {{ feature_text_height }}%;
     text-transform: unset;
   }

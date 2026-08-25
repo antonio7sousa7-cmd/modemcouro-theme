@@ -17,6 +17,13 @@
     font-style: italic;
     font-weight: 400;
     letter-spacing: 0.02em;
+    font-size: calc(var(--font-heading-scale) * 2.6rem);
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding .image-with-text__heading {
+      font-size: calc(var(--font-heading-scale) * 3.4rem);
+    }
   }
 {%- endstyle -%}
 

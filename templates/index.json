@@ -172,60 +172,98 @@
         "padding_bottom": 48
       }
     },
-    "multicolumn_ace83n": {
-      "type": "multicolumn",
+    "image_with_text_fabricar": {
+      "type": "image-with-text",
       "blocks": {
-        "column_3AjNgq": {
-          "type": "column",
+        "heading_iwt_fab": {
+          "type": "heading",
           "settings": {
-            "image": "shopify://shop_images/vender-banner.jpg",
-            "title": "VENDER",
-            "text": "<p>Explore a nossa linha exclusiva de produtos de couro. </p><p></p><p>Qualidade e elegância duradoura.</p>",
-            "link_label": "Ver Produtos",
-            "link": "shopify://collections/all"
+            "heading": "Fabricar",
+            "heading_size": "h1"
           }
         },
-        "column_4tPpnL": {
-          "type": "column",
+        "text_iwt_fab": {
+          "type": "text",
           "settings": {
-            "image": "shopify://shop_images/reparar-banner.jpg",
-            "title": "REPARAR",
-            "text": "<p>Devolvemos vida aos seus produtos.</p><p>Reparos precisos, pintura e restauração das suas peças de couro.</p><p></p>",
-            "link_label": "Conheça o serviço",
-            "link": "shopify://pages/reparar"
-          }
-        },
-        "column_cVxYhM": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/fabricar-banner.jpg",
-            "title": "FABRICAR",
             "text": "<p>Transformamos ideias em realidade.</p><p>Criação personalizada de peças em couro.</p>",
-            "link_label": "Saiba mais",
-            "link": "shopify://pages/fabricar"
+            "text_style": "body"
+          }
+        },
+        "button_iwt_fab": {
+          "type": "button",
+          "settings": {
+            "button_label": "Saiba mais",
+            "button_link": "shopify://pages/fabricar",
+            "button_style_secondary": true
           }
         }
       },
       "block_order": [
-        "column_3AjNgq",
-        "column_4tPpnL",
-        "column_cVxYhM"
+        "heading_iwt_fab",
+        "text_iwt_fab",
+        "button_iwt_fab"
       ],
       "settings": {
-        "title": "O que Fazemos",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "primary",
+        "image": "shopify://shop_images/fabricar-banner.jpg",
+        "height": "large",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "zoom-in",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
         "color_scheme": "scheme-2",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 56,
-        "padding_bottom": 56
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "image_with_text_reparar": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_iwt_rep": {
+          "type": "heading",
+          "settings": {
+            "heading": "Reparar",
+            "heading_size": "h1"
+          }
+        },
+        "text_iwt_rep": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Devolvemos vida aos seus produtos.</p><p>Reparos precisos, pintura e restauração das suas peças de couro.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_iwt_rep": {
+          "type": "button",
+          "settings": {
+            "button_label": "Conheça o serviço",
+            "button_link": "shopify://pages/reparar",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_iwt_rep",
+        "text_iwt_rep",
+        "button_iwt_rep"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/reparar-banner.jpg",
+        "height": "large",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "zoom-in",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-2",
+        "color_scheme": "scheme-2",
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     },
     "featured_collection": {
@@ -506,7 +544,8 @@
     "slideshow_VpaKHP",
     "ss_feature_1_hznDc6",
     "category_grid_1",
-    "multicolumn_ace83n",
+    "image_with_text_fabricar",
+    "image_with_text_reparar",
     "featured_collection",
     "image_with_text_story",
     "shop_the_look_1",

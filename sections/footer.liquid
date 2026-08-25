@@ -188,27 +188,6 @@
     padding: 0;
   }
 
-  .ss-mega-footer-{{ section.id }} .ss-footer-payment__list .list-payment__item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 0.4rem;
-    padding: 0.6rem;
-  }
-
-  .ss-mega-footer-{{ section.id }} .ss-footer-payment__list .ss-payment-badge {
-    min-height: 1.6rem;
-  }
-
-  .ss-mega-footer-{{ section.id }} .ss-payment-badge__text {
-    font-size: 1.1rem;
-    font-weight: var(--font-heading-weight, 700);
-    letter-spacing: 0.02rem;
-    color: var(--ss-footer-text-strong);
-    white-space: nowrap;
-  }
-
   @media screen and (min-width: 990px) {
     .ss-mega-footer-{{ section.id }} .ss-mega-footer {
       grid-template-columns: 25% 75%;
@@ -362,18 +341,18 @@
                         <h2 class="ss-mega-footer__block-heading">{{ block.settings.payment_heading | escape }}</h2>
                       {%- endif -%}
                       <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
-                      <ul class="ss-footer-payment__list" role="list">
+                      <ul class="ss-footer-payment__list list-payment" role="list">
                         <li class="list-payment__item">
                           {{ 'visa' | payment_type_svg_tag: class: 'icon icon--full-color' }}
                         </li>
                         <li class="list-payment__item">
                           {{ 'master' | payment_type_svg_tag: class: 'icon icon--full-color' }}
                         </li>
-                        <li class="list-payment__item ss-payment-badge">
-                          <span class="ss-payment-badge__text">MB WAY</span>
+                        <li class="list-payment__item">
+                          {{ 'icon-mbway.svg' | inline_asset_content }}
                         </li>
-                        <li class="list-payment__item ss-payment-badge">
-                          <span class="ss-payment-badge__text">Multibanco</span>
+                        <li class="list-payment__item">
+                          {{ 'icon-multibanco.svg' | inline_asset_content }}
                         </li>
                       </ul>
                     </div>

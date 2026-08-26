@@ -181,8 +181,17 @@
         "category_1": {
           "type": "category",
           "settings": {
-            "collection": "casacos",
+            "collection": "homem-casacos",
+            "image": "shopify://shop_images/1_758c15fa-c159-4834-a4c4-1cb447f24ec1.webp",
             "title": ""
+          }
+        },
+        "category_7": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/IMG_0060.png",
+            "title": "CASACOS MULHER"
           }
         },
         "category_2": {
@@ -201,54 +210,47 @@
             "title": "Malas"
           }
         },
-        "category_4": {
-          "type": "category",
-          "settings": {
-            "collection": "best-selling-products",
-            "title": "Mais Vendidos"
-          }
-        },
         "category_5": {
           "type": "category",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/vender-banner.jpg",
-            "title": "Carteiras"
+            "image": "shopify://shop_images/2_0bb7e39c-c7a4-4550-9830-5325defe0120.png",
+            "title": "CALÇAS"
+          }
+        },
+        "category_4": {
+          "type": "category",
+          "settings": {
+            "collection": "cachecois",
+            "image": "shopify://shop_images/12.png",
+            "title": "CACHECÓIS"
           }
         },
         "category_6": {
           "type": "category",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/reparar-banner.jpg",
+            "image": "shopify://shop_images/7_32e8782c-fad0-4e73-a380-560f5ad5ade1.webp",
             "title": "Cintos"
-          }
-        },
-        "category_7": {
-          "type": "category",
-          "settings": {
-            "collection": "",
-            "image": "shopify://shop_images/fabricar-banner.jpg",
-            "title": "Calçado"
           }
         },
         "category_8": {
           "type": "category",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/IMG_0031.jpg",
-            "title": "Acessórios"
+            "image": "shopify://shop_images/IMG_0262.jpg",
+            "title": "SAIAS"
           }
         }
       },
       "block_order": [
         "category_1",
+        "category_7",
         "category_2",
         "category_3",
-        "category_4",
         "category_5",
+        "category_4",
         "category_6",
-        "category_7",
         "category_8"
       ],
       "settings": {

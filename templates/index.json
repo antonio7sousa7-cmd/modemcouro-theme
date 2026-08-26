@@ -83,6 +83,98 @@
         "accessibility_info": "Banner a apresentar a marca de Produtos de couro - Mod'em Couro"
       }
     },
+    "ss_feature_1_hznDc6": {
+      "type": "ss-feature-1",
+      "blocks": {
+        "image_Vb8etk": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Envios Rápidos",
+            "feature_text": "",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_dJmwVn": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Fabrico em Portugal",
+            "feature_text": "",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_nhmqwX": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Devoluções sem complicações",
+            "feature_text": "",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_TAMBXM": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Pele Genuína",
+            "feature_text": "",
+            "feature_url": "",
+            "hide_image": false
+          }
+        }
+      },
+      "block_order": [
+        "image_Vb8etk",
+        "image_dJmwVn",
+        "image_nhmqwX",
+        "image_TAMBXM"
+      ],
+      "settings": {
+        "feature_row": 4,
+        "feature_row_mobile": 1,
+        "feature_gap": 48,
+        "feature_gap_mobile": 36,
+        "feature_padding_horizontal": 0,
+        "feature_padding_vertical": 0,
+        "feature_radius": 16,
+        "feature_border_thickness": 0,
+        "feature_shadow": false,
+        "feature_heading_custom": false,
+        "feature_heading_font": "josefin_sans_n4",
+        "feature_heading_size": 14,
+        "feature_heading_size_mobile": 12,
+        "feature_heading_height": 130,
+        "feature_heading_mt": 8,
+        "feature_text_custom": false,
+        "feature_text_font": "josefin_sans_n4",
+        "feature_text_size": 12,
+        "feature_text_size_mobile": 12,
+        "feature_text_height": 130,
+        "feature_text_mt": 4,
+        "feature_icon_size": 84,
+        "feature_icon_size_mobile": 64,
+        "feature_bg": "#ffffff",
+        "feature_border_color": "#000000",
+        "feature_shadow_color": "#000000",
+        "feature_heading_color": "#000000",
+        "feature_text_color": "#000000",
+        "feature_icon_color": "#000000",
+        "color_scheme": "",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
     "category_grid_1": {
       "type": "category-grid",
       "blocks": {
@@ -90,7 +182,6 @@
           "type": "category",
           "settings": {
             "collection": "casacos",
-            "image": "",
             "title": ""
           }
         },
@@ -98,7 +189,7 @@
           "type": "category",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/dark-haired-man-in-brown-leather-jacket.jpg",
+            "image": "shopify://shop_images/IMG_0272.jpg",
             "title": "Coletes"
           }
         },
@@ -106,15 +197,14 @@
           "type": "category",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/model-with-leather-jacket-over-shoulders.jpg",
-            "title": "Malas & Acessórios"
+            "image": "shopify://shop_images/7.webp",
+            "title": "Malas"
           }
         },
         "category_4": {
           "type": "category",
           "settings": {
             "collection": "best-selling-products",
-            "image": "",
             "title": "Mais Vendidos"
           }
         },
@@ -375,7 +465,8 @@
           }
         },
         "email_form_newsletter": {
-          "type": "email_form"
+          "type": "email_form",
+          "settings": {}
         }
       },
       "block_order": [
@@ -388,97 +479,6 @@
         "full_width": true,
         "padding_top": 64,
         "padding_bottom": 64
-      }
-    },
-    "ss_feature_1_hznDc6": {
-      "type": "ss-feature-1",
-      "blocks": {
-        "image_Vb8etk": {
-          "type": "image",
-          "settings": {
-            "feature_title": "Envios Rápidos",
-            "feature_text": "",
-            "feature_url": "",
-            "hide_image": false
-          }
-        },
-        "image_dJmwVn": {
-          "type": "image",
-          "settings": {
-            "feature_title": "Fabrico em Portugal",
-            "feature_text": "",
-            "feature_url": "",
-            "hide_image": false
-          }
-        },
-        "image_nhmqwX": {
-          "type": "image",
-          "settings": {
-            "feature_title": "Devoluções sem complicações",
-            "feature_text": "",
-            "feature_url": "",
-            "hide_image": false
-          }
-        },
-        "image_TAMBXM": {
-          "type": "image",
-          "settings": {
-            "feature_title": "Pele Genuína",
-            "feature_text": "",
-            "feature_url": "",
-            "hide_image": false
-          }
-        }
-      },
-      "block_order": [
-        "image_Vb8etk",
-        "image_dJmwVn",
-        "image_nhmqwX",
-        "image_TAMBXM"
-      ],
-      "settings": {
-        "feature_row": 4,
-        "feature_row_mobile": 1,
-        "feature_gap": 48,
-        "feature_gap_mobile": 36,
-        "feature_padding_horizontal": 0,
-        "feature_padding_vertical": 0,
-        "feature_radius": 16,
-        "feature_border_thickness": 0,
-        "feature_shadow": false,
-        "feature_heading_custom": false,
-        "feature_heading_font": "josefin_sans_n4",
-        "feature_heading_size": 14,
-        "feature_heading_size_mobile": 12,
-        "feature_heading_height": 130,
-        "feature_heading_mt": 8,
-        "feature_text_custom": false,
-        "feature_text_font": "josefin_sans_n4",
-        "feature_text_size": 12,
-        "feature_text_size_mobile": 12,
-        "feature_text_height": 130,
-        "feature_text_mt": 4,
-        "feature_icon_size": 84,
-        "feature_icon_size_mobile": 64,
-        "feature_bg": "#ffffff",
-        "feature_border_color": "#000000",
-        "feature_shadow_color": "#000000",
-        "feature_heading_color": "#000000",
-        "feature_text_color": "#000000",
-        "feature_icon_color": "#000000",
-        "background_color": "#ffffff",
-        "background_gradient": "",
-        "border_color": "#000000",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "padding_top": 56,
-        "padding_bottom": 56,
-        "padding_horizontal": 5,
-        "padding_horizontal_mobile": 1.5,
-        "full_width": false,
-        "content_width": 120,
-        "border_thickness": 0,
-        "lazy": true
       }
     },
     "instagram_gallery_1": {

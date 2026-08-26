@@ -1,0 +1,61 @@
+{%- comment -%}
+  Compact row of 4 trust icons for the product page, rendered right below
+  the buy buttons. Mirrors the homepage icon row content (Envios Rápidos,
+  Fabrico em Portugal, Devoluções sem complicações, Pele Genuína).
+{%- endcomment -%}
+
+{%- style -%}
+  .ss-product-trust {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin-top: 2.4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+
+  .ss-product-trust__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 1 0;
+    text-align: center;
+    gap: 0.6rem;
+  }
+
+  .ss-product-trust__item svg {
+    width: 2rem;
+    height: 2rem;
+    fill: rgb(var(--color-foreground));
+  }
+
+  .ss-product-trust__label {
+    font-family: var(--font-heading-family);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: rgb(var(--color-foreground));
+    text-wrap: balance;
+  }
+{%- endstyle -%}
+
+<div class="ss-product-trust">
+  <div class="ss-product-trust__item">
+    {% render 'icon-accordion', icon: 'truck' %}
+    <span class="ss-product-trust__label">Envios Rápidos</span>
+  </div>
+  <div class="ss-product-trust__item">
+    {% render 'icon-accordion', icon: 'map-pin' %}
+    <span class="ss-product-trust__label">Fabrico em Portugal</span>
+  </div>
+  <div class="ss-product-trust__item">
+    {% render 'icon-accordion', icon: 'return' %}
+    <span class="ss-product-trust__label">Devoluções sem complicações</span>
+  </div>
+  <div class="ss-product-trust__item">
+    {% render 'icon-accordion', icon: 'leather' %}
+    <span class="ss-product-trust__label">Pele Genuína</span>
+  </div>
+</div>

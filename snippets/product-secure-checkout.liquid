@@ -1,0 +1,77 @@
+{%- comment -%}
+  "Secure Checkout" bar with payment icons, rendered right below the buy
+  buttons on the product page. Reuses the same payment icon markup/format
+  (native list-payment + the card-format MB WAY/Multibanco assets) as the
+  footer.
+{%- endcomment -%}
+
+{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .ss-secure-checkout {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.6rem;
+    padding: 1.2rem 1.6rem;
+    background: rgba(var(--color-foreground), 0.03);
+    border: 1px solid rgba(var(--color-foreground), 0.08);
+    border-radius: 0.8rem;
+  }
+
+  .ss-secure-checkout__label {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-body-family);
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+    color: rgb(var(--color-foreground));
+    white-space: nowrap;
+  }
+
+  .ss-secure-checkout__label svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    fill: rgb(var(--color-foreground));
+    flex-shrink: 0;
+  }
+
+  .ss-secure-checkout .list-payment {
+    margin: -0.5rem;
+    padding-top: 0;
+  }
+
+  @media screen and (max-width: 479px) {
+    .ss-secure-checkout {
+      justify-content: center;
+    }
+
+    .ss-secure-checkout .list-payment {
+      justify-content: center;
+    }
+  }
+{%- endstyle -%}
+
+<div class="ss-secure-checkout">
+  <span class="ss-secure-checkout__label">
+    {{ 'icon-lock.svg' | inline_asset_content }}
+    Pagamento Seguro
+  </span>
+  <ul class="list-payment" role="list">
+    <li class="list-payment__item">
+      {{ 'visa' | payment_type_svg_tag: class: 'icon icon--full-color' }}
+    </li>
+    <li class="list-payment__item">
+      {{ 'master' | payment_type_svg_tag: class: 'icon icon--full-color' }}
+    </li>
+    <li class="list-payment__item">
+      {{ 'icon-mbway.svg' | inline_asset_content }}
+    </li>
+    <li class="list-payment__item">
+      {{ 'icon-multibanco.svg' | inline_asset_content }}
+    </li>
+  </ul>
+</div>

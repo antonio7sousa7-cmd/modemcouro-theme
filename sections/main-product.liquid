@@ -37,6 +37,19 @@
         padding-bottom: {{ section.settings.padding_bottom }}px;
       }
     }
+
+    /* Ajusta o espaçamento acima dos breadcrumbs para ficar igual ao das
+       páginas de coleção (2rem entre a linha do cabeçalho e o breadcrumb),
+       independentemente do padding_top configurado nesta secção. */
+    #MainProduct-{{ section.id }} .ss-breadcrumbs {
+      margin-top: calc(2rem - {{ section.settings.padding_top | times: 0.75 | round: 0 }}px);
+    }
+
+    @media screen and (min-width: 750px) {
+      #MainProduct-{{ section.id }} .ss-breadcrumbs {
+        margin-top: calc(2rem - {{ section.settings.padding_top }}px);
+      }
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -472,6 +485,8 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
+                {%- render 'product-secure-checkout' -%}
+                {%- render 'product-trust-icons' -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">

@@ -292,6 +292,36 @@
         "padding_bottom": 72
       }
     },
+    "shop_the_look_1": {
+      "type": "shop-the-look",
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "product": "saia-comprida"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "product": "mala-de-pele-estilo-vaca"
+          }
+        }
+      },
+      "block_order": [
+        "product_1",
+        "product_2"
+      ],
+      "settings": {
+        "heading": "Comprar o Look",
+        "heading_size": "h1",
+        "image": "shopify://shop_images/IMG_0273.jpg",
+        "image_position": "left",
+        "color_scheme": "scheme-1",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
     "image_with_text_fabricar": {
       "type": "image-with-text",
       "blocks": {
@@ -420,36 +450,6 @@
         "padding_bottom": 96
       }
     },
-    "shop_the_look_1": {
-      "type": "shop-the-look",
-      "blocks": {
-        "product_1": {
-          "type": "product",
-          "settings": {
-            "product": "saia-comprida"
-          }
-        },
-        "product_2": {
-          "type": "product",
-          "settings": {
-            "product": "mala-de-pele-estilo-vaca"
-          }
-        }
-      },
-      "block_order": [
-        "product_1",
-        "product_2"
-      ],
-      "settings": {
-        "heading": "Comprar o Look",
-        "heading_size": "h1",
-        "image": "shopify://shop_images/IMG_0273.jpg",
-        "image_position": "left",
-        "color_scheme": "scheme-1",
-        "padding_top": 56,
-        "padding_bottom": 56
-      }
-    },
     "newsletter_1": {
       "type": "newsletter",
       "blocks": {
@@ -539,9 +539,9 @@
     "ss_feature_1_hznDc6",
     "category_grid_1",
     "featured_collection",
+    "shop_the_look_1",
     "image_with_text_fabricar",
     "image_with_text_reparar",
-    "shop_the_look_1",
     "image_with_text_story",
     "newsletter_1",
     "instagram_gallery_1"

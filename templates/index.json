@@ -489,35 +489,28 @@
         "post_1": {
           "type": "post",
           "settings": {
-            "image": "shopify://shop_images/vender-banner.jpg",
+            "image": "shopify://shop_images/IMG_3921.png",
             "link": ""
           }
         },
         "post_2": {
           "type": "post",
           "settings": {
-            "image": "shopify://shop_images/reparar-banner.jpg",
+            "image": "shopify://shop_images/9_05449e50-038a-4227-b4d5-0e918aecd989.webp",
             "link": ""
           }
         },
         "post_3": {
           "type": "post",
           "settings": {
-            "image": "shopify://shop_images/fabricar-banner.jpg",
+            "image": "shopify://shop_images/8.webp",
             "link": ""
           }
         },
         "post_4": {
           "type": "post",
           "settings": {
-            "image": "shopify://shop_images/dark-haired-man-in-brown-leather-jacket.jpg",
-            "link": ""
-          }
-        },
-        "post_5": {
-          "type": "post",
-          "settings": {
-            "image": "shopify://shop_images/model-with-leather-jacket-over-shoulders.jpg",
+            "image": "shopify://shop_images/IMG_0262.jpg",
             "link": ""
           }
         }
@@ -526,8 +519,7 @@
         "post_1",
         "post_2",
         "post_3",
-        "post_4",
-        "post_5"
+        "post_4"
       ],
       "settings": {
         "heading": "Siga-nos no Instagram",

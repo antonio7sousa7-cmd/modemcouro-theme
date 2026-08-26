@@ -1,0 +1,274 @@
+{%- comment -%}
+  Renders the breadcrumb trail (Início > Coleção > Produto) for product and
+  collection pages, plus the matching BreadcrumbList JSON-LD structured data.
+{%- endcomment -%}
+
+{%- style -%}
+  .ss-breadcrumbs {
+    margin: 2rem 0 1.6rem;
+  }
+
+  .ss-breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body-family);
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+  }
+
+  .ss-breadcrumbs__item {
+    display: flex;
+    align-items: center;
+    color: rgba(var(--color-foreground), 0.6);
+  }
+
+  .ss-breadcrumbs__item:not(:last-child)::after {
+    content: '/';
+    margin: 0 0.8rem;
+    color: rgba(var(--color-foreground), 0.35);
+  }
+
+  .ss-breadcrumbs__link {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--duration-short, 0.25s) ease;
+  }
+
+  .ss-breadcrumbs__link:hover {
+    color: rgb(var(--color-foreground));
+    text-decoration: underline;
+  }
+
+  .ss-breadcrumbs__item--current {
+    color: rgb(var(--color-foreground));
+  }
+{%- endstyle -%}
+
+{%- liquid
+  # 1. Escolhe a coleção do breadcrumb. Se o URL já traz contexto de coleção
+  #    (ex: veio de uma subcategoria como 'Casacos Mulher' via ?collection=...),
+  #    usa-o diretamente — é sempre a fonte mais específica e correta.
+  #    Caso contrário (acesso direto ao produto), procura entre as coleções do
+  #    produto a mais específica que estiver ligada no menu principal,
+  #    verificando primeiro 3 níveis de profundidade, depois 2, depois 1 — para
+  #    não parar num nível "pai" quando existe uma subcategoria mais profunda
+  #    (ex: Mulher > Roupa > Casacos Mulher). Só como último recurso evita
+  #    coleções automáticas/genéricas (ex: 'Best Selling Products').
+  assign breadcrumb_collection = collection
+  assign main_menu = linklists['main-menu']
+
+  if breadcrumb_collection == blank and product != blank
+    assign matched_collection = blank
+
+    # 1a. Prioridade máxima: uma coleção do produto cujo handle indique
+    #     claramente uma subcategoria específica (ex: 'casacos-mulher'),
+    #     mesmo que essa coleção não esteja (ou esteja mal) ligada no menu
+    #     principal. Isto evita cair na categoria-mãe genérica (ex: 'Mulher')
+    #     quando ambas estão associadas ao produto.
+    for pc in product.collections
+      assign pc_handle = pc.handle | downcase
+      assign pc_is_subcategory = false
+      if pc_handle contains 'casaco' or pc_handle contains 'calca' or pc_handle contains 'vestido' or pc_handle contains 'saia' or pc_handle contains 'camisa' or pc_handle contains 'camisola' or pc_handle contains 'mala' or pc_handle contains 'carteira' or pc_handle contains 'cinto' or pc_handle contains 'sapato' or pc_handle contains 'bota' or pc_handle contains 'luva' or pc_handle contains 'chapeu' or pc_handle contains 'blusa' or pc_handle contains 'blazer' or pc_handle contains 'fato' or pc_handle contains 'calcao'
+        assign pc_is_subcategory = true
+      endif
+      if matched_collection == blank and pc_is_subcategory
+        assign matched_collection = pc
+      endif
+    endfor
+
+    for l1 in main_menu.links
+      for l2 in l1.links
+        for l3 in l2.links
+          if matched_collection == blank and l3.type == 'collection_link'
+            for pc in product.collections
+              if matched_collection == blank and pc.id == l3.object.id
+                assign matched_collection = pc
+              endif
+            endfor
+          endif
+        endfor
+      endfor
+    endfor
+
+    if matched_collection == blank
+      for l1 in main_menu.links
+        for l2 in l1.links
+          if matched_collection == blank and l2.type == 'collection_link'
+            for pc in product.collections
+              if matched_collection == blank and pc.id == l2.object.id
+                assign matched_collection = pc
+              endif
+            endfor
+          endif
+        endfor
+      endfor
+    endif
+
+    if matched_collection == blank
+      for l1 in main_menu.links
+        if matched_collection == blank and l1.type == 'collection_link'
+          for pc in product.collections
+            if matched_collection == blank and pc.id == l1.object.id
+              assign matched_collection = pc
+            endif
+          endfor
+        endif
+      endfor
+    endif
+
+    if matched_collection == blank
+      for pc in product.collections
+        assign pc_is_utility = false
+        if pc.handle contains 'best-selling' or pc.handle contains 'all-products' or pc.handle contains 'frontpage' or pc.handle contains 'featured' or pc.handle contains 'new-arrivals' or pc.handle contains 'novidades' or pc.handle contains 'destaque' or pc.handle contains 'promo' or pc.handle contains 'sale'
+          assign pc_is_utility = true
+        endif
+        if matched_collection == blank and pc_is_utility == false
+          assign matched_collection = pc
+        endif
+      endfor
+    endif
+
+    if matched_collection == blank
+      assign matched_collection = product.collections.first
+    endif
+
+    assign breadcrumb_collection = matched_collection
+  endif
+
+  # 2. Localiza a coleção escolhida na árvore do menu principal (até 2 níveis
+  #    acima), para mostrar a categoria e a subcategoria intermédia sem saltos
+  #    — de forma idêntica quer a coleção venha do contexto do URL, quer da
+  #    procura acima, e independentemente de estar a 2 ou a 3 níveis de
+  #    profundidade no menu.
+  assign breadcrumb_l1_title = blank
+  assign breadcrumb_l1_url = blank
+  assign breadcrumb_l2_title = blank
+  assign breadcrumb_l2_url = blank
+
+  if breadcrumb_collection != blank
+    for l1 in main_menu.links
+      for l2 in l1.links
+        if breadcrumb_l1_title == blank and l2.type == 'collection_link' and l2.object.id == breadcrumb_collection.id
+          assign breadcrumb_l1_title = l1.title
+          assign breadcrumb_l1_url = l1.url
+        endif
+        for l3 in l2.links
+          if breadcrumb_l2_title == blank and l3.type == 'collection_link' and l3.object.id == breadcrumb_collection.id
+            assign breadcrumb_l1_title = l1.title
+            assign breadcrumb_l1_url = l1.url
+            assign breadcrumb_l2_title = l2.title
+            assign breadcrumb_l2_url = l2.url
+          endif
+        endfor
+      endfor
+    endfor
+  endif
+
+  # 3. Se a coleção escolhida não estiver ligada em lado nenhum do menu (ex:
+  #    'Casacos Mulher' não existe como link de navegação), procura entre as
+  #    OUTRAS coleções do produto uma que esteja ligada como categoria de
+  #    topo no menu (ex: 'Mulher') e usa-a como categoria pai — assim o
+  #    caminho fica Início > Mulher > Casacos Mulher > Produto mesmo sem
+  #    depender da estrutura do menu para a subcategoria em si.
+  if breadcrumb_l1_title == blank and product != blank
+    for pc in product.collections
+      if breadcrumb_l1_title == blank and pc.id != breadcrumb_collection.id
+        for l1 in main_menu.links
+          if breadcrumb_l1_title == blank and l1.type == 'collection_link' and l1.object.id == pc.id
+            assign breadcrumb_l1_title = pc.title
+            assign breadcrumb_l1_url = pc.url
+          endif
+        endfor
+      endif
+    endfor
+  endif
+-%}
+
+<nav class="ss-breadcrumbs page-width" aria-label="Navegação estrutural">
+  <ol class="ss-breadcrumbs__list">
+    <li class="ss-breadcrumbs__item">
+      <a class="ss-breadcrumbs__link" href="{{ routes.root_url }}">Início</a>
+    </li>
+    {%- if breadcrumb_l1_title != blank -%}
+      <li class="ss-breadcrumbs__item">
+        <a class="ss-breadcrumbs__link" href="{{ breadcrumb_l1_url }}">{{ breadcrumb_l1_title | escape }}</a>
+      </li>
+    {%- endif -%}
+    {%- if breadcrumb_l2_title != blank -%}
+      <li class="ss-breadcrumbs__item">
+        <a class="ss-breadcrumbs__link" href="{{ breadcrumb_l2_url }}">{{ breadcrumb_l2_title | escape }}</a>
+      </li>
+    {%- endif -%}
+    {%- if breadcrumb_collection != blank -%}
+      <li class="ss-breadcrumbs__item{% if product == blank %} ss-breadcrumbs__item--current{% endif %}">
+        {%- if product == blank -%}
+          <span aria-current="page">{{ breadcrumb_collection.title | escape }}</span>
+        {%- else -%}
+          <a class="ss-breadcrumbs__link" href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title | escape }}</a>
+        {%- endif -%}
+      </li>
+    {%- endif -%}
+    {%- if product != blank -%}
+      <li class="ss-breadcrumbs__item ss-breadcrumbs__item--current">
+        <span aria-current="page">{{ product.title | escape }}</span>
+      </li>
+    {%- endif -%}
+  </ol>
+</nav>
+
+{%- capture breadcrumb_json_items -%}
+  {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Início",
+    "item": {{ shop.url | append: routes.root_url | json }}
+  }
+  {%- assign breadcrumb_position = 2 -%}
+  {%- if breadcrumb_l1_title != blank -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ breadcrumb_position }},
+      "name": {{ breadcrumb_l1_title | json }},
+      "item": {{ shop.url | append: breadcrumb_l1_url | json }}
+    }
+    {%- assign breadcrumb_position = breadcrumb_position | plus: 1 -%}
+  {%- endif -%}
+  {%- if breadcrumb_l2_title != blank -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ breadcrumb_position }},
+      "name": {{ breadcrumb_l2_title | json }},
+      "item": {{ shop.url | append: breadcrumb_l2_url | json }}
+    }
+    {%- assign breadcrumb_position = breadcrumb_position | plus: 1 -%}
+  {%- endif -%}
+  {%- if breadcrumb_collection != blank -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ breadcrumb_position }},
+      "name": {{ breadcrumb_collection.title | json }},
+      "item": {{ shop.url | append: breadcrumb_collection.url | json }}
+    }
+    {%- assign breadcrumb_position = breadcrumb_position | plus: 1 -%}
+  {%- endif -%}
+  {%- if product != blank -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ breadcrumb_position }},
+      "name": {{ product.title | json }},
+      "item": {{ shop.url | append: product.url | json }}
+    }
+  {%- endif -%}
+{%- endcapture -%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{{ breadcrumb_json_items }}]
+  }
+</script>

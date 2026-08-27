@@ -293,30 +293,25 @@
       }
     },
     "shop_the_look_1": {
-      "type": "shop-the-look",
+      "type": "editorial-shop-the-look",
       "blocks": {
-        "product_1": {
-          "type": "product",
+        "look_1": {
+          "type": "look",
           "settings": {
-            "product": "saia-comprida"
-          }
-        },
-        "product_2": {
-          "type": "product",
-          "settings": {
-            "product": "mala-de-pele-estilo-vaca"
+            "image": "shopify://shop_images/IMG_0273.jpg",
+            "cards_position": "right",
+            "product_1": "saia-comprida",
+            "product_2": "mala-de-pele-estilo-vaca",
+            "product_3": ""
           }
         }
       },
       "block_order": [
-        "product_1",
-        "product_2"
+        "look_1"
       ],
       "settings": {
         "heading": "Comprar o Look",
         "heading_size": "h1",
-        "image": "shopify://shop_images/IMG_0273.jpg",
-        "image_position": "left",
         "color_scheme": "scheme-1",
         "padding_top": 56,
         "padding_bottom": 56

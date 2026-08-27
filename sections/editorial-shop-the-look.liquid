@@ -1,0 +1,449 @@
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .section-{{ section.id }}-padding h2 {
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  @media screen and (min-width: 990px) {
+    .section-{{ section.id }}-padding h2 {
+      font-size: 26px;
+    }
+  }
+
+  .section-{{ section.id }}-padding .title-wrapper-with-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Contentor: respeita o page-width do resto do site, não é full-bleed. */
+  #EditorialLook-{{ section.id }} {
+    position: relative;
+  }
+
+  /* Carrossel: um "look" completo (imagem + cartões) por slide, com
+     scroll-snap nativo — dá swipe por toque em mobile sem JS extra. */
+  #EditorialLook-{{ section.id }} .editorial-look__viewport {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__slide {
+    position: relative;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--product-card-corner-radius);
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  /* Cartões de produto: empilhados por baixo da imagem em mobile. */
+  #EditorialLook-{{ section.id }} .editorial-look__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 1.6rem;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__card {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    text-decoration: none;
+    color: rgb(var(--color-foreground));
+    background-color: rgb(var(--color-background));
+    border-radius: 0.8rem;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    padding: 1.2rem 1.6rem;
+    transition: transform var(--duration-short, 0.25s) ease, box-shadow var(--duration-short, 0.25s) ease;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__card:hover,
+  #EditorialLook-{{ section.id }} .editorial-look__card:focus-visible {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__card:focus-visible {
+    outline: 2px solid rgba(var(--color-foreground), 0.5);
+    outline-offset: 2px;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__card-media {
+    flex-shrink: 0;
+    width: 6.4rem;
+    height: 6.4rem;
+    overflow: hidden;
+    border-radius: 0.6rem;
+    background-color: rgba(var(--color-foreground), 0.04);
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__card-info {
+    min-width: 0;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__card-title {
+    font-size: 1.4rem;
+    margin: 0 0 0.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__card-info .price {
+    font-size: 1.3rem;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__card-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__card-rating .rating-text,
+  #EditorialLook-{{ section.id }} .editorial-look__card-rating .rating-count {
+    font-size: 1.1rem;
+    color: rgba(var(--color-foreground), 0.6);
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__empty {
+    margin: 1.6rem 0 0;
+    color: rgba(var(--color-foreground), 0.6);
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  /* Setas de navegação: círculo escuro minimalista, sobreposto no canto
+     inferior direito da imagem (a altura do carrossel, em desktop,
+     é a da própria imagem, já que os cartões flutuam por cima dela). */
+  #EditorialLook-{{ section.id }} .editorial-look__nav {
+    position: absolute;
+    right: 1.6rem;
+    bottom: 1.6rem;
+    z-index: 2;
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: rgb(var(--color-foreground));
+    color: rgb(var(--color-background));
+    cursor: pointer;
+    transition: opacity var(--duration-short, 0.25s) ease, transform var(--duration-short, 0.25s) ease;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__arrow .icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__arrow--prev .icon {
+    transform: rotate(90deg);
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__arrow--next .icon {
+    transform: rotate(-90deg);
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__arrow:not([disabled]):hover {
+    transform: scale(1.08);
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__arrow:focus-visible {
+    outline: 2px solid rgb(var(--color-background));
+    outline-offset: 2px;
+  }
+
+  #EditorialLook-{{ section.id }} .editorial-look__arrow[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* Desktop: imagem larga com os cartões sobrepostos, flutuando por cima. */
+  @media screen and (min-width: 750px) {
+    #EditorialLook-{{ section.id }} .editorial-look__media img {
+      aspect-ratio: 21 / 9;
+    }
+
+    #EditorialLook-{{ section.id }} .editorial-look__cards {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 4%;
+      margin-top: 0;
+      width: 28rem;
+      max-width: 34%;
+    }
+
+    #EditorialLook-{{ section.id }} .editorial-look__slide--cards-left .editorial-look__cards {
+      right: auto;
+      left: 4%;
+    }
+
+    #EditorialLook-{{ section.id }} .editorial-look__card {
+      padding: 1.4rem 1.8rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #EditorialLook-{{ section.id }} .editorial-look__card,
+    #EditorialLook-{{ section.id }} .editorial-look__arrow {
+      transition: none;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- unless section.settings.heading == blank -%}
+      <div class="title-wrapper-with-link title-wrapper--no-top-margin">
+        <h2 class="inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
+    {%- endunless -%}
+
+    <slider-component id="EditorialLook-{{ section.id }}">
+      <div class="editorial-look__stage">
+        <div
+          id="Slider-{{ section.id }}"
+          class="editorial-look__viewport"
+          role="list"
+          {% if section.blocks.size > 1 %}
+            aria-label="{{ 'general.slider.name' | t }}"
+          {% endif %}
+        >
+          {%- for block in section.blocks -%}
+            <div
+              id="Slide-{{ section.id }}-{{ forloop.index }}"
+              class="editorial-look__slide{% if block.settings.cards_position == 'left' %} editorial-look__slide--cards-left{% endif %}"
+              role="group"
+              {{ block.shopify_attributes }}
+              {% if section.blocks.size > 1 %}
+                aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
+                aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
+              {% endif %}
+            >
+              <div class="editorial-look__media">
+                {%- if block.settings.image != blank -%}
+                  {%- assign lifestyle_alt = block.settings.image.alt | default: section.settings.heading | strip_html -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 2000
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '750, 1100, 1500, 2000',
+                      sizes: '100vw',
+                      alt: lifestyle_alt
+                  }}
+                {%- else -%}
+                  {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+
+              {%- liquid
+                assign has_products = false
+                if block.settings.product_1 != blank or block.settings.product_2 != blank or block.settings.product_3 != blank
+                  assign has_products = true
+                endif
+              -%}
+              {%- if has_products -%}
+                <div class="editorial-look__cards">
+                  {%- render 'editorial-look-card', product: block.settings.product_1 -%}
+                  {%- render 'editorial-look-card', product: block.settings.product_2 -%}
+                  {%- render 'editorial-look-card', product: block.settings.product_3 -%}
+                </div>
+              {%- else -%}
+                <p class="editorial-look__empty">Escolhe os produtos deste look no editor de temas.</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.blocks.size > 1 -%}
+          <div class="editorial-look__nav">
+            <button
+              type="button"
+              class="editorial-look__arrow editorial-look__arrow--prev"
+              name="previous"
+              aria-label="{{ 'general.slider.previous_slide' | t }}"
+            >
+              <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+            </button>
+            <button
+              type="button"
+              class="editorial-look__arrow editorial-look__arrow--next"
+              name="next"
+              aria-label="{{ 'general.slider.next_slide' | t }}"
+            >
+              <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+            </button>
+          </div>
+        {%- endif -%}
+      </div>
+    </slider-component>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Look Editorial",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 5,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Comprar o Look",
+      "label": "Título"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Pequeno" },
+        { "value": "h1", "label": "Médio" },
+        { "value": "h0", "label": "Grande" }
+      ],
+      "default": "h1",
+      "label": "Tamanho do título"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cores",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Espaçamento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaçamento superior",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaçamento inferior",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem lifestyle"
+        },
+        {
+          "type": "select",
+          "id": "cards_position",
+          "options": [
+            { "value": "left", "label": "Esquerda" },
+            { "value": "right", "label": "Direita" }
+          ],
+          "default": "right",
+          "label": "Posição dos cartões (desktop)"
+        },
+        {
+          "type": "header",
+          "content": "Produtos deste look"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Produto 1"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Produto 2"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Produto 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Look Editorial",
+      "blocks": [{ "type": "look" }]
+    }
+  ]
+}
+{% endschema %}

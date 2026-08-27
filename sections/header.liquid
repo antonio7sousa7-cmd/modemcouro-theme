@@ -90,6 +90,28 @@
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
 
+  /* Controla o tamanho do logótipo na barra compacta, sem nunca o
+     distorcer (width/height: auto preservam sempre o rácio natural). */
+  .header .header__heading-logo {
+    height: auto;
+    max-height: 4.8rem;
+    width: auto;
+  }
+
+  /* Isola o logótipo do padding do cabeçalho: o link nativo à volta do
+     logótipo (.header__heading-link) tem 0.75rem de padding vertical
+     próprio em base.css, que se soma ao padding do .header e infla a
+     barra. Zera-o aqui para que só o padding do .header (acima) e a
+     altura do próprio logótipo determinem a altura da barra. */
+  .header .header__heading-link {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .header .header__heading-logo-wrapper {
+    overflow: visible;
+  }
+
   .section-header {
     position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
     margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;

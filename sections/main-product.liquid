@@ -50,6 +50,19 @@
         margin-top: calc(2rem - {{ section.settings.padding_top }}px);
       }
     }
+
+    /* Título do produto ~17% mais pequeno do que o h1 nativo do tema
+       (3rem/4rem), mantendo a família de fonte serifada e a escala de
+       --font-heading-scale configurável no editor (Tipografia). */
+    #MainProduct-{{ section.id }} .product__title h1 {
+      font-size: calc(var(--font-heading-scale) * 2.5rem);
+    }
+
+    @media screen and (min-width: 750px) {
+      #MainProduct-{{ section.id }} .product__title h1 {
+        font-size: calc(var(--font-heading-scale) * 3.3rem);
+      }
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>

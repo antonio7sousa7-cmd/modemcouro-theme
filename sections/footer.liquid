@@ -376,7 +376,7 @@
                           </a>
                         </li>
                       {%- endfor -%}
-                      {%- if block.settings.heading == 'Empresa' -%}
+                      {%- if block.settings.show_cookie_preferences -%}
                         <li>
                           <button
                             type="button"
@@ -596,6 +596,12 @@
           "id": "menu",
           "default": "footer",
           "label": "t:sections.footer.blocks.link_list.settings.menu.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_cookie_preferences",
+          "default": false,
+          "label": "Mostrar \"Preferências de cookies\" no fim desta lista"
         }
       ]
     },

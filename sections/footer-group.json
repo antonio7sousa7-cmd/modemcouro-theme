@@ -41,7 +41,8 @@
           "type": "link_list",
           "settings": {
             "heading": "Empresa",
-            "menu": "footer"
+            "menu": "footer",
+            "show_cookie_preferences": true
           }
         },
         "social_payments_1": {

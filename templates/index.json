@@ -159,7 +159,7 @@
         "feature_heading_color": "#000000",
         "feature_text_color": "#000000",
         "feature_icon_color": "#000000",
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "background_color": "#ffffff",
         "background_gradient": "",
         "border_color": "#000000",
@@ -259,7 +259,7 @@
         "subheading": "Encontre sempre a peça certa em pele e couro",
         "columns_desktop": 4,
         "columns_mobile": "2",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "padding_top": 56,
         "padding_bottom": 48
       }
@@ -312,7 +312,7 @@
       "settings": {
         "heading": "Comprar o Look",
         "heading_size": "h1",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "padding_top": 56,
         "padding_bottom": 56
       }
@@ -358,8 +358,8 @@
         "desktop_content_position": "middle",
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
-        "section_color_scheme": "scheme-2",
-        "color_scheme": "scheme-2",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
         "padding_top": 96,
         "padding_bottom": 96
       }
@@ -405,8 +405,8 @@
         "desktop_content_position": "middle",
         "desktop_content_alignment": "left",
         "mobile_content_alignment": "left",
-        "section_color_scheme": "scheme-2",
-        "color_scheme": "scheme-2",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
         "padding_top": 96,
         "padding_bottom": 96
       }
@@ -472,7 +472,7 @@
         "email_form_newsletter"
       ],
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "full_width": true,
         "padding_top": 64,
         "padding_bottom": 64
@@ -523,7 +523,7 @@
         "instagram_label": "Seguir",
         "columns_desktop": 5,
         "columns_mobile": "3",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "padding_top": 56,
         "padding_bottom": 56
       }

@@ -31,6 +31,27 @@
     --ss-footer-text-strong: rgb(var(--color-foreground));
   }
 
+  /* Remove a linha divisória entre os menus e a zona de copyright, e
+     reduz o espaço vertical entre as duas zonas (era 5rem/3rem no fundo
+     dos menus + 3rem/0 no topo do copyright, em desktop/mobile). */
+  .ss-mega-footer-{{ section.id }} .footer__content-top {
+    padding-bottom: 1.5rem;
+  }
+
+  .ss-mega-footer-{{ section.id }} .footer__content-bottom {
+    border-top: none !important;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ss-mega-footer-{{ section.id }} .footer__content-top {
+      padding-bottom: 2rem;
+    }
+
+    .ss-mega-footer-{{ section.id }} .footer__content-bottom {
+      padding-top: 1.5rem;
+    }
+  }
+
   .ss-mega-footer-{{ section.id }} .ss-mega-footer {
     display: grid;
     grid-template-columns: 1fr;
@@ -46,6 +67,42 @@
   .ss-mega-footer-{{ section.id }} a:hover {
     color: var(--ss-footer-text-strong);
     text-decoration: underline;
+  }
+
+  /* O botão de preferências de cookies é um <button>, não um <a>, por isso
+     não é apanhado pela regra "a" acima. Replica aqui exatamente o mesmo
+     comportamento (cor e sublinhado só no hover) para que se comporte como
+     mais um link nativo do menu, mesmo que o script de privacidade do
+     Shopify tente forçar o seu próprio estilo diretamente no elemento. */
+  .ss-mega-footer-{{ section.id }} .ss-footer-cookie-preferences {
+    color: var(--ss-footer-text) !important;
+    text-decoration: none !important;
+    /* Um <button> nativo traz padding/border do próprio browser que um <a>
+       não tem, o que o desalinhava ligeiramente à direita dos restantes
+       links. Substitui essa caixa pela mesma usada pelos links irmãos
+       (.ss-footer-linklist__list a, acima: padding: 0.6rem 0). */
+    display: inline-block;
+    padding: 0.6rem 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    text-align: left !important;
+    /* Nota: usar o atalho "font: inherit" aqui foi o que causou o bug
+       anterior (letra maior, quebra de linha) — o atalho reinicia também o
+       font-size, herdando-o do <li> pai em vez do 1.4rem explícito que
+       ".link" já define. Por isso os valores tipográficos vão explícitos,
+       um a um, iguais aos que ".link"/".link--text" já aplicam ao <a>. */
+    font-family: inherit !important;
+    font-size: 1.4rem !important;
+    font-weight: normal !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+    white-space: nowrap !important;
+  }
+
+  .ss-mega-footer-{{ section.id }} .ss-footer-cookie-preferences:hover {
+    color: var(--ss-footer-text-strong) !important;
+    text-decoration: underline !important;
   }
 
   .ss-mega-footer-{{ section.id }} .ss-mega-footer__block-heading {
@@ -319,6 +376,17 @@
                           </a>
                         </li>
                       {%- endfor -%}
+                      {%- if block.settings.heading == 'Empresa' -%}
+                        <li>
+                          <button
+                            type="button"
+                            class="link link--text ss-footer-cookie-preferences"
+                            onclick="window.Shopify && window.Shopify.customerPrivacy && window.Shopify.customerPrivacy.showPreferences && window.Shopify.customerPrivacy.showPreferences()"
+                          >
+                            Preferências de cookies
+                          </button>
+                        </li>
+                      {%- endif -%}
                     </ul>
                   {%- endif -%}
                 </div>
@@ -400,19 +468,12 @@
         <small class="copyright__content"
           >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
         </small>
-        {%- if section.settings.show_policy -%}
-          <ul class="policies list-unstyled">
-            {%- for policy in shop.policies -%}
-              {%- if policy != blank -%}
-                <li>
-                  <small class="copyright__content"
-                    ><a href="{{ policy.url }}">{{ policy.title | escape }}</a></small
-                  >
-                </li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        {%- endif -%}
+        {%- comment -%}
+          Links de políticas (Política de privacidade, Reembolso, Termos do
+          serviço, etc.) removidos desta linha a pedido — mantém-se só o
+          copyright. O separador visual entre eles desaparece junto, já que
+          era aplicado ao <ul class="policies"> que aqui existia.
+        {%- endcomment -%}
       </div>
     </div>
   </div>

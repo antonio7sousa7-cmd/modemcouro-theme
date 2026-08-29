@@ -295,6 +295,16 @@
     "shop_the_look_1": {
       "type": "editorial-shop-the-look",
       "blocks": {
+        "look_kT9pDd": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/IMG_0277.jpg",
+            "cards_position": "right",
+            "product_1": "casaco-de-pelo",
+            "product_2": "calcas-em-pele-1",
+            "product_3": ""
+          }
+        },
         "look_1": {
           "type": "look",
           "settings": {
@@ -307,6 +317,7 @@
         }
       },
       "block_order": [
+        "look_kT9pDd",
         "look_1"
       ],
       "settings": {

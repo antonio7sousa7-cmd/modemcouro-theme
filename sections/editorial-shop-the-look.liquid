@@ -77,21 +77,20 @@
     object-position: center;
   }
 
-  /* Quando o bloco tem imagem principal E imagem mobile dedicada, cada
-     uma só é renderizada no seu breakpoint (o CSS de aspect-ratio de
-     cada um mantém-se totalmente independente por já estar isolado em
-     media queries próprias, mais abaixo). */
-  #EditorialLook-{{ section.id }} .editorial-look__media-img--mobile-only {
-    display: none;
-  }
-
+  /* Quando o bloco tem imagem principal E imagem mobile dedicada, as
+     duas tags <img> existem no DOM mas nunca aparecem juntas: cada
+     regra vive isolada no seu próprio media query (sem sobreposição
+     de intervalos) e usa !important para nunca ser sobreposta por
+     qualquer outra regra de "display" desta secção. */
   @media screen and (max-width: 749px) {
     #EditorialLook-{{ section.id }} .editorial-look__media-img--desktop-only {
-      display: none;
+      display: none !important;
     }
+  }
 
+  @media screen and (min-width: 750px) {
     #EditorialLook-{{ section.id }} .editorial-look__media-img--mobile-only {
-      display: block;
+      display: none !important;
     }
   }
 

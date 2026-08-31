@@ -264,6 +264,31 @@
      flex-direction: column), seja 1 ou vários produtos — sem scroll
      horizontal nem swipe. */
   @media screen and (max-width: 749px) {
+    /* Breakout full-bleed: o título da secção fica dentro do
+       .page-width normal (não é tocado aqui), mas o carrossel
+       (imagem + setas) escapa às margens laterais da página e toca
+       nas extremidades do ecrã. Técnica clássica de breakout: alarga
+       para 100vw e recua com margens negativas até ficar centrado. */
+    #EditorialLook-{{ section.id }} {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+
+    /* Como o carrossel inteiro (imagem + cartões) fica full-bleed, os
+       cartões recebem de volta o padding lateral da página, para não
+       ficarem encostados às bordas do ecrã como a imagem. */
+    #EditorialLook-{{ section.id }} .editorial-look__cards {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    /* Sem cantos arredondados: a imagem toca mesmo nas bordas do
+       ecrã, um raio aqui deixaria de parecer edge-to-edge. */
+    #EditorialLook-{{ section.id }} .editorial-look__media {
+      border-radius: 0;
+    }
+
     #EditorialLook-{{ section.id }} .editorial-look__media img {
       aspect-ratio: 4 / 3;
       height: auto;

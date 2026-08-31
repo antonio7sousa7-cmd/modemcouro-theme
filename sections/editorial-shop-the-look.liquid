@@ -233,20 +233,14 @@
 
   /* Desktop: imagem larga com os cartões sobrepostos, flutuando por cima. */
   @media screen and (min-width: 750px) {
-    /* Breakout full-bleed (mesma técnica usada no mobile): o título da
-       secção fica dentro do .page-width normal, mas o carrossel
-       (imagem + setas + cartões) escapa às margens laterais da página
-       e toca nas extremidades do ecrã. */
+    /* Breakout parcial: escapa às margens laterais da página (título
+       fica dentro do .page-width normal), mas fica 3rem aquém das
+       extremidades do ecrã de cada lado — um respiro elegante em vez
+       de tocar mesmo nas bordas. */
     #EditorialLook-{{ section.id }} {
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-    }
-
-    /* Sem cantos arredondados: a imagem toca mesmo nas bordas do
-       ecrã, um raio aqui deixaria de parecer edge-to-edge. */
-    #EditorialLook-{{ section.id }} .editorial-look__media {
-      border-radius: 0;
+      width: calc(100vw - 6rem);
+      margin-left: calc(50% - 50vw + 3rem);
+      margin-right: calc(50% - 50vw + 3rem);
     }
 
     #EditorialLook-{{ section.id }} .editorial-look__media img {

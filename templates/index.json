@@ -363,8 +363,8 @@
       ],
       "settings": {
         "image": "shopify://shop_images/fabricar-banner.jpg",
-        "height": "large",
-        "desktop_image_width": "medium",
+        "height": "medium",
+        "desktop_image_width": "small",
         "layout": "image_first",
         "image_behavior": "zoom-in",
         "content_layout": "no-overlap",
@@ -373,8 +373,8 @@
         "mobile_content_alignment": "left",
         "section_color_scheme": "scheme-1",
         "color_scheme": "scheme-1",
-        "padding_top": 96,
-        "padding_bottom": 96
+        "padding_top": 72,
+        "padding_bottom": 8
       }
     },
     "image_with_text_reparar": {
@@ -410,8 +410,8 @@
       ],
       "settings": {
         "image": "shopify://shop_images/reparar-banner.jpg",
-        "height": "large",
-        "desktop_image_width": "medium",
+        "height": "medium",
+        "desktop_image_width": "small",
         "layout": "text_first",
         "image_behavior": "zoom-in",
         "content_layout": "no-overlap",
@@ -420,8 +420,8 @@
         "mobile_content_alignment": "left",
         "section_color_scheme": "scheme-1",
         "color_scheme": "scheme-1",
-        "padding_top": 96,
-        "padding_bottom": 96
+        "padding_top": 8,
+        "padding_bottom": 72
       }
     },
     "image_with_text_story": {

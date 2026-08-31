@@ -25,6 +25,101 @@
       font-size: calc(var(--font-heading-scale) * 3.4rem);
     }
   }
+
+  /* Alinha o bloco de texto exatamente a meio da altura da imagem
+     (em vez de esticar o grid__item e confiar só no justify-content
+     do conteúdo, que produz o mesmo resultado mas é menos explícito). */
+  .section-{{ section.id }}-padding .image-with-text__grid {
+    align-items: center;
+  }
+
+  /* A opção nativa "small" de largura da imagem fixa a coluna a
+     ~33,33%. Sobe-se aqui para 48%, um meio-termo entre "small" e
+     "medium" (50%) que a grelha nativa não oferece. Só a largura é
+     alterada — a altura vem de section.settings.height ("medium",
+     valor fixo em rem no .image-with-text__media), independente da
+     largura da coluna, por isso mantém-se sempre igual. O bloco de
+     texto não precisa de nenhum ajuste: continua com flex-grow: 1
+     (regra nativa), por isso absorve sozinho a largura que sobra
+     (~52%) sem que o seu padding, font-size ou line-height sejam
+     tocados. Como a grelha já é "gapless" (sem espaço entre colunas),
+     não há gap a reduzir. */
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding .image-with-text__media-item {
+      width: 48%;
+    }
+  }
+
+  /* O .image-with-text__content nativo tem padding-bottom sempre 1rem
+     maior do que o padding-top (4rem/5rem em mobile-tablet, 6rem/7rem
+     a partir dos 990px) — pensado para uma secção isolada, mas cria
+     uma assimetria visível na costura entre Fabricar e Reparar, agora
+     que o espaço entre as duas secções é mínimo. Iguala-se aqui aos
+     dois para que a "moldura" de texto fique perfeitamente espelhada
+     nas duas secções. */
+  .section-{{ section.id }}-padding .image-with-text__content {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  /* Layout "split-screen" full-bleed, só a partir dos 990px (desktop
+     "a sério" — mantém o layout em caixa, com a largura de 48%
+     definida acima, no intervalo 750-989px de tablet). A imagem cola-
+     se à margem do ecrã e vai até ao centro; o texto ocupa a outra
+     metade exata. layout: image_first (Fabricar) / text_first +
+     grid--reverse (Reparar) já colocam a imagem à esquerda ou à
+     direita — aqui só se ajusta a geometria da grelha. */
+  @media screen and (min-width: 990px) {
+    /* Neutraliza o .page-width nativo só dentro desta secção: o resto
+       da página mantém a largura de leitura normal. */
+    .section-{{ section.id }}-padding .page-width {
+      max-width: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* 50/50 exato, sem gap (a grelha já é "gapless" nativamente) e
+       sem crescer/encolher, ao contrário do flex-grow: 1 nativo. */
+    .section-{{ section.id }}-padding .image-with-text__media-item,
+    .section-{{ section.id }}-padding .image-with-text__text-item {
+      width: 50%;
+      max-width: 50%;
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+
+    /* Substitui o align-items: center (usado no layout em caixa) por
+       stretch, para a imagem preencher a linha toda de alto a baixo —
+       a altura da secção passa a ser ditada pelo bloco de texto. */
+    .section-{{ section.id }}-padding .image-with-text__grid {
+      align-items: stretch;
+    }
+
+    .section-{{ section.id }}-padding .image-with-text__media-item,
+    .section-{{ section.id }}-padding .image-with-text__media {
+      height: 100%;
+    }
+
+    /* Sem cantos arredondados nem sombra: a imagem toca mesmo nas
+       bordas do ecrã e no centro, sem "moldura". A cadeia
+       ".image-with-text .image-with-text__media-item" (em vez de só
+       ".image-with-text__media-item") iguala a especificidade das
+       regras nativas equivalentes em component-image-with-text.css,
+       para as sobrepor de forma fiável. */
+    .section-{{ section.id }}-padding .image-with-text .image-with-text__media-item:after,
+    .section-{{ section.id }}-padding .image-with-text .image-with-text__media-item > * {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* Padding generoso no bloco de texto (agora a meio ecrã, colado
+       à borda exterior de um lado e ao centro do outro), para o texto
+       nunca ficar colado a nenhuma das duas bordas da sua metade. */
+    .section-{{ section.id }}-padding .image-with-text__content {
+      padding: 5rem 10%;
+    }
+  }
 {%- endstyle -%}
 
 {%- liquid

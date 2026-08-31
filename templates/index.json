@@ -298,7 +298,8 @@
         "look_kT9pDd": {
           "type": "look",
           "settings": {
-            "image": "shopify://shop_images/IMG_0277_bd970dfa-5eac-42f8-85d2-412b45b69092.jpg",
+            "image": "shopify://shop_images/IMG_0277.jpg",
+            "image_mobile": "shopify://shop_images/IMG_0277_bd970dfa-5eac-42f8-85d2-412b45b69092.jpg",
             "cards_position": "right",
             "product_1": "casaco-de-pelo",
             "product_2": "calcas-em-pele-1",
@@ -309,6 +310,7 @@
           "type": "look",
           "settings": {
             "image": "shopify://shop_images/IMG_0281_ad870b94-5e0a-4598-b980-bc437b6dc024.jpg",
+            "image_mobile": "shopify://shop_images/IMG_0273_2186e2d9-4b9c-4f76-85a9-289febed1ffd.jpg",
             "cards_position": "right",
             "product_1": "saia-comprida",
             "product_2": "mala-de-pele-estilo-vaca",

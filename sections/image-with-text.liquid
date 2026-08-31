@@ -70,6 +70,15 @@
      grid--reverse (Reparar) já colocam a imagem à esquerda ou à
      direita — aqui só se ajusta a geometria da grelha. */
   @media screen and (min-width: 990px) {
+    /* Rede de segurança: o wrapper #shopify-section-{id} (gerado pelo
+       Shopify, fora do nosso controlo direto) não tem por defeito
+       nenhuma margem/padding no Dawn, mas fica aqui explicitamente a
+       zero, para garantir que nada o empurra. */
+    #shopify-section-{{ section.id }} {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
     /* Neutraliza o .page-width nativo só dentro desta secção: o resto
        da página mantém a largura de leitura normal. */
     .section-{{ section.id }}-padding .page-width {
@@ -77,6 +86,14 @@
       width: 100%;
       padding: 0;
       margin: 0;
+    }
+
+    /* O .grid nativo (classe partilhada por .image-with-text__grid)
+       tem margin-bottom: 2rem por defeito — a verdadeira origem da
+       faixa creme entre Fabricar e Reparar, já que esse espaço soma-
+       se ao padding (agora 0) do contentor da secção. */
+    .section-{{ section.id }}-padding .image-with-text__grid {
+      margin-bottom: 0;
     }
 
     /* 50/50 exato, sem gap (a grelha já é "gapless" nativamente) e
@@ -96,9 +113,22 @@
       align-items: stretch;
     }
 
-    .section-{{ section.id }}-padding .image-with-text__media-item,
+    /* .image-with-text__media-item é o próprio item flex da linha:
+       fica com height: auto (o align-items: stretch acima já o estica
+       de forma nativa e sem ambiguidades, sem precisar de height:
+       100% explícito, que contra um contentor de altura auto é um
+       caso-limite instável em alguns motores de renderização — e
+       terá sido a causa da imagem a aparecer em branco/invisível).
+       .image-with-text__media é um filho normal (não um item flex),
+       por isso o seu height: 100% resolve de forma fiável contra a
+       altura já esticada do media-item. */
+    .section-{{ section.id }}-padding .image-with-text__media-item {
+      min-height: 46rem;
+    }
+
     .section-{{ section.id }}-padding .image-with-text__media {
       height: 100%;
+      min-height: 46rem;
     }
 
     /* Sem cantos arredondados nem sombra: a imagem toca mesmo nas

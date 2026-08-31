@@ -258,9 +258,11 @@
   }
 
   /* Mobile: imagem com proporção fixa e controlada (4:3, mais baixa do
-     que o 4:5 anterior), setas sobrepostas na própria imagem (não no
-     fundo de todo o bloco) e cartões de produto em carrossel
-     horizontal com scroll-snap, em vez de empilhados. */
+     que o 4:5 anterior) e setas sobrepostas na própria imagem (não no
+     fundo de todo o bloco). Os cartões de produto ficam todos
+     empilhados abaixo da imagem (regra base .editorial-look__cards,
+     flex-direction: column), seja 1 ou vários produtos — sem scroll
+     horizontal nem swipe. */
   @media screen and (max-width: 749px) {
     #EditorialLook-{{ section.id }} .editorial-look__media img {
       aspect-ratio: 4 / 3;
@@ -279,32 +281,6 @@
       right: 1rem;
       transform: translateY(-50%);
       justify-content: space-between;
-    }
-
-    /* Carrossel horizontal dos produtos do look, com scroll-snap
-       nativo (swipe por toque). Cada cartão não ocupa 100% da largura
-       do ecrã, para a ponta do cartão seguinte ficar visível e sugerir
-       que se pode deslizar lateralmente. */
-    #EditorialLook-{{ section.id }} .editorial-look__cards {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      gap: 1rem;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-
-    #EditorialLook-{{ section.id }} .editorial-look__cards::-webkit-scrollbar {
-      display: none;
-    }
-
-    #EditorialLook-{{ section.id }} .editorial-look__card {
-      flex: 0 0 80%;
-      width: 80vw;
-      scroll-snap-align: start;
     }
   }
 

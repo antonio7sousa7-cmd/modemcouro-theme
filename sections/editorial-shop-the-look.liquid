@@ -286,11 +286,15 @@
     /* Sem cantos arredondados: a imagem toca mesmo nas bordas do
        ecrã, um raio aqui deixaria de parecer edge-to-edge. */
     #EditorialLook-{{ section.id }} .editorial-look__media {
+      width: 100%;
       border-radius: 0;
     }
 
+    /* Formato retrato, mais alto do que largo (altura = 1.33x a
+       largura), para replicar uma foto vertical de telemóvel. */
     #EditorialLook-{{ section.id }} .editorial-look__media img {
-      aspect-ratio: 4 / 3;
+      width: 100%;
+      aspect-ratio: 3 / 4;
       height: auto;
       object-fit: cover;
       object-position: center;

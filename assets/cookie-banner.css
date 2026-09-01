@@ -1,0 +1,141 @@
+/*
+ * Estiliza o banner de consentimento de cookies nativo do Shopify
+ * (a funcionalidade de Privacidade/"Cookie banner" das definições da
+ * loja, controlada por window.Shopify.customerPrivacy — já usada em
+ * sections/footer.liquid para o link "Preferências de cookies").
+ *
+ * Este banner não é gerado por nenhum ficheiro do tema: é injetado
+ * diretamente pelo Shopify no <body>, com os seus próprios estilos.
+ * Por isso o !important aqui é intencional e necessário. Os nomes de
+ * classe abaixo foram confirmados a partir do DOM real da loja
+ * (inspecionado no DevTools em 2026-09-01) e misturam underscore
+ * simples e duplo — não é um erro de escrita, é mesmo assim que o
+ * Shopify gera o markup:
+ *
+ *   <section id="shopify-pc__banner" class="shopify-pc__banner_dialog">
+ *     <div class="shopify-pc__banner__wrapper">
+ *       <div class="shopify-pc__banner__body">
+ *         <h2 id="shopify-pc__banner_body-title">...</h2>
+ *         <p>...</p>
+ *       </div>
+ *       <div class="shopify-pc__banner_btns shopify-pc__banner_btns-granular">
+ *         <button id="shopify-pc__banner_btn-manage-prefs" class="shopify-pc__banner_btn-manage-prefs">...</button>
+ *         <button id="shopify-pc__banner_btn-accept" class="shopify-pc__banner_btn-accept">Aceitar</button>
+ *       </div>
+ *     </div>
+ *   </section>
+ *
+ * Não foi confirmado um botão "Rejeitar" separado nesta loja (modo de
+ * consentimento "granular": só Aceitar + Gerir preferências) — a
+ * regra para .shopify-pc__banner_btn-decline fica incluída na mesma
+ * para o caso de existir noutra configuração/região, mas sem efeito
+ * visível aqui se não existir.
+ *
+ * As cores usam rgb(var(--color-foreground))/rgb(var(--color-background))
+ * em vez de #000000/#ffffff literais: no esquema scheme-1 da loja
+ * resolvem para #1c1a17 (carvão quente) e #faf7f2 (creme), o mesmo
+ * "preto"/"branco" usados em todo o resto do tema — mais consistente
+ * com a identidade da marca do que um preto/branco puros, e continua
+ * a acompanhar a loja se as cores do tema alguma vez mudarem.
+ */
+
+#shopify-pc__banner {
+  font-family: var(--font-body-family);
+}
+
+#shopify-pc__banner.shopify-pc__banner_dialog {
+  background-color: rgb(var(--color-background)) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: 0 1rem 3rem rgba(var(--color-foreground), 0.08) !important;
+}
+
+#shopify-pc__banner .shopify-pc__banner__body {
+  padding: 2.5rem !important;
+}
+
+#shopify-pc__banner_body-title {
+  font-family: var(--font-heading-family) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: 2.2rem !important;
+  letter-spacing: 0.02em !important;
+  color: rgb(var(--color-foreground)) !important;
+  margin: 0 0 0.8rem !important;
+}
+
+#shopify-pc__banner.shopify-pc__banner_dialog p {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.2rem !important;
+  line-height: 1.6 !important;
+  color: rgba(var(--color-foreground), 0.75) !important;
+  font-weight: 400 !important;
+}
+
+#shopify-pc__banner .shopify-pc__banner_btns {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 2rem !important;
+  padding: 0 2.5rem 2.5rem !important;
+}
+
+/* Botão principal ("Aceitar"): fundo escuro, texto claro, sem borda,
+   cantos retos — mesmo tratamento visual do .button--primary nativo
+   do tema. */
+#shopify-pc__banner_btn-accept {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 0.05em !important;
+  background-color: rgb(var(--color-foreground)) !important;
+  color: rgb(var(--color-background)) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 1.2rem 2.4rem !important;
+}
+
+#shopify-pc__banner_btn-accept:hover {
+  opacity: 0.85;
+}
+
+/* Botão "Rejeitar" (só existe nalgumas regiões/configurações — ver
+   nota no topo do ficheiro): caixa com contorno fino, sem
+   preenchimento, para não competir com o botão principal mas ainda
+   se ler como uma ação clara. */
+#shopify-pc__banner_btn-decline {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 0.05em !important;
+  background-color: transparent !important;
+  color: rgb(var(--color-foreground)) !important;
+  border: 1px solid rgba(var(--color-foreground), 0.2) !important;
+  border-radius: 0 !important;
+  padding: 1.2rem 2.4rem !important;
+}
+
+#shopify-pc__banner_btn-decline:hover {
+  background-color: rgba(var(--color-foreground), 0.05) !important;
+}
+
+/* "Gerir preferências": texto limpo, sem caixa nem contorno — só um
+   sublinhado discreto que escurece no hover — para não parecer um
+   segundo botão a competir com "Aceitar", e sem quebrar linha. */
+#shopify-pc__banner_btn-manage-prefs {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 0.02em !important;
+  background-color: transparent !important;
+  color: rgb(var(--color-foreground)) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 1.2rem 0.4rem !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px !important;
+  text-decoration-thickness: 1px !important;
+  text-decoration-color: rgba(var(--color-foreground), 0.35) !important;
+  white-space: nowrap !important;
+}
+
+#shopify-pc__banner_btn-manage-prefs:hover {
+  text-decoration-color: rgb(var(--color-foreground)) !important;
+}

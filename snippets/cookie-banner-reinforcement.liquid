@@ -1,0 +1,453 @@
+{%- comment -%}
+  Reforço do design do banner de cookies nativo do Shopify (ver
+  assets/cookie-banner.css para os comentários completos sobre a
+  estrutura real, confirmada por inspeção do DOM em 2026-09-01).
+
+  Incluído (render) mesmo antes de </body> em AMBOS os layouts —
+  layout/theme.liquid e layout/password.liquid — para que o banner
+  fique estilizado mesmo quando o tema está protegido por password
+  (foi exatamente essa a causa de nenhum estilo aparecer a validar:
+  layout/password.liquid não tinha a nossa folha de estilos ligada).
+
+  Fica de propósito no fim do <body>, depois de qualquer <style> que
+  o próprio script do Shopify injete em runtime — em caso de empate
+  de especificidade + !important, ganha quem vem depois no
+  documento. O ID repetido (#shopify-pc__banner#shopify-pc__banner)
+  duplica a especificidade sem depender só da ordem no documento.
+{%- endcomment -%}
+{%- style -%}
+  #shopify-pc__banner#shopify-pc__banner.shopify-pc__banner_dialog,
+  #shopify-pc__banner#shopify-pc__banner.shopify-pc__banner__dialog {
+    background-color: rgb(var(--color-background)) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: 0 1rem 3rem rgba(var(--color-foreground), 0.08) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* O padding-bottom deste contentor (título+texto) só tinha sido
+     reduzido no topo — o fundo ficou esquecido em 2.5rem, somando-se
+     ao gap do wrapper e criando um fosso extra de ~25px que nenhuma
+     das afinações ao parágrafo/gap conseguia explicar. */
+  #shopify-pc__banner#shopify-pc__banner .shopify-pc__banner__body {
+    padding: 3rem 2.5rem 0 2.5rem !important;
+  }
+
+  #shopify-pc__banner_body-title#shopify-pc__banner_body-title,
+  #shopify-pc__banner#shopify-pc__banner h2 {
+    font-family: var(--font-heading-family) !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    font-size: 2.2rem !important;
+    letter-spacing: 0.02em !important;
+    color: rgb(var(--color-foreground)) !important;
+    margin-top: 0 !important;
+    margin-bottom: 2.5rem !important;
+  }
+
+  #shopify-pc__banner#shopify-pc__banner.shopify-pc__banner_dialog p,
+  #shopify-pc__banner#shopify-pc__banner.shopify-pc__banner__dialog p {
+    font-family: var(--font-body-family) !important;
+    font-size: 1.2rem !important;
+    line-height: 1.6 !important;
+    color: rgba(var(--color-foreground), 0.75) !important;
+    font-weight: 400 !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  /* Só o primeiro parágrafo se afasta do título — se alguma vez
+     houver mais do que um parágrafo, o espaçamento entre eles e o
+     fosso para os botões não são tocados por este ajuste. Prefixo
+     "body" para especificidade extra (ver também o JS mais abaixo,
+     que aplica o mesmo diretamente ao nó — o <style> sozinho não
+     estava a ganhar). */
+  body #shopify-pc__banner#shopify-pc__banner p:first-of-type {
+    margin-top: 2.5rem !important;
+  }
+
+  /* Link "Política de privacidade" dentro do texto descritivo. */
+  #shopify-pc__banner#shopify-pc__banner p a {
+    color: rgb(var(--color-foreground)) !important;
+    text-underline-offset: 4px !important;
+    text-decoration-thickness: 1px !important;
+  }
+
+  /* Contentor flex-column que envolve o corpo (título+texto) e a
+     barra de botões (nunca space-between, que reintroduziria o
+     "buraco" que já corrigimos — este contentor tem height: auto e
+     não sobra espaço para distribuir de forma previsível). Ajuste
+     final: texto→botões fica mais apertado (0.3rem do parágrafo +
+     0.5rem deste gap = 0.8rem), aproximando o texto do grupo de
+     botões — o título→texto (2.5rem) não é tocado. */
+  #shopify-pc__banner#shopify-pc__banner .shopify-pc__banner__wrapper {
+    height: auto !important;
+    min-height: 0 !important;
+    justify-content: flex-start !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Classes reais confirmadas por enumeração via JS em 2026-09-01:
+     usam underscore DUPLO antes de "btns"/"btn" (.shopify-pc__banner__btns,
+     .shopify-pc__banner__btn-accept, etc.) — ao contrário do que
+     tínhamos assumido (e confirmado só para os IDs, que continuam
+     com underscore simples). Mantêm-se aqui as duas variantes de
+     classe (simples e dupla) para não voltar a falhar se isto mudar
+     outra vez. */
+  #shopify-pc__banner#shopify-pc__banner .shopify-pc__banner_btns,
+  #shopify-pc__banner#shopify-pc__banner .shopify-pc__banner__btns {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 2rem !important;
+    margin-top: 0 !important;
+    padding: 0 2.5rem 3rem !important;
+  }
+
+  #shopify-pc__banner_btn-accept#shopify-pc__banner_btn-accept,
+  #shopify-pc__banner_btn-decline#shopify-pc__banner_btn-decline,
+  #shopify-pc__banner .shopify-pc__banner__btn-accept,
+  #shopify-pc__banner .shopify-pc__banner__btn-decline {
+    min-width: 140px !important;
+    line-height: 1.4 !important;
+    padding: 1.2rem 2.4rem !important;
+    font-family: var(--font-body-family) !important;
+    font-size: 1.2rem !important;
+    text-align: center !important;
+  }
+
+  #shopify-pc__banner_btn-accept#shopify-pc__banner_btn-accept,
+  #shopify-pc__banner .shopify-pc__banner__btn-accept {
+    background-color: rgb(var(--color-foreground)) !important;
+    color: rgb(var(--color-background)) !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  #shopify-pc__banner_btn-decline#shopify-pc__banner_btn-decline,
+  #shopify-pc__banner .shopify-pc__banner__btn-decline {
+    background-color: transparent !important;
+    color: rgb(var(--color-foreground)) !important;
+    border: 1px solid rgba(var(--color-foreground), 0.2) !important;
+    border-radius: 0 !important;
+  }
+
+  #shopify-pc__banner_btn-manage-prefs#shopify-pc__banner_btn-manage-prefs,
+  #shopify-pc__banner .shopify-pc__banner__btn-manage-prefs {
+    background-color: transparent !important;
+    color: rgb(var(--color-foreground)) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 1.2rem 0.4rem !important;
+    font-family: var(--font-body-family) !important;
+    font-size: 1.2rem !important;
+    text-decoration: underline !important;
+    text-underline-offset: 4px !important;
+    text-decoration-thickness: 1px !important;
+    text-decoration-color: rgba(var(--color-foreground), 0.35) !important;
+    white-space: nowrap !important;
+  }
+{%- endstyle -%}
+
+{%- comment -%}
+  Camada de segurança em JS: as regras CSS acima assumem que o banner
+  vive no DOM normal, com os IDs/classes shopify-pc__* confirmados por
+  inspeção. Se o Shopify voltar a re-renderizar o banner (substituindo
+  os nós, o que apagaria qualquer style.setProperty inline aplicado
+  antes) ou injetar o seu próprio CSS depois do nosso, este
+  MutationObserver deteta o banner sempre que aparece/muda e volta a
+  injetar uma única <style id="modem-cookie-override"> — sempre como
+  o ÚLTIMO nó de document.body, para garantir que carrega depois de
+  qualquer CSS que o Shopify tenha injetado até esse momento. Os
+  seletores dos botões são construídos dinamicamente a partir do
+  texto de cada botão (Aceitar/Rejeitar/Gerir preferências) e da sua
+  posição real (:nth-of-type), em vez de assumir uma ordem fixa —
+  mais fiável do que adivinhar qual é "o primeiro" ou "o último".
+{%- endcomment -%}
+<script>
+  (function () {
+    var STYLE_ID = 'modem-cookie-override';
+
+    var BASE_CSS = [
+      'body #shopify-pc__banner.shopify-pc__banner_dialog,',
+      'body #shopify-pc__banner.shopify-pc__banner__dialog,',
+      'body .shopify-pc__banner_dialog,',
+      'body .shopify-pc__banner__dialog {',
+      '  background-color: rgb(var(--color-background)) !important;',
+      '  border: none !important;',
+      '  border-radius: 0 !important;',
+      '  box-shadow: 0 1rem 3rem rgba(var(--color-foreground), 0.08) !important;',
+      '  padding-top: 0 !important;',
+      '  padding-bottom: 0 !important;',
+      '  height: auto !important;',
+      '  min-height: 0 !important;',
+      '  max-height: none !important;',
+      '  overflow: visible !important;',
+      '}',
+      'body #shopify-pc__banner .shopify-pc__banner__body {',
+      '  padding-top: 3rem !important;',
+      '  padding-bottom: 0 !important;',
+      '}',
+      'body #shopify-pc__banner h2,',
+      'body #shopify-pc__banner_body-title,',
+      'body .shopify-pc__banner_body-title {',
+      '  font-family: var(--font-heading-family) !important;',
+      '  font-style: italic !important;',
+      '  font-weight: 400 !important;',
+      '  font-size: 1.8rem !important;',
+      '  letter-spacing: 0.02em !important;',
+      '  color: rgb(var(--color-foreground)) !important;',
+      '  margin-top: 0 !important;',
+      '  margin-bottom: 2.5rem !important;',
+      '}',
+      'body #shopify-pc__banner p {',
+      '  font-family: var(--font-body-family) !important;',
+      '  font-size: 1.2rem !important;',
+      '  line-height: 1.6 !important;',
+      '  color: rgba(var(--color-foreground), 0.75) !important;',
+      '  font-weight: 400 !important;',
+      '  margin-bottom: 0.3rem !important;',
+      '}',
+      'body #shopify-pc__banner p:first-of-type {',
+      '  margin-top: 2.5rem !important;',
+      '}',
+      'body #shopify-pc__banner p a {',
+      '  color: rgb(var(--color-foreground)) !important;',
+      '  text-underline-offset: 4px !important;',
+      '  text-decoration-thickness: 1px !important;',
+      '}',
+      'body #shopify-pc__banner .shopify-pc__banner__wrapper {',
+      '  height: auto !important;',
+      '  min-height: 0 !important;',
+      '  justify-content: flex-start !important;',
+      '  gap: 0.5rem !important;',
+      '}',
+      'body #shopify-pc__banner .shopify-pc__banner_btns,',
+      'body #shopify-pc__banner .shopify-pc__banner__btns {',
+      '  display: flex !important;',
+      '  align-items: center !important;',
+      '  justify-content: flex-end !important;',
+      '  gap: 2rem !important;',
+      '  margin-top: 0 !important;',
+      '  padding-bottom: 3rem !important;',
+      '}'
+    ].join('\n');
+
+    function classify(text) {
+      text = (text || '').trim().toLowerCase();
+      if (text.indexOf('aceitar') !== -1 || text.indexOf('accept') !== -1 || text.indexOf('permitir') !== -1) return 'accept';
+      if (text.indexOf('rejeitar') !== -1 || text.indexOf('recusar') !== -1 || text.indexOf('decline') !== -1 || text.indexOf('reject') !== -1) return 'decline';
+      if (text.indexOf('gerir') !== -1 || text.indexOf('preferê') !== -1 || text.indexOf('preferen') !== -1 || text.indexOf('manage') !== -1) return 'manage';
+      return null;
+    }
+
+    // Regras "por hierarquia" (nth-of-type), construídas a partir da
+    // posição REAL de cada botão dentro do banner — nunca adivinhada.
+    function buildButtonCss(bannerEl) {
+      var buttons = bannerEl.querySelectorAll('button');
+      var rules = [];
+      buttons.forEach(function (btn, index) {
+        var kind = classify(btn.textContent);
+        if (!kind) return;
+        var nth = index + 1;
+        var selector = 'body #shopify-pc__banner button:nth-of-type(' + nth + ')' +
+          ', body .shopify-pc__banner_dialog button:nth-of-type(' + nth + ')' +
+          ', body .shopify-pc__banner__dialog button:nth-of-type(' + nth + ')';
+        if (kind === 'accept') {
+          rules.push(
+            selector + ' { background-color: rgb(var(--color-foreground)) !important;' +
+            ' color: rgb(var(--color-background)) !important; border: none !important;' +
+            ' border-radius: 0 !important; padding: 1.2rem 2.4rem !important;' +
+            ' min-width: 140px !important; line-height: 1.4 !important; text-align: center !important; }'
+          );
+        } else if (kind === 'decline') {
+          rules.push(
+            selector + ' { background-color: transparent !important;' +
+            ' color: rgb(var(--color-foreground)) !important;' +
+            ' border: 1px solid rgba(var(--color-foreground), 0.2) !important;' +
+            ' border-radius: 0 !important; padding: 1.2rem 2.4rem !important;' +
+            ' min-width: 140px !important; line-height: 1.4 !important; text-align: center !important; }'
+          );
+        } else if (kind === 'manage') {
+          rules.push(
+            selector + ' { background-color: transparent !important;' +
+            ' color: rgb(var(--color-foreground)) !important; border: none !important;' +
+            ' text-decoration: underline !important; text-underline-offset: 4px !important;' +
+            ' text-decoration-thickness: 1px !important; white-space: nowrap !important; }'
+          );
+        }
+      });
+      return rules.join('\n');
+    }
+
+    // Rede de segurança adicional: aplica o mesmo diretamente aos nós
+    // (inline, com !important), para o caso de o próprio <style>
+    // alguma vez perder por qualquer motivo que não conseguimos prever.
+    function applyDirectStyles(bannerEl) {
+      // Zera o padding superior E inferior do próprio banner (o
+      // contentor mais exterior, que envolve título+texto+botões) —
+      // o espaço acima do título e abaixo dos botões passam a vir
+      // sempre de uma única fonte cada (o padding-top do .body e o
+      // padding-bottom do contentor dos botões, ambos forçados mais
+      // abaixo), em vez de se somarem a este padding exterior.
+      bannerEl.style.setProperty('padding-top', '0', 'important');
+      bannerEl.style.setProperty('padding-bottom', '0', 'important');
+
+      // Os botões estavam a ultrapassar o limite do cartão por dezenas
+      // de pixels (fundo-real negativo) — sinal de um max-height ou
+      // overflow:hidden do Shopify a cortar o cartão mais curto do que
+      // o conteúdo real. Neutralizado aqui diretamente no nó.
+      bannerEl.style.setProperty('max-height', 'none', 'important');
+      bannerEl.style.setProperty('overflow', 'visible', 'important');
+
+      var buttons = bannerEl.querySelectorAll('button');
+      var acceptBtn = null;
+      var declineBtn = null;
+      var manageBtn = null;
+      buttons.forEach(function (btn) {
+        var kind = classify(btn.textContent);
+        if (kind === 'accept') acceptBtn = btn;
+        if (kind === 'decline') declineBtn = btn;
+        if (kind === 'manage') manageBtn = btn;
+        if (kind === 'accept' || kind === 'decline') {
+          btn.style.setProperty('min-width', '140px', 'important');
+          btn.style.setProperty('line-height', '1.4', 'important');
+          btn.style.setProperty('text-align', 'center', 'important');
+          btn.style.setProperty('border-radius', '0', 'important');
+          if (kind === 'accept') {
+            btn.style.setProperty('background-color', 'rgb(var(--color-foreground))', 'important');
+            btn.style.setProperty('color', 'rgb(var(--color-background))', 'important');
+            btn.style.setProperty('border', 'none', 'important');
+          } else {
+            btn.style.setProperty('background-color', 'transparent', 'important');
+            btn.style.setProperty('color', 'rgb(var(--color-foreground))', 'important');
+            btn.style.setProperty('border', '1px solid rgba(var(--color-foreground), 0.2)', 'important');
+          }
+        } else if (kind === 'manage') {
+          btn.style.setProperty('background-color', 'transparent', 'important');
+          btn.style.setProperty('color', 'rgb(var(--color-foreground))', 'important');
+          btn.style.setProperty('border', 'none', 'important');
+          btn.style.setProperty('text-decoration', 'underline', 'important');
+          btn.style.setProperty('text-underline-offset', '4px', 'important');
+          btn.style.setProperty('text-decoration-thickness', '1px', 'important');
+          btn.style.setProperty('white-space', 'nowrap', 'important');
+        }
+      });
+
+      // O afastamento entre o título e o texto não estava a resultar
+      // via <style> — sinal de que o Shopify define margin/gap inline
+      // (com !important) diretamente nestes nós, o que vence sempre
+      // um <style> externo. Aplicado aqui diretamente aos nós, como
+      // já fazíamos nos botões, para ganhar de vez essa guerra de
+      // especificidade.
+      var title = bannerEl.querySelector('h2');
+      if (title) {
+        title.style.setProperty('margin-top', '0', 'important');
+        title.style.setProperty('margin-bottom', '2.5rem', 'important');
+      }
+
+      // O padding-bottom do .body (título+texto) só tinha sido
+      // reduzido no topo — o fundo ficava esquecido a 2.5rem,
+      // somando-se ao gap do wrapper e criando ~25px extra que
+      // nenhuma afinação ao parágrafo/gap explicava sozinha.
+      var body = title ? title.parentElement : null;
+      if (body) {
+        body.style.setProperty('padding-top', '3rem', 'important');
+        body.style.setProperty('padding-bottom', '0', 'important');
+      }
+
+      var firstParagraph = bannerEl.querySelector('p');
+      if (firstParagraph) {
+        firstParagraph.style.setProperty('margin-top', '2.5rem', 'important');
+        firstParagraph.style.setProperty('margin-bottom', '0.3rem', 'important');
+      }
+
+      // Estrutural, em vez de por nome de classe: já erramos o nome
+      // exato da classe do wrapper e do contentor dos botões mais do
+      // que uma vez (a Shopify mistura underscore simples e duplo de
+      // forma inconsistente). O título (h2, encontrado por tag) e o
+      // botão "Aceitar" (encontrado pelo texto) são as duas coisas
+      // que sabemos localizar com 100% de certeza — o wrapper é o avô
+      // do título (h2 → .body → .wrapper), e o contentor dos botões é
+      // o pai direto de qualquer um dos botões.
+      var wrapper = title && title.parentElement ? title.parentElement.parentElement : null;
+      if (wrapper) {
+        wrapper.style.setProperty('height', 'auto', 'important');
+        wrapper.style.setProperty('min-height', '0', 'important');
+        wrapper.style.setProperty('justify-content', 'flex-start', 'important');
+        wrapper.style.setProperty('gap', '0.5rem', 'important');
+      }
+
+      var referenceBtn = acceptBtn || declineBtn || manageBtn;
+      var btnsContainer = referenceBtn ? referenceBtn.parentElement : null;
+      if (btnsContainer) {
+        btnsContainer.style.setProperty('margin-top', '0', 'important');
+        btnsContainer.style.setProperty('padding-top', '0', 'important');
+        btnsContainer.style.setProperty('padding-bottom', '3rem', 'important');
+      }
+    }
+
+    // Remove a <style> anterior (se existir) e injeta uma nova como
+    // último filho de <body> — nunca duplica, e garante que fica
+    // sempre depois de qualquer CSS que o Shopify já tenha injetado.
+    function injectOverride(bannerEl) {
+      var existing = document.getElementById(STYLE_ID);
+      if (existing) existing.remove();
+
+      var styleEl = document.createElement('style');
+      styleEl.id = STYLE_ID;
+      styleEl.textContent = BASE_CSS + '\n' + buildButtonCss(bannerEl);
+      document.body.appendChild(styleEl);
+    }
+
+    function styleBanner(bannerEl) {
+      if (!bannerEl) return;
+      injectOverride(bannerEl);
+      applyDirectStyles(bannerEl);
+    }
+
+    // Identifica especificamente o banner (nunca um ancestral genérico
+    // como document.body): exige sempre um id/class real que contenha
+    // "shopify-pc__banner", no próprio nó OU num descendente concreto
+    // encontrado via querySelector. Isto corrige um bug em que
+    // document.body era aceite como "o banner" (o texto "Consentimento
+    // de cookies" está algures dentro do body, e o body tem sempre
+    // muitos <button>) — isso fazia bannerEl.querySelector('p') ir
+    // buscar o primeiro parágrafo da página inteira, não o do banner.
+    function isBannerNode(node) {
+      if (!node || node.nodeType !== 1) return false;
+      var id = node.id || '';
+      var className = typeof node.className === 'string' ? node.className : '';
+      return id.indexOf('shopify-pc__banner') !== -1 || className.indexOf('shopify-pc__banner') !== -1;
+    }
+
+    function findRealBanner(root) {
+      if (!root) return null;
+      if (isBannerNode(root)) return root;
+      if (!root.querySelector) return null;
+      return root.querySelector('[id*="shopify-pc__banner"], [class*="shopify-pc__banner"]');
+    }
+
+    function findAndStyle(root) {
+      var banner = findRealBanner(root);
+      if (banner) styleBanner(banner);
+    }
+
+    // O banner pode já existir quando este script corre (ex: password.liquid,
+    // onde fica no fim do <body>, depois do banner ter sido injetado).
+    findAndStyle(document.body);
+
+    var observer = new MutationObserver(function (mutations) {
+      for (var i = 0; i < mutations.length; i++) {
+        var added = mutations[i].addedNodes;
+        for (var j = 0; j < added.length; j++) {
+          findAndStyle(added[j]);
+        }
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  })();
+</script>

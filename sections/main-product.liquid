@@ -63,6 +63,316 @@
         font-size: calc(var(--font-heading-scale) * 3.3rem);
       }
     }
+
+    /* ---------------------------------------------------------------
+       Buy box "silent luxury": tipografia do vendor, tamanhos/
+       quantidade/botão sem arredondamento e com borda fina, e mais
+       respiração entre os grandes blocos da secção de compra. Tudo
+       scoped a #MainProduct-{{ section.id }} para não afetar outros
+       usos partilhados destas classes/variáveis (carrinho, quick-add,
+       páginas de outros produtos, etc.).
+       --------------------------------------------------------------- */
+
+    /* Variáveis de raio/borda do tema (definidas em layout/theme.liquid
+       a partir das definições do editor) redefinidas só dentro da buy
+       box: cantos retos nas opções de tamanho, no seletor de
+       quantidade e no botão de compra (e, por arrasto, no botão Shop
+       Pay/checkout acelerado, que lê --buttons-radius-outset). A
+       borda inativa passa a 1px na cor do texto do tema a 10% de
+       opacidade — mais fina e discreta do que a borda por definição,
+       sem fixar um preto/branco literal que destoe do resto da loja. */
+    #MainProduct-{{ section.id }} {
+      --variant-pills-radius: 0px;
+      --variant-pills-border-width: 0.1rem;
+      --variant-pills-border-opacity: 0.1;
+      --inputs-radius: 0px;
+      --inputs-radius-outset: 0px;
+      --inputs-border-width: 0.1rem;
+      --inputs-border-opacity: 0.1;
+      --buttons-radius: 0px;
+      --buttons-radius-outset: 0px;
+    }
+
+    /* A opção de tamanho selecionada fica um bloco sólido escuro sem
+       nenhuma borda adicional (a regra acima já deixa a borda fina,
+       mas ainda visível, nas opções por selecionar). */
+    #MainProduct-{{ section.id }} .product-form__input--pill input[type='radio']:checked + label {
+      border-color: transparent;
+    }
+
+    /* Vendor (ex.: MOD'EM COURO): oculto por pedido — deixa de
+       aparecer por cima do título na página de produto. */
+    #MainProduct-{{ section.id }} .product__text.caption-with-letter-spacing {
+      display: none;
+    }
+
+    /* Preço: respira mais do título; "Impostos incluídos" num tom
+       mais subtil do que o preço em si. */
+    #MainProduct-{{ section.id }} [id^="price-"] {
+      margin-top: 2rem;
+    }
+
+    #MainProduct-{{ section.id }} .product__tax {
+      color: rgba(var(--color-foreground), 0.5);
+    }
+
+    /* Botão "Adicionar ao carrinho": maiúsculas com leve
+       letter-spacing e altura generosa, cantos retos (ver variáveis
+       acima). */
+    #MainProduct-{{ section.id }} .product-form__submit {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      min-height: 5rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    /* Mais respiração antes de cada grande grupo da buy box (Tamanhos,
+       Pagamento seguro), sem tocar no espaçamento apertado
+       propositado entre o vendor e o título logo acima. */
+    #MainProduct-{{ section.id }} variant-selects {
+      margin-top: 3rem;
+    }
+
+    /* Seletor de quantidade removido da página de produto por pedido.
+       Com display: none o bloco deixa de ocupar espaço, e como os
+       vizinhos (fieldset dos tamanhos acima, botão de compra abaixo)
+       são ambos elementos de bloco normais, as suas margens colapsam
+       naturalmente no maior dos dois valores — o espaço fecha de
+       forma limpa, sem buraco nem sobreposição, sem precisar de mais
+       nenhuma regra de espaçamento. */
+    #MainProduct-{{ section.id }} [id^="Quantity-Form-"] {
+      display: none;
+    }
+
+    #MainProduct-{{ section.id }} .product__info-container .product-form {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    #MainProduct-{{ section.id }} .ss-secure-checkout {
+      margin-top: 2.4rem;
+    }
+
+    /* ---------------------------------------------------------------
+       Layout editorial 50/50 em desktop (>=990px): a galeria de
+       imagem e a coluna de informação passam a ocupar exatamente
+       metade do ecrã cada uma, substituindo o rácio 45/55 (ou 65/35,
+       55/45, consoante o "Tamanho do media" escolhido no editor da
+       secção) que o tema aplica por definição via as classes
+       .product--small/.product--medium/.product--large. O
+       ":not(.product--no-media)" mantém intacto o layout centrado
+       (sem imagem) usado quando o produto não tem media.
+       --------------------------------------------------------------- */
+    @media screen and (min-width: 990px) {
+      /* Full-bleed do lado da imagem: a .page-width desta secção
+         (normalmente limitada a --page-width, 1200px, e centrada,
+         tal como em todas as outras secções do tema) deixa de
+         limitar a largura aqui, para a galeria poder crescer até
+         perto da margem do ecrã. Como a grelha abaixo continua
+         dividida exatamente 50/50, o limite entre imagem e texto
+         fica sempre ao centro do ecrã — só o lado de fora é que
+         ganha o espaço libertado pela .page-width mais larga. */
+      #MainProduct-{{ section.id }} .page-width {
+        max-width: 100%;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      #MainProduct-{{ section.id }} .product:not(.product--no-media) .product__media-wrapper,
+      #MainProduct-{{ section.id }} .product:not(.product--no-media) .product__info-wrapper {
+        width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
+        max-width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
+      }
+
+      /* Afinação fina do respiro esquerdo da imagem: a distância
+         entre a imagem e a margem do ecrã vinha inteiramente do
+         padding-left de 2rem da .page-width acima; aumenta agora
+         exatamente 50% (2rem * 1.5 = 3rem, ou seja, mais 1rem). Em
+         vez de mexer na .page-width (o que deslocaria o centro da
+         grelha e alteraria também o .product__info-wrapper, já que
+         ambos dependem da mesma largura do contentor), a largura da
+         imagem encolhe só do lado de fora com uma margin-left
+         positiva: a borda direita dela — o limite ao centro do ecrã
+         — fica exatamente onde estava, e o .product__info-wrapper
+         nem é tocado por esta regra. Só se aplica com a imagem à
+         esquerda (media_position: left, a única usada nesta loja);
+         com a imagem à direita "margem esquerda" deixaria de fazer
+         sentido aqui. */
+      #MainProduct-{{ section.id }} .product:not(.product--no-media):not(.product--right) .product__media-wrapper {
+        width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2 - 1rem);
+        max-width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2 - 1rem);
+        margin-left: 1rem;
+      }
+
+      /* Respiro lateral generoso do lado do texto — agora ainda mais
+         necessário, já que a .page-width já não trava o texto perto
+         da margem do ecrã. Cobre as duas posições possíveis da
+         imagem (à esquerda ou à direita). */
+      #MainProduct-{{ section.id }} .product__info-wrapper {
+        padding: 0 0 0 8rem;
+      }
+
+      #MainProduct-{{ section.id }} .product--right .product__info-wrapper {
+        padding: 0 8rem 0 0;
+      }
+
+      /* Simetria: a distância entre o texto e a margem direita do
+         ecrã passa a ser exatamente igual à distância entre a imagem
+         e o texto.
+
+         Distância imagem->texto = column-gap da grelha
+         (var(--grid-desktop-horizontal-spacing)) + padding-left do
+         .product__info-wrapper (8rem, definido acima).
+
+         Distância texto->margem = padding-right da .page-width (2rem,
+         fixo, definido no bloco "full-bleed" acima) + o padding-right
+         deste bloco. Para as duas distâncias ficarem iguais, este
+         padding-right tem de ser "8rem + column-gap - 2rem", ou seja,
+         6.8rem com a configuração atual de espaçamento da grelha.
+         Como todo o tema usa box-sizing: border-box (definido em
+         layout/theme.liquid), isto só empurra o texto para o centro
+         da coluna — não expande o .product__info-wrapper, que
+         continua fixo pela grelha 50/50. */
+      #MainProduct-{{ section.id }} .product__info-wrapper {
+        padding-right: calc(8rem + var(--grid-desktop-horizontal-spacing) - 2rem);
+      }
+
+      /* Alinhamento geral da buy box: título, preço, tamanhos,
+         quantidade, botão e texto descritivo passam todos a partilhar
+         exatamente a mesma largura máxima — a do próprio
+         .product__info-container (o espaço disponível dentro do
+         padding acima). Sem isto, .product-form__input e
+         .product-form__buttons ficavam presos a um max-width de
+         44rem definido em section-main-product.css (pensado para uma
+         coluna estreita), enquanto o título/preço/descrição não
+         tinham esse limite — o que desalinhava os tamanhos, a
+         quantidade e o botão face ao resto do texto. */
+      #MainProduct-{{ section.id }} .product__info-container {
+        max-width: none;
+      }
+
+      #MainProduct-{{ section.id }} .product-form__input,
+      #MainProduct-{{ section.id }} .product-form__buttons {
+        max-width: none;
+      }
+
+      /* Botão "Adicionar ao carrinho" a 100% da largura útil da
+         coluna (já tinha .button--full-width; só faltava o
+         max-width acima deixar de o travar aos 44rem). */
+      #MainProduct-{{ section.id }} .product-form__submit {
+        width: 100%;
+      }
+
+      /* Pílulas de tamanho esticadas para preencherem toda a largura
+         da fieldset e alinharem com o texto por baixo: a legenda
+         ("Tamanho") ocupa sempre a primeira linha inteira
+         (flex-basis: 100% força a quebra de linha), e cada pílula
+         reparte o espaço da(s) linha(s) seguinte(s) por igual. */
+      #MainProduct-{{ section.id }} .product-form__input--pill {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+
+      #MainProduct-{{ section.id }} .product-form__input--pill .form__label {
+        flex: 1 0 100%;
+      }
+
+      #MainProduct-{{ section.id }} .product-form__input--pill input[type='radio'] + label {
+        flex: 1 1 0;
+        margin: 0;
+        text-align: center;
+      }
+
+      /* A caixa de cada imagem já segue o rácio nativo dela própria
+         (--preview-ratio, definido inline por media em
+         product-thumbnail.liquid), por isso não há corte a corrigir
+         aqui — isto é só uma salvaguarda extra para nunca recortar a
+         imagem mesmo que o "Ajuste de imagem" da secção esteja
+         definido como "Preencher" (cover). */
+      #MainProduct-{{ section.id }} .product-media-container .media > img {
+        object-fit: contain;
+      }
+
+      /* As setas de navegação da galeria (product-media-gallery.liquid)
+         só aparecem por definição ao passar o rato por cima da imagem
+         (.ss-gallery-viewport:hover); em desktop devem ficar sempre
+         visíveis, tal como já acontece em mobile. */
+      #MainProduct-{{ section.id }} .ss-gallery-nav:not([disabled]) {
+        opacity: 1;
+      }
+
+      /* Bloco de Disponibilidade de Recolha: espaçamento elegante e
+         confortável, com a estrutura de 2 linhas de
+         sections/pickup-availability.liquid — "[✓] Recolha disponível
+         em X" seguido de "[✓] Normalmente pronto para envio em X
+         dias". O link "Ver informações da loja" e o travessão
+         separador foram removidos por pedido (deixaram de existir no
+         HTML, por isso a regra .pickup-availability-separator abaixo
+         já não tem nada para estilizar nesta linha — mantém-se só
+         porque .pickup-availability-button continua a ser usado no
+         ramo "sem stock" quando há mais do que uma loja). O tamanho
+         de letra uniforme de 1.2rem mantém-se (definido numa tarefa
+         anterior); a regra que estilizava o travessão foi removida
+         daqui por já não haver nenhum elemento com essa classe no
+         HTML. Isto NÃO é o mesmo .pickup-availability-list__item
+         usado dentro da gaveta de detalhe (<pickup-availability-drawer>,
+         que o JS move para o fundo do <body>, fora desta secção) —
+         só afeta a pré-visualização na própria página. */
+      #MainProduct-{{ section.id }} .product__pickup-availabilities {
+        margin-top: 1.2rem;
+        margin-bottom: 1.2rem;
+        font-size: 1.2rem;
+      }
+
+      #MainProduct-{{ section.id }} .product__pickup-availabilities[available] {
+        min-height: 0;
+      }
+
+      #MainProduct-{{ section.id }} .pickup-availability-info p {
+        font-size: 1.2rem;
+        line-height: calc(1 + 0.5 / var(--font-body-scale));
+        margin: 0;
+      }
+
+      #MainProduct-{{ section.id }} .pickup-availability-line + .pickup-availability-line {
+        margin-top: 0.6rem;
+      }
+
+      #MainProduct-{{ section.id }} .pickup-availability-line .svg-wrapper {
+        display: inline-flex;
+        width: 1.4rem;
+        vertical-align: -0.25em;
+        margin-right: 0.5rem;
+      }
+
+      #MainProduct-{{ section.id }} .pickup-availability-button {
+        font-size: 1.2rem;
+        line-height: calc(1 + 0.5 / var(--font-body-scale));
+        padding: 0;
+        vertical-align: baseline;
+      }
+    }
+
+    /* Setas da galeria (definidas em product-media-gallery.liquid):
+       fundo em "vidro fosco" semi-transparente em vez do branco quase
+       opaco por definição, para não cortar tanto a fotografia por
+       baixo. O !important é necessário porque o <style> desta secção
+       é impresso no HTML antes do <style> scoped da galeria — com a
+       mesma especificidade (um ID + uma classe dos dois lados), sem
+       !important a ordem no DOM decidiria a favor do snippet, não
+       desta regra. */
+    #MainProduct-{{ section.id }} .ss-gallery-nav {
+      background-color: rgba(255, 255, 255, 0.4) !important;
+      border: 1px solid rgba(0, 0, 0, 0.05) !important;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    #MainProduct-{{ section.id }} .ss-gallery-nav:hover {
+      background-color: rgba(255, 255, 255, 0.7) !important;
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -491,12 +801,12 @@
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
+                {%- render 'product-pickup-availability', product: product -%}
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,
                   product_form_id: product_form_id,
-                  section_id: section.id,
-                  show_pickup_availability: true
+                  section_id: section.id
                 -%}
                 {%- render 'product-secure-checkout' -%}
                 {%- render 'product-trust-icons' -%}

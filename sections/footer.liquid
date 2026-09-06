@@ -251,6 +251,14 @@
     .ss-mega-footer-{{ section.id }} .ss-footer-bottom-row {
       grid-template-columns: repeat(4, 1fr);
     }
+
+    /* Mantém os títulos dos links do rodapé (ex. "Perguntas Frequentes")
+       numa única linha no desktop, em vez de quebrarem ao meio por causa
+       da largura estreita das colunas do mega menu / listas de links. */
+    .ss-mega-footer-{{ section.id }} .ss-mega-menu__list a,
+    .ss-mega-footer-{{ section.id }} .ss-footer-linklist__list a {
+      white-space: nowrap;
+    }
   }
 {%- endstyle -%}
 

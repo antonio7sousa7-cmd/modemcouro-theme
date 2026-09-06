@@ -1,0 +1,277 @@
+{%- comment -%}
+  Secção de FAQ em formato acordeão, com estética "silent luxury": cabeçalho
+  centrado com título e barra de pesquisa (filtra as perguntas em tempo
+  real via JavaScript, no fim deste ficheiro), seguido da lista de
+  perguntas/respostas. Secção normal (sem restrição de "enabled_on"),
+  pensada para ser adicionada individualmente, via editor visual, a uma
+  página dedicada (ex. página "FAQ").
+{%- endcomment -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__title {
+    margin: 0 0 1.5rem;
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-weight: normal;
+    font-size: 2rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__search {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 60rem;
+    margin: 0 auto;
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__search-icon {
+    position: absolute;
+    top: 50%;
+    left: 1.4rem;
+    display: flex;
+    width: 1.6rem;
+    height: 1.6rem;
+    color: rgba(var(--color-foreground), 0.5);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__search-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__search-input {
+    display: block;
+    width: 100%;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 1.2rem 1.6rem 1.2rem 4rem;
+    border: 1px solid rgba(var(--color-foreground), 0.15);
+    border-radius: 0.6rem;
+    background: rgb(var(--color-background));
+    font-family: var(--font-body-family);
+    font-size: 1.4rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__search-input::placeholder {
+    color: rgba(var(--color-foreground), 0.5);
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__search-input:focus {
+    outline: none;
+    border-color: rgba(var(--color-foreground), 0.35);
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__list {
+    border-top: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__item {
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem 0;
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: 1.6rem;
+    letter-spacing: 0.02em;
+    color: rgb(var(--color-foreground));
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__question::after {
+    content: '+';
+    flex-shrink: 0;
+    font-family: var(--font-body-family);
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  #LuxuryFAQ-{{ section.id }} details[open] .ss-luxury-faq__question::after {
+    content: '\2212';
+  }
+
+  #LuxuryFAQ-{{ section.id }} .ss-luxury-faq__answer {
+    max-width: 70rem;
+    padding: 0 0 2rem;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+{%- endstyle -%}
+
+<div id="LuxuryFAQ-{{ section.id }}" class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="ss-luxury-faq__header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="ss-luxury-faq__title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      <div class="ss-luxury-faq__search">
+        <span class="ss-luxury-faq__search-icon" aria-hidden="true">
+          {{- 'icon-search.svg' | inline_asset_content -}}
+        </span>
+        <input
+          type="text"
+          id="FaqSearch-{{ section.id }}"
+          class="ss-luxury-faq__search-input"
+          placeholder="Pesquisar perguntas frequentes"
+          aria-label="Pesquisar perguntas frequentes"
+          autocomplete="off"
+        >
+      </div>
+    </div>
+
+    <div class="ss-luxury-faq__list">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'faq_item' -%}
+            <details class="ss-luxury-faq__item" id="LuxuryFAQ-Item-{{ block.id }}" {{ block.shopify_attributes }}>
+              <summary class="ss-luxury-faq__question">
+                <span>{{ block.settings.question | escape }}</span>
+              </summary>
+              <div class="ss-luxury-faq__answer rte">
+                {{ block.settings.answer }}
+              </div>
+            </details>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    function initLuxuryFaqSearch(root) {
+      var input = root.querySelector('.ss-luxury-faq__search-input');
+      var items = root.querySelectorAll('.ss-luxury-faq__item');
+      if (!input) return;
+
+      input.addEventListener('input', function () {
+        var term = input.value.trim().toLowerCase();
+
+        items.forEach(function (item) {
+          var question = item.querySelector('.ss-luxury-faq__question');
+          var answer = item.querySelector('.ss-luxury-faq__answer');
+          var text = (question ? question.textContent : '') + ' ' + (answer ? answer.textContent : '');
+
+          item.style.display = text.toLowerCase().includes(term) ? 'block' : 'none';
+        });
+      });
+    }
+
+    var root = document.getElementById('LuxuryFAQ-{{ section.id }}');
+    if (root) initLuxuryFaqSearch(root);
+
+    // Reinicializa a pesquisa quando o editor de temas volta a desenhar esta
+    // secção (ex. depois de editar um bloco), já que o script injetado
+    // pelo AJAX do editor não é executado automaticamente.
+    document.addEventListener('shopify:section:load', function (event) {
+      var reloadedRoot = event.target.querySelector && event.target.querySelector('#LuxuryFAQ-{{ section.id }}');
+      if (reloadedRoot) initLuxuryFaqSearch(reloadedRoot);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Ajuda / FAQ"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cor",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Espaçamento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaçamento superior",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaçamento inferior",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Pergunta e Resposta",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pergunta",
+          "default": "Pergunta de exemplo"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Resposta",
+          "default": "<p>Resposta de exemplo.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ de Luxo",
+      "blocks": [
+        { "type": "faq_item" },
+        { "type": "faq_item" },
+        { "type": "faq_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

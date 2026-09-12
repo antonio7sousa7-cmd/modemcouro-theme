@@ -31,10 +31,49 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "luxury_faq_ihmfGt": {
+      "type": "luxury-faq",
+      "blocks": {
+        "faq_item_p4G94m": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Pergunta de exemplo",
+            "answer": "<p>Resposta de exemplo.</p>"
+          }
+        },
+        "faq_item_hjTiyj": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Pergunta de exemplo",
+            "answer": "<p>Resposta de exemplo.</p>"
+          }
+        },
+        "faq_item_kiyJ7h": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Pergunta de exemplo",
+            "answer": "<p>Resposta de exemplo.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_p4G94m",
+        "faq_item_hjTiyj",
+        "faq_item_kiyJ7h"
+      ],
+      "name": "FAQ de Luxo",
+      "settings": {
+        "heading": "Ajuda / FAQ",
+        "color_scheme": "",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "image_banner_79Ydyk",
-    "main"
+    "main",
+    "luxury_faq_ihmfGt"
   ]
 }

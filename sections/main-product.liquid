@@ -373,6 +373,55 @@
     #MainProduct-{{ section.id }} .ss-gallery-nav:hover {
       background-color: rgba(255, 255, 255, 0.7) !important;
     }
+
+    #MainProduct-{{ section.id }} .ss-sibling-colors__label {
+      margin: 0 0 0.8rem;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1rem;
+      color: rgb(var(--color-foreground));
+    }
+
+    #MainProduct-{{ section.id }} .ss-sibling-colors__list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    #MainProduct-{{ section.id }} .ss-sibling-colors__swatch {
+      display: block;
+      width: 5rem;
+      height: 5rem;
+      padding: 0.2rem;
+      border-radius: 0.4rem;
+    }
+
+    #MainProduct-{{ section.id }} .ss-sibling-colors__swatch img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.2rem;
+    }
+
+    #MainProduct-{{ section.id }} .ss-sibling-colors__swatch--active {
+      border: 0.15rem solid rgb(var(--color-foreground));
+    }
+
+    #MainProduct-{{ section.id }} .ss-sibling-colors__swatch--link {
+      padding: 0;
+      border: 1px solid rgba(var(--color-foreground), 0.15);
+      transition: border-color 0.2s ease;
+    }
+
+    #MainProduct-{{ section.id }} .ss-sibling-colors__swatch--link img {
+      border-radius: 0.4rem;
+    }
+
+    #MainProduct-{{ section.id }} .ss-sibling-colors__swatch--link:hover {
+      border-color: rgba(var(--color-foreground), 0.4);
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -442,6 +491,34 @@
                     </h2>
                   </a>
                 </div>
+              {%- when 'sibling_colors' -%}
+                {%- if product.metafields.custom.outras_cores -%}
+                  <div {{ block.shopify_attributes }}>
+                    <p class="ss-sibling-colors__label">Cores disponíveis</p>
+                    <div class="ss-sibling-colors__list">
+                      {%- if product.featured_image -%}
+                        <div class="ss-sibling-colors__swatch ss-sibling-colors__swatch--active">
+                          {{
+                            product.featured_image
+                            | image_url: width: 100
+                            | image_tag: loading: 'lazy', width: 100, height: 100, alt: product.title | escape
+                          }}
+                        </div>
+                      {%- endif -%}
+                      {%- for sibling in product.metafields.custom.outras_cores.value -%}
+                        <a href="{{ sibling.url }}" class="ss-sibling-colors__swatch ss-sibling-colors__swatch--link">
+                          {%- if sibling.featured_image -%}
+                            {{
+                              sibling.featured_image
+                              | image_url: width: 100
+                              | image_tag: loading: 'lazy', width: 100, height: 100, alt: sibling.title | escape
+                            }}
+                          {%- endif -%}
+                        </a>
+                      {%- endfor -%}
+                    </div>
+                  </div>
+                {%- endif -%}
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
@@ -1108,6 +1185,10 @@
       "type": "title",
       "name": "t:sections.main-product.blocks.title.name",
       "limit": 1
+    },
+    {
+      "type": "sibling_colors",
+      "name": "Cores Adicionais"
     },
     {
       "type": "price",

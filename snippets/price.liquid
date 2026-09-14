@@ -12,6 +12,7 @@
   Usage:
   {% render 'price', product: product %}
 {% endcomment %}
+{{ 'component-badge-sale.css' | asset_url | stylesheet_tag }}
 {%- liquid
   if use_variant
     assign target = product.selected_or_first_available_variant
@@ -124,7 +125,7 @@
       </small>
     </div>
     {%- if show_badges -%}
-      <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
+      <span class="badge price__badge-sale ss-badge-sale color-{{ settings.sale_badge_color_scheme }}">
         {{ 'products.product.on_sale' | t }}
       </span>
 

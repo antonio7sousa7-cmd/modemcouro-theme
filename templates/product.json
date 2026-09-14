@@ -41,6 +41,10 @@
             "page": ""
           }
         },
+        "sibling_colors_DLjKKM": {
+          "type": "sibling_colors",
+          "settings": {}
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -90,6 +94,7 @@
         "price",
         "variant_picker",
         "popup_size_guide",
+        "sibling_colors_DLjKKM",
         "quantity_selector",
         "buy_buttons",
         "description",

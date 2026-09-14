@@ -38,6 +38,19 @@
       }
     }
 
+    /* Fundo branco puro no contentor principal do produto, para que as
+       fotografias com fundo branco se fundam com a página (efeito de
+       "flutuação"). Sobrepõe-se de propósito à classe .gradient (que
+       define "background" via shorthand, podendo incluir um gradiente
+       configurado no esquema de cor da secção) — daí o !important, já
+       que ambas as regras têm a mesma especificidade de classe e a
+       ordem no DOM favoreceria .gradient. Só afeta a pintura de fundo:
+       não mexe em padding/margin, por isso não há impacto no layout
+       nem no mobile. */
+    #MainProduct-{{ section.id }} {
+      background: #ffffff !important;
+    }
+
     /* Ajusta o espaçamento acima dos breadcrumbs para ficar igual ao das
        páginas de coleção (2rem entre a linha do cabeçalho e o breadcrumb),
        independentemente do padding_top configurado nesta secção. */
@@ -152,6 +165,48 @@
 
     #MainProduct-{{ section.id }} .ss-secure-checkout {
       margin-top: 2.4rem;
+    }
+
+    /* Guia de Tamanhos: alinhado à direita, na mesma linha do label
+       "Tamanho"/"Size" (ver product-variant-picker.liquid e
+       product-size-guide-link.liquid). width: 100% garante a linha
+       inteira mesmo fora do layout de pílulas em ecrã largo (que só se
+       aplica a partir de 990px, ver media query abaixo). */
+    #MainProduct-{{ section.id }} .ss-size-guide-legend {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    /* "Tamanho: M" a negrito — escopado ao span do nome/valor da opção,
+       não ao <legend> inteiro, para não engordar também o link do Guia
+       de Tamanhos que partilha a mesma linha. O valor (span
+       [data-selected-value]) é atualizado em tempo real pelo mecanismo
+       nativo do tema (updateSelectionMetadata em global.js), que já
+       reescreve qualquer [data-selected-value] dentro do
+       .product-form__input mais próximo sempre que muda a opção
+       selecionada — não foi preciso JS novo. */
+    #MainProduct-{{ section.id }} .ss-variant-option-label {
+      font-weight: 700;
+      color: rgb(var(--color-foreground));
+    }
+
+    /* Mesma cor e peso de fonte do label "Tamanho" (.form__label não
+       define nenhum dos dois — herda do body: rgba(--color-foreground,
+       0.75) e --font-body-weight, ver theme.liquid), para que o link
+       leia como uma continuação discreta do label, não um destaque. O
+       sublinhado herda esta cor automaticamente (não fixámos
+       text-decoration-color, por isso segue o "currentColor"). */
+    #MainProduct-{{ section.id }} .ss-size-guide-link .product-popup-modal__button {
+      margin: 0;
+      padding: 0;
+      min-height: 0;
+      font-size: 1.3rem;
+      font-weight: var(--font-body-weight);
+      color: rgba(var(--color-foreground), 0.75);
+      text-decoration: underline;
+      text-underline-offset: 0.4rem;
     }
 
     /* ---------------------------------------------------------------
@@ -470,6 +525,22 @@
           class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
         >
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
+
+          {%- comment -%}
+            Guia de Tamanhos: em vez de aparecer sozinho onde o bloco
+            "popup" está na ordem, é renderizado dentro de
+            product-variant-picker.liquid, alinhado à direita na mesma
+            linha do label "Tamanho"/"Size". "has_size_option" evita
+            renderizá-lo em duplicado no caso 'popup' abaixo.
+          {%- endcomment -%}
+          {%- assign size_guide_block = section.blocks | where: 'type', 'popup' | first -%}
+          {%- assign has_size_option = false -%}
+          {%- for option in product.options_with_values -%}
+            {%- assign option_name_downcase = option.name | downcase -%}
+            {%- if option_name_downcase == 'tamanho' or option_name_downcase == 'size' -%}
+              {%- assign has_size_option = true -%}
+            {%- endif -%}
+          {%- endfor -%}
 
           {%- for block in section.blocks -%}
             {%- case block.type -%}
@@ -855,20 +926,22 @@
                   {%- endif -%}
                 </div>
               {%- when 'popup' -%}
-                <modal-opener
-                  class="product-popup-modal__opener quick-add-hidden"
-                  data-modal="#PopupModal-{{ block.id }}"
-                  {{ block.shopify_attributes }}
-                >
-                  <button
-                    id="ProductPopup-{{ block.id }}"
-                    class="product-popup-modal__button link"
-                    type="button"
-                    aria-haspopup="dialog"
+                {%- if has_size_option == false and product.metafields.custom.guia_de_tamanhos != blank -%}
+                  <modal-opener
+                    class="product-popup-modal__opener quick-add-hidden"
+                    data-modal="#PopupModal-{{ block.id }}"
+                    {{ block.shopify_attributes }}
                   >
-                    {{ block.settings.text | default: block.settings.page.title | escape }}
-                  </button>
-                </modal-opener>
+                    <button
+                      id="ProductPopup-{{ block.id }}"
+                      class="product-popup-modal__button link"
+                      type="button"
+                      aria-haspopup="dialog"
+                    >
+                      {{ block.settings.text | default: block.settings.page.title | escape }}
+                    </button>
+                  </modal-opener>
+                {%- endif -%}
               {%- when 'share' -%}
                 {% liquid
                   assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
@@ -876,7 +949,12 @@
                 %}
 
               {%- when 'variant_picker' -%}
-                {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+                {% render 'product-variant-picker',
+                  product: product,
+                  block: block,
+                  product_form_id: product_form_id,
+                  size_guide_block: size_guide_block
+                %}
               {%- when 'buy_buttons' -%}
                 {%- render 'product-pickup-availability', product: product -%}
                 {%- render 'buy-buttons',
@@ -1090,6 +1168,7 @@
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
     {%- for block in popups -%}
+      {%- if product.metafields.custom.guia_de_tamanhos != blank -%}
       <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
         <div
           role="dialog"
@@ -1112,6 +1191,7 @@
           </div>
         </div>
       </modal-dialog>
+      {%- endif -%}
     {%- endfor -%}
 
     {%- if product.media.size > 0 -%}

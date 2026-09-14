@@ -1,0 +1,25 @@
+{% comment %}
+  Renders the opener link for a "popup" block, styled to sit inline next
+  to a variant option's label (used by product-variant-picker.liquid to
+  place the size guide link next to "Tamanho"/"Size").
+
+  Accepts:
+  - block: {Object} the "popup" type block.
+
+  Usage:
+  {% render 'product-size-guide-link', block: size_guide_block %}
+{% endcomment %}
+<modal-opener
+  class="product-popup-modal__opener quick-add-hidden ss-size-guide-link"
+  data-modal="#PopupModal-{{ block.id }}"
+  {{ block.shopify_attributes }}
+>
+  <button
+    id="ProductPopup-{{ block.id }}"
+    class="product-popup-modal__button link"
+    type="button"
+    aria-haspopup="dialog"
+  >
+    {{ block.settings.text | default: block.settings.page.title | escape }}
+  </button>
+</modal-opener>

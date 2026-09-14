@@ -34,6 +34,13 @@
             "swatch_shape": "circle"
           }
         },
+        "popup_size_guide": {
+          "type": "popup",
+          "settings": {
+            "text": "Guia de Tamanhos",
+            "page": ""
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -82,6 +89,7 @@
         "title",
         "price",
         "variant_picker",
+        "popup_size_guide",
         "quantity_selector",
         "buy_buttons",
         "description",

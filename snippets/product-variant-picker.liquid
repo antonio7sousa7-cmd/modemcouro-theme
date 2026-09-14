@@ -5,8 +5,12 @@
   - product: {Object} product object.
   - block: {Object} passing the block information.
   - product_form_id: {String} Id of the product form to which the variant picker is associated.
+  - size_guide_block: {Object} optional "popup" block; when the product has
+    a "Tamanho"/"Size" option, its opener link is rendered aligned to the
+    right of that option's label instead of wherever "popup" sits in the
+    block order.
   Usage:
-  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id, size_guide_block: size_guide_block %}
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
   <variant-selects
@@ -18,6 +22,12 @@
       {%- assign option_name_downcase = option.name | downcase -%}
       {%- if option_name_downcase == 'cor' or option_name_downcase == 'color' -%}
         {%- continue -%}
+      {%- endif -%}
+      {%- assign show_size_guide = false -%}
+      {%- if size_guide_block and product.metafields.custom.guia_de_tamanhos != blank -%}
+        {%- if option_name_downcase == 'tamanho' or option_name_downcase == 'size' -%}
+          {%- assign show_size_guide = true -%}
+        {%- endif -%}
       {%- endif -%}
       {%- liquid
         assign swatch_count = option.values | map: 'swatch' | compact | size
@@ -33,11 +43,16 @@
       -%}
       {%- if picker_type == 'swatch' -%}
         <fieldset class="js product-form__input product-form__input--swatch">
-          <legend class="form__label">
-            {{ option.name }}:
-            <span data-selected-value>
-              {{- option.selected_value -}}
+          <legend class="form__label{% if show_size_guide %} ss-size-guide-legend{% endif %}">
+            <span class="ss-variant-option-label">
+              {{ option.name }}:
+              <span data-selected-value>
+                {{- option.selected_value -}}
+              </span>
             </span>
+            {%- if show_size_guide -%}
+              {%- render 'product-size-guide-link', block: size_guide_block -%}
+            {%- endif -%}
           </legend>
           {% render 'product-variant-options',
             product: product,
@@ -48,7 +63,17 @@
         </fieldset>
       {%- elsif picker_type == 'button' -%}
         <fieldset class="js product-form__input product-form__input--pill">
-          <legend class="form__label">{{ option.name }}</legend>
+          <legend class="form__label{% if show_size_guide %} ss-size-guide-legend{% endif %}">
+            <span class="ss-variant-option-label">
+              {{ option.name }}:
+              <span data-selected-value>
+                {{- option.selected_value -}}
+              </span>
+            </span>
+            {%- if show_size_guide -%}
+              {%- render 'product-size-guide-link', block: size_guide_block -%}
+            {%- endif -%}
+          </legend>
           {% render 'product-variant-options',
             product: product,
             option: option,

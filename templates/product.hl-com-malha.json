@@ -81,6 +81,10 @@
           "settings": {
             "custom_liquid": "<style>\n .table_component {overflow:auto;width:100%;} .table_component table {border:1px solid #dededf;height:100%;width:100%;table-layout:fixed;border-collapse:collapse;border-spacing:1px;text-align:center;} .table_component caption {caption-side:top;text-align:left;} .table_component th {border:1px solid #dededf;background-color:#354ea4;color:#ffffff;padding:5px;} .table_component td {border:1px solid #dededf;background-color:#ffffff;color:#000000;padding:5px;}\n</style>\n<div class=\"table_component\" role=\"region\" tabindex=\"0\"><table><caption>Tabela de Tamanhos</caption><thead><tr><th>Zona</th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th></tr></thead><tbody><tr><td>Peito</td><td>55</td><td>57</td><td>59</td><td>61</td><td>63</td><td>65</td></tr><tr><td>Fundo</td><td>44</td><td>46</td><td>48</td><td>50</td><td>52</td><td>54</td></tr><tr><td>Manga</td><td>68</td><td>69</td><td>70</td><td>71</td><td>72</td><td>73</td></tr><tr><td>Costas</td><td>66</td><td>67</td><td>68</td><td>69</td><td>70</td><td>71</td></tr></tbody></table>"
           }
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
         }
       },
       "block_order": [
@@ -90,6 +94,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "pickup_availability",
         "description",
         "collapsible_tab_epCQwM",
         "collapsible_tab_RVHTFm",

@@ -86,6 +86,10 @@
             "content": "<p>Feito em couro macio e resistente, proporciona conforto durante o dia todo.</p>",
             "page": ""
           }
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
         }
       },
       "block_order": [
@@ -97,6 +101,7 @@
         "sibling_colors_DLjKKM",
         "quantity_selector",
         "buy_buttons",
+        "pickup_availability",
         "description",
         "collapsible_tab_epCQwM",
         "collapsible_tab_RVHTFm",

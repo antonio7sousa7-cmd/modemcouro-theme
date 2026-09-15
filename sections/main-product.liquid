@@ -563,33 +563,31 @@
                   </a>
                 </div>
               {%- when 'sibling_colors' -%}
-                {%- if product.metafields.custom.outras_cores -%}
-                  <div {{ block.shopify_attributes }}>
-                    <p class="ss-sibling-colors__label">Cores disponíveis</p>
-                    <div class="ss-sibling-colors__list">
-                      {%- if product.featured_image -%}
-                        <div class="ss-sibling-colors__swatch ss-sibling-colors__swatch--active">
+                <div {{ block.shopify_attributes }}>
+                  <p class="ss-sibling-colors__label">Cores disponíveis</p>
+                  <div class="ss-sibling-colors__list">
+                    {%- if product.featured_image -%}
+                      <div class="ss-sibling-colors__swatch ss-sibling-colors__swatch--active">
+                        {{
+                          product.featured_image
+                          | image_url: width: 100
+                          | image_tag: loading: 'lazy', width: 100, height: 100, alt: product.title | escape
+                        }}
+                      </div>
+                    {%- endif -%}
+                    {%- for sibling in product.metafields.custom.outras_cores.value -%}
+                      <a href="{{ sibling.url }}" class="ss-sibling-colors__swatch ss-sibling-colors__swatch--link">
+                        {%- if sibling.featured_image -%}
                           {{
-                            product.featured_image
+                            sibling.featured_image
                             | image_url: width: 100
-                            | image_tag: loading: 'lazy', width: 100, height: 100, alt: product.title | escape
+                            | image_tag: loading: 'lazy', width: 100, height: 100, alt: sibling.title | escape
                           }}
-                        </div>
-                      {%- endif -%}
-                      {%- for sibling in product.metafields.custom.outras_cores.value -%}
-                        <a href="{{ sibling.url }}" class="ss-sibling-colors__swatch ss-sibling-colors__swatch--link">
-                          {%- if sibling.featured_image -%}
-                            {{
-                              sibling.featured_image
-                              | image_url: width: 100
-                              | image_tag: loading: 'lazy', width: 100, height: 100, alt: sibling.title | escape
-                            }}
-                          {%- endif -%}
-                        </a>
-                      {%- endfor -%}
-                    </div>
+                        {%- endif -%}
+                      </a>
+                    {%- endfor -%}
                   </div>
-                {%- endif -%}
+                </div>
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
@@ -956,7 +954,7 @@
                   size_guide_block: size_guide_block
                 %}
               {%- when 'buy_buttons' -%}
-                {%- render 'product-pickup-availability', product: product -%}
+                {%- render 'product-trust-icons' -%}
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,
@@ -964,7 +962,8 @@
                   section_id: section.id
                 -%}
                 {%- render 'product-secure-checkout' -%}
-                {%- render 'product-trust-icons' -%}
+              {%- when 'pickup_availability' -%}
+                {%- render 'product-pickup-availability', product: product -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
@@ -1269,6 +1268,11 @@
     {
       "type": "sibling_colors",
       "name": "Cores Adicionais"
+    },
+    {
+      "type": "pickup_availability",
+      "name": "Recolha em Loja",
+      "limit": 1
     },
     {
       "type": "price",

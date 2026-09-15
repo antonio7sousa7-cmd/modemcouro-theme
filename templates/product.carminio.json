@@ -66,6 +66,10 @@
             "content": "<ul><li><strong>Bolsos Estrategicamente Localizados: </strong>Disponíveis na parte frontal, oferecendo espaço suficiente para guardar pequenos objetos para acesso fácil</li></ul>",
             "page": ""
           }
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
         }
       },
       "block_order": [
@@ -75,6 +79,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "pickup_availability",
         "description",
         "collapsible_tab_epCQwM",
         "collapsible_tab_RVHTFm"

@@ -9,22 +9,6 @@
  */
 {
   "sections": {
-    "image_banner_79Ydyk": {
-      "type": "image-banner",
-      "settings": {
-        "image": "shopify://shop_images/multiple-rolls-of-fabric-on-shelves.jpg",
-        "image_overlay_opacity": 0,
-        "image_height": "small",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": true,
-        "color_scheme": "",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
-      }
-    },
     "main": {
       "type": "main-page",
       "settings": {
@@ -38,33 +22,48 @@
         "faq_item_p4G94m": {
           "type": "faq_item",
           "settings": {
-            "question": "Pergunta de exemplo",
-            "answer": "<p>Resposta de exemplo.</p>"
+            "question": "O couro utilizado nos vossos produtos é 100% verdadeiro?",
+            "answer": "<p>Sim, todos os nossos produtos são fabricados exclusivamente com couro genuíno de alta qualidade. Não utilizamos \"couro sintético\", \"PU\" ou couro reconstituído. Podes ter a certeza de que estás a adquirir uma peça autêntica.</p>"
+          }
+        },
+        "faq_item_dfHJzd": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Os vossos artigos de couro são à prova de água?",
+            "answer": "<p>O couro genuíno tem alguma resistência natural à água, mas não é impermeável. Para proteção extra, sugerimos a aplicação de um spray impermeabilizante de alta qualidade. Se o artigo se molhar, deixa-o secar naturalmente, longe de fontes de calor direto (como aquecedores ou sol forte), pois isso pode danificar o material.</p>"
           }
         },
         "faq_item_hjTiyj": {
           "type": "faq_item",
           "settings": {
-            "question": "Pergunta de exemplo",
-            "answer": "<p>Resposta de exemplo.</p>"
+            "question": "O meu produto tem pequenas variações de cor ou marcas. Isso é um defeito?",
+            "answer": "<p>Pelo contrário! Cicatrizes ligeiras, marcas naturais ou pequenas variações de tonalidade são características intrínsecas do couro genuíno e são prova da sua autenticidade. Cada peça é única e conta a sua própria história. Estas \"imperfeições\" são parte da beleza de um produto natural.</p>"
           }
         },
         "faq_item_kiyJ7h": {
           "type": "faq_item",
           "settings": {
-            "question": "Pergunta de exemplo",
-            "answer": "<p>Resposta de exemplo.</p>"
+            "question": "Como devo limpar e cuidar do meu casaco/mala de couro?",
+            "answer": "<p>Para limpeza diária, basta um pano macio e ligeiramente húmido. Periodicamente, recomendamos a aplicação de um creme ou amaciador específico para couro para manter a hidratação e evitar que resseque. Evita usar produtos químicos agressivos ou lavar na máquina. Consulta o nosso [Guia de Cuidados com o Couro] no rodapé para mais detalhes.</p>"
+          }
+        },
+        "faq_item_6QL4m8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "De onde provém o vosso couro e como garantem práticas sustentáveis?",
+            "answer": "<p>Preocupamo-nos com a origem dos nossos materiais. O nosso couro é proveniente de fornecedores certificados que seguem rigorosos padrões ambientais e de bem-estar animal. Damos prioridade a processos de curtimenta que minimizam o uso de produtos químicos nocivos.</p>"
           }
         }
       },
       "block_order": [
         "faq_item_p4G94m",
+        "faq_item_dfHJzd",
         "faq_item_hjTiyj",
-        "faq_item_kiyJ7h"
+        "faq_item_kiyJ7h",
+        "faq_item_6QL4m8"
       ],
       "name": "FAQ de Luxo",
       "settings": {
-        "heading": "Ajuda / FAQ",
         "color_scheme": "",
         "padding_top": 8,
         "padding_bottom": 52
@@ -72,7 +71,6 @@
     }
   },
   "order": [
-    "image_banner_79Ydyk",
     "main",
     "luxury_faq_ihmfGt"
   ]

@@ -53,6 +53,13 @@
             "question": "De onde provém o vosso couro e como garantem práticas sustentáveis?",
             "answer": "<p>Preocupamo-nos com a origem dos nossos materiais. O nosso couro é proveniente de fornecedores certificados que seguem rigorosos padrões ambientais e de bem-estar animal. Damos prioridade a processos de curtimenta que minimizam o uso de produtos químicos nocivos.</p>"
           }
+        },
+        "faq_item_xCCYHk": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Quais são os prazos e custos de envio?",
+            "answer": "<p>Os envios para Portugal Continental demoram habitualmente entre 2 a 3 dias úteis. Os portes são para Portugal continental. Para as ilhas (Açores e Madeira), o prazo estimado é de 5 a 8 dias úteis.</p>"
+          }
         }
       },
       "block_order": [
@@ -60,7 +67,8 @@
         "faq_item_dfHJzd",
         "faq_item_hjTiyj",
         "faq_item_kiyJ7h",
-        "faq_item_6QL4m8"
+        "faq_item_6QL4m8",
+        "faq_item_xCCYHk"
       ],
       "name": "FAQ de Luxo",
       "settings": {

@@ -60,6 +60,27 @@
             "question": "Quais são os prazos e custos de envio?",
             "answer": "<p>Os envios para Portugal Continental demoram habitualmente entre 2 a 3 dias úteis. Os portes são para Portugal continental. Para as ilhas (Açores e Madeira), o prazo estimado é de 5 a 8 dias úteis.</p>"
           }
+        },
+        "faq_item_dhPJtV": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Como posso acompanhar a minha encomenda?",
+            "answer": "<p>Assim que o teu pedido for expedido, receberás um e-mail com o número de rastreio e um link para acompanhares a entrega em tempo real através da nossa transportadora parceira.</p>"
+          }
+        },
+        "faq_item_pmPRJ6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Qual é a política de devoluções da Modem Couro?",
+            "answer": "<p>Aceitamos trocas e devoluções num prazo de 14 dias após a receção da encomenda. O artigo deve ser devolvido na sua embalagem original, com as respetivas etiquetas e sem quaisquer marcas de uso ou arranhões.</p>"
+          }
+        },
+        "faq_item_itazKf": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Quais são os métodos de pagamento aceites?",
+            "answer": "<p>Para tua total comodidade e segurança, aceitamos pagamentos via MB Way, Referência Multibanco, Cartões de Crédito (Visa/Mastercard) e PayPal. Todas as transações são encriptadas.</p>"
+          }
         }
       },
       "block_order": [
@@ -68,7 +89,10 @@
         "faq_item_hjTiyj",
         "faq_item_kiyJ7h",
         "faq_item_6QL4m8",
-        "faq_item_xCCYHk"
+        "faq_item_xCCYHk",
+        "faq_item_dhPJtV",
+        "faq_item_pmPRJ6",
+        "faq_item_itazKf"
       ],
       "name": "FAQ de Luxo",
       "settings": {

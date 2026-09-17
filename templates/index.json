@@ -57,7 +57,7 @@
             "heading_size": "h1",
             "subheading": "<strong>Mais de 35 anos de experiência no fabrico de vestuário em couro</strong>",
             "button_label": "SABER MAIS",
-            "link": "shopify://pages/sobre",
+            "link": "shopify://pages/contact",
             "button_style_secondary": true,
             "show_text_box": false,
             "box_align": "middle-center",

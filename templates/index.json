@@ -12,30 +12,12 @@
     "slideshow_VpaKHP": {
       "type": "slideshow",
       "blocks": {
-        "slide_y9j7tT": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/IMG_0031.jpg",
-            "image_overlay_opacity": 0,
-            "heading": "<strong>Mod'Em Couro</strong>",
-            "heading_size": "h1",
-            "subheading": "<strong>Mais de 35 anos de experiência no fabrico de vestuário em couro</strong>",
-            "button_label": "COMPRAR AGORA",
-            "link": "shopify://collections/all",
-            "button_style_secondary": true,
-            "show_text_box": false,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": "scheme-3"
-          }
-        },
         "slide_HeNpE8": {
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/dark-haired-man-in-brown-leather-jacket.jpg",
             "image_overlay_opacity": 0,
-            "heading": "<strong>Coleção de Casacos de Couro de Homem</strong>",
+            "heading": "<strong>Coleção de Casacos de Homem</strong>",
             "heading_size": "h2",
             "subheading": "",
             "button_label": "COMPRAR AGORA",
@@ -53,11 +35,29 @@
           "settings": {
             "image": "shopify://shop_images/model-with-leather-jacket-over-shoulders.jpg",
             "image_overlay_opacity": 0,
-            "heading": "<strong>Tem um Design Específico?</strong>",
+            "heading": "<strong>Coleção de Casacos de Mulher</strong>",
             "heading_size": "h2",
-            "subheading": "<strong>Fabricamos as suas ideias à medida</strong>",
-            "button_label": "CONHEÇA O SERVIÇO",
+            "subheading": "",
+            "button_label": "COMPRAR AGORA",
             "link": "shopify://pages/fabricar",
+            "button_style_secondary": true,
+            "show_text_box": false,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-3"
+          }
+        },
+        "slide_y9j7tT": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_0031.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "<strong>Mod'Em Couro</strong>",
+            "heading_size": "h1",
+            "subheading": "<strong>Mais de 35 anos de experiência no fabrico de vestuário em couro</strong>",
+            "button_label": "COMPRAR AGORA",
+            "link": "shopify://collections/all",
             "button_style_secondary": true,
             "show_text_box": false,
             "box_align": "middle-center",
@@ -68,9 +68,9 @@
         }
       },
       "block_order": [
-        "slide_y9j7tT",
         "slide_HeNpE8",
-        "slide_YyAFcU"
+        "slide_YyAFcU",
+        "slide_y9j7tT"
       ],
       "settings": {
         "layout": "full_bleed",

@@ -362,7 +362,7 @@
         "button_iwt_fab"
       ],
       "settings": {
-        "image": "shopify://shop_images/fabricar-banner.jpg",
+        "image": "shopify://shop_images/IMG_0295.jpg",
         "height": "medium",
         "desktop_image_width": "small",
         "layout": "image_first",
@@ -409,7 +409,7 @@
         "button_iwt_rep"
       ],
       "settings": {
-        "image": "shopify://shop_images/reparar-banner.jpg",
+        "image": "shopify://shop_images/IMG_0292.jpg",
         "height": "medium",
         "desktop_image_width": "small",
         "layout": "text_first",
@@ -430,7 +430,7 @@
         "story_row_1": {
           "type": "story_row",
           "settings": {
-            "image": "shopify://shop_images/IMG_3914.jpg",
+            "image": "shopify://shop_images/IMG_3921_cbade54a-bed2-4fea-ab4c-8698a6a7e92f.png",
             "heading": "Mod'em Couro é uma Fábrica Portuguesa de Confeção de Produtos em Pele e Couro",
             "text": "<p>Desde 1989, a <strong>MOD'EM COURO</strong> destaca-se no mercado pela excelência na fabricação, venda e reparação de produtos em pele e couro. Com décadas de experiência no fabrico para marcas conceituadas e uma equipa altamente qualificada, oferecemos soluções personalizadas para atender às necessidades dos nossos clientes, desde pequenos reparos até grandes projetos de fabricação.</p>",
             "button_label": "",

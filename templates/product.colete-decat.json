@@ -12,10 +12,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "sibling_colors_yLEgrR": {
-          "type": "sibling_colors",
-          "settings": {}
-        },
         "vendor": {
           "type": "text",
           "settings": {
@@ -29,6 +25,10 @@
         },
         "price": {
           "type": "price",
+          "settings": {}
+        },
+        "sibling_colors_yLEgrR": {
+          "type": "sibling_colors",
           "settings": {}
         },
         "variant_picker": {
@@ -92,10 +92,10 @@
         }
       },
       "block_order": [
-        "sibling_colors_yLEgrR",
         "vendor",
         "title",
         "price",
+        "sibling_colors_yLEgrR",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",

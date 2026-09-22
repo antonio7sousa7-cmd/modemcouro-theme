@@ -38,6 +38,24 @@
       }
     }
 
+    /* Galeria de fotos colada à margem esquerda do ecrã no mobile
+       (<750px): cancela o padding-left de 1.5rem herdado de .page-width
+       (crescendo a largura do wrapper na mesma medida, para não afetar
+       a margem direita) e remove o margin-left de 1.5rem que o Dawn
+       aplica nativamente ao primeiro slide do carrossel "peek". O
+       "espreitar" nativo da foto seguinte no lado direito mantém-se
+       intacto — só o lado esquerdo fica edge-to-edge. */
+    @media screen and (max-width: 749px) {
+      #MainProduct-{{ section.id }} .product__media-wrapper {
+        width: calc(100% + 1.5rem);
+        margin-left: -1.5rem;
+      }
+
+      #MainProduct-{{ section.id }} .grid--peek.slider .grid__item:first-of-type {
+        margin-left: 0;
+      }
+    }
+
     /* Fundo branco puro no contentor principal do produto, para que as
        fotografias com fundo branco se fundam com a página (efeito de
        "flutuação"). Sobrepõe-se de propósito à classe .gradient (que

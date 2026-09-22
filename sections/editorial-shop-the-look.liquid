@@ -4,13 +4,11 @@
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
 
@@ -113,6 +111,17 @@
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
     padding: 1.2rem 1.6rem;
     transition: transform var(--duration-short, 0.25s) ease, box-shadow var(--duration-short, 0.25s) ease;
+  }
+
+  /* Só o último cartão da pilha (mobile) recebe a margem inferior — se
+     fosse em todos, somaria ao "gap" entre cartões e não só ao fim da
+     pilha. Em desktop os cartões flutuam sobre a imagem (position:
+     absolute) e não afetam a altura da secção, por isso esta margem só
+     é visível em mobile. Valor igual ao "gap" de .editorial-look__cards
+     (1.2rem), para uma margem simétrica entre cartões e abaixo do
+     último. */
+  #EditorialLook-{{ section.id }} .editorial-look__card:last-child {
+    margin-bottom: 1.2rem;
   }
 
   #EditorialLook-{{ section.id }} .editorial-look__card:hover,
@@ -502,16 +511,6 @@
       "step": 4,
       "unit": "px",
       "label": "Espaçamento superior",
-      "default": 56
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "Espaçamento inferior",
       "default": 56
     }
   ],

@@ -56,6 +56,20 @@
       }
     }
 
+    /* Remove a moldura (border) e a sombra (box-shadow, aplicada via o
+       pseudo-elemento :after) que .global-media-settings desenha à volta
+       de cada imagem — tanto na imagem principal como nas miniaturas da
+       galeria — controladas pelas definições globais de "Media" do
+       tema. Escopado a esta secção para não afetar imagens usadas
+       noutras secções do site. */
+    #MainProduct-{{ section.id }} .global-media-settings {
+      border: none;
+    }
+
+    #MainProduct-{{ section.id }} .global-media-settings:after {
+      box-shadow: none;
+    }
+
     /* Fundo branco puro no contentor principal do produto, para que as
        fotografias com fundo branco se fundam com a página (efeito de
        "flutuação"). Sobrepõe-se de propósito à classe .gradient (que

@@ -15,12 +15,46 @@
     block: block
     picker_type: picker_type
   %}
+
+  For the "Tamanho"/"Size" option specifically, values are reordered to
+  follow XS, S, M, L, XL, 2XL, 3XL (left to right) instead of Shopify's
+  default order (creation/alphabetical order in the admin). Any value
+  outside that list (e.g. "Único") still renders — appended after the
+  known sizes, in its original order — so it never silently disappears.
 {% endcomment %}
 {%- liquid
   assign product_form_id = 'product-form-' | append: section.id
+
+  assign option_name_downcase = option.name | downcase
+  assign values_to_render = option.values
+
+  if option_name_downcase == 'tamanho' or option_name_downcase == 'size'
+    assign size_order = 'XS,S,M,L,XL,2XL,3XL' | split: ','
+    assign ordered_values = '' | split: ','
+    assign matched_names = ''
+
+    for size_name in size_order
+      assign size_matches = option.values | where: 'name', size_name
+      if size_matches.size > 0
+        assign ordered_values = ordered_values | concat: size_matches
+        assign matched_names = matched_names | append: '||' | append: size_name | append: '||'
+      endif
+    endfor
+
+    assign remaining_values = '' | split: ','
+    for value in option.values
+      assign needle = '||' | append: value.name | append: '||'
+      unless matched_names contains needle
+        assign single_match = option.values | where: 'name', value.name
+        assign remaining_values = remaining_values | concat: single_match
+      endunless
+    endfor
+
+    assign values_to_render = ordered_values | concat: remaining_values
+  endif
 -%}
 
-{%- for value in option.values -%}
+{%- for value in values_to_render -%}
   {%- liquid
     assign swatch_focal_point = null
     if value.swatch.image

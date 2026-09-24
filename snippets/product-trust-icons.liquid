@@ -9,8 +9,12 @@
     display: flex;
     justify-content: space-between;
     gap: 0.6rem;
-    margin-top: 2.4rem;
-    margin-bottom: 2.4rem;
+    /* Margens verticais iguais e ≥ às dos vizinhos (fieldset dos
+       tamanhos 1.2rem / variant-selects 1.5rem em cima; .product-form
+       3rem em baixo). Como margens adjacentes colapsam no maior valor,
+       o espaço até aos tamanhos e até ao botão fica exatamente 3rem. */
+    margin-top: 3rem;
+    margin-bottom: 3rem;
   }
 
   .ss-product-trust__item {

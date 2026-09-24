@@ -199,6 +199,43 @@
       margin-top: 2.4rem;
     }
 
+    /* Recolha em Loja: as duas frases ("Recolha disponível em…" e
+       "Normalmente pronto para envio…") com o mesmo tamanho, espaçamento
+       de letras e altura de linha — a 1.ª frase (.caption-large, 1.3rem)
+       é a referência. Sem isto, abaixo de 990px a 2.ª usava .caption
+       (1rem em mobile, 1.2rem em tablet). A partir de 990px o bloco
+       abaixo (media query) já fixa 1.2rem nas duas, e essa regra tem
+       maior especificidade, por isso continua a valer. */
+    #MainProduct-{{ section.id }} .pickup-availability-line {
+      font-size: 1.3rem;
+      letter-spacing: 0.04rem;
+      line-height: calc(1 + 0.5 / var(--font-body-scale));
+    }
+
+    /* Ícone de aviso de "Stock limitado": pulsação de opacidade lenta e
+       subtil (100% → 35%, 2s, infinita) só neste ícone — os vistos
+       verdes das outras linhas não têm esta classe. Desligada para quem
+       pediu "reduzir movimento" no sistema. */
+    @keyframes ss-stock-alert-pulse {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.35;
+      }
+    }
+
+    #MainProduct-{{ section.id }} .stock-alert-icon {
+      animation: ss-stock-alert-pulse 2s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #MainProduct-{{ section.id }} .stock-alert-icon {
+        animation: none;
+      }
+    }
+
     /* Guia de Tamanhos: alinhado à direita, na mesma linha do label
        "Tamanho"/"Size" (ver product-variant-picker.liquid e
        product-size-guide-link.liquid). width: 100% garante a linha

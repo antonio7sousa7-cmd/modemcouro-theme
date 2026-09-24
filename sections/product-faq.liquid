@@ -1,0 +1,256 @@
+{%- comment -%}
+  FAQ em acordeão para a página de produto, com o mesmo estilo da secção
+  luxury-faq (bordas finas, +/−, pergunta 1.9rem / resposta 1.4rem).
+
+  As perguntas e respostas PADRÃO são blocos da secção (iguais para todos
+  os produtos, editáveis no editor de temas). Para personalizar a resposta
+  de um produto, preenche o metafield desse produto:
+    custom.faq_1_answer, custom.faq_2_answer, ... (pela ordem dos blocos).
+  Se o metafield existir e tiver conteúdo, substitui a resposta padrão;
+  se estiver vazio, mostra-se a resposta padrão.
+{%- endcomment -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #ProductFAQ-{{ section.id }} .ss-product-faq__heading {
+    margin: 0 0 2rem;
+    text-align: left;
+    text-transform: uppercase;
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-weight: var(--font-heading-weight);
+    font-size: 1.6rem;
+    letter-spacing: 0.15em;
+    color: rgb(var(--color-foreground));
+  }
+
+  #ProductFAQ-{{ section.id }} .ss-product-faq__list {
+    border-top: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+
+  /* Hierarquia tipográfica igual à da FAQ principal: resposta 1.4rem e
+     pergunta 1.9rem. */
+  #ProductFAQ-{{ section.id }} .ss-product-faq__item {
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+    font-size: 1.4rem;
+  }
+
+  #ProductFAQ-{{ section.id }} .ss-product-faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.2rem 0;
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: 1.9rem;
+    letter-spacing: 0.02em;
+    color: rgb(var(--color-foreground));
+  }
+
+  #ProductFAQ-{{ section.id }} .ss-product-faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  #ProductFAQ-{{ section.id }} .ss-product-faq__question::after {
+    content: '+';
+    flex-shrink: 0;
+    font-family: var(--font-body-family);
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  #ProductFAQ-{{ section.id }} details[open] .ss-product-faq__question::after {
+    content: '\2212';
+  }
+
+  #ProductFAQ-{{ section.id }} .ss-product-faq__answer {
+    max-width: 70rem;
+    padding: 0 0 1.2rem;
+    font-size: 1em;
+    line-height: 1.7;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  #ProductFAQ-{{ section.id }} .ss-product-faq__answer p,
+  #ProductFAQ-{{ section.id }} .ss-product-faq__answer li {
+    font-size: inherit;
+  }
+{%- endstyle -%}
+
+<div id="ProductFAQ-{{ section.id }}" class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ss-product-faq__heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    <div class="ss-product-faq__list">
+      {%- comment -%}
+        Se a secção tiver blocos (editáveis no editor de temas), usa-os.
+        Se não tiver nenhum, usa as 5 FAQs padrão escritas aqui no código,
+        para que apareçam sempre, sem depender de configuração. Em ambos os
+        casos, o metafield custom.faq_N_answer do produto (N = posição da
+        pergunta), se existir e tiver conteúdo, substitui a resposta padrão.
+      {%- endcomment -%}
+      {%- liquid
+        assign use_built_in = false
+        assign item_count = section.blocks.size
+        if item_count == 0
+          assign use_built_in = true
+          assign item_count = 5
+        endif
+      -%}
+
+      {%- for i in (1..item_count) -%}
+        {%- liquid
+          assign block = null
+          assign question = ''
+          assign default_answer = ''
+
+          if use_built_in
+            case i
+              when 1
+                assign question = 'Qual o tempo de envio?'
+                assign default_answer = '<p>Normalmente 2 a 4 dias úteis para Portugal Continental, com envio gratuito através dos CTT. Para as ilhas (Açores e Madeira), o prazo estimado é de 5 a 8 dias úteis.</p>'
+              when 2
+                assign question = 'Posso devolver?'
+                assign default_answer = '<p>Sim, as devoluções são fáceis. Tem 14 dias após a receção da encomenda para devolver o artigo, desde que esteja na embalagem original, com as etiquetas e sem sinais de uso.</p>'
+              when 3
+                assign question = 'O couro é genuíno?'
+                assign default_answer = '<p>Sim, 100% pele legítima. Todos os nossos artigos são fabricados em Portugal com couro genuíno de alta qualidade — nunca usamos couro sintético, PU ou reconstituído.</p>'
+              when 4
+                assign question = 'Quais os métodos de pagamento?'
+                assign default_answer = '<p>Aceitamos MB Way, Multibanco (referência) e cartões de crédito e débito (Visa e Mastercard). Todas as transações são encriptadas.</p>'
+              when 5
+                assign question = 'Como cuidar do artigo?'
+                assign default_answer = '<p>Limpe com um pano macio e ligeiramente húmido e, de vez em quando, aplique um creme ou amaciador próprio para couro para manter a hidratação. Evite produtos químicos agressivos, lavar à máquina e fontes de calor direto (aquecedores ou sol forte). Se o artigo se molhar, deixe secar naturalmente.</p>'
+            endcase
+          else
+            assign block_index = i | minus: 1
+            assign block = section.blocks[block_index]
+            assign question = block.settings.question
+            assign default_answer = block.settings.answer
+          endif
+
+          assign meta_key = 'faq_' | append: i | append: '_answer'
+          assign meta_answer = product.metafields.custom[meta_key]
+        -%}
+
+        <details
+          class="ss-product-faq__item"
+          id="ProductFAQ-Item-{{ section.id }}-{{ i }}"
+          {% if block %}
+            {{ block.shopify_attributes }}
+          {% endif %}
+        >
+          <summary class="ss-product-faq__question">
+            <span>{{ question | escape }}</span>
+          </summary>
+          <div class="ss-product-faq__answer rte">
+            {%- if meta_answer != blank -%}
+              {{ meta_answer | metafield_tag }}
+            {%- else -%}
+              {{ default_answer }}
+            {%- endif -%}
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ do Produto",
+  "class": "section",
+  "max_blocks": 10,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Perguntas Frequentes"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de cor",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Espaçamento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaçamento superior",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaçamento inferior",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Pergunta e Resposta",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pergunta",
+          "default": "Pergunta de exemplo"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Resposta padrão",
+          "info": "Usada em todos os produtos, exceto naqueles que tenham o metafield custom.faq_N_answer preenchido (N = posição desta pergunta).",
+          "default": "<p>Resposta de exemplo.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ do Produto",
+      "blocks": [
+        { "type": "faq_item", "settings": {"question":"Qual o tempo de envio?","answer":"<p>Normalmente 2 a 4 dias úteis para Portugal Continental, com envio gratuito através dos CTT. Para as ilhas (Açores e Madeira), o prazo estimado é de 5 a 8 dias úteis.</p>"} },
+        { "type": "faq_item", "settings": {"question":"Posso devolver?","answer":"<p>Sim, as devoluções são fáceis. Tem 14 dias após a receção da encomenda para devolver o artigo, desde que esteja na embalagem original, com as etiquetas e sem sinais de uso.</p>"} },
+        { "type": "faq_item", "settings": {"question":"O couro é genuíno?","answer":"<p>Sim, 100% pele legítima. Todos os nossos artigos são fabricados em Portugal com couro genuíno de alta qualidade — nunca usamos couro sintético, PU ou reconstituído.</p>"} },
+        { "type": "faq_item", "settings": {"question":"Quais os métodos de pagamento?","answer":"<p>Aceitamos MB Way, Multibanco (referência) e cartões de crédito e débito (Visa e Mastercard). Todas as transações são encriptadas.</p>"} },
+        { "type": "faq_item", "settings": {"question":"Como cuidar do artigo?","answer":"<p>Limpe com um pano macio e ligeiramente húmido e, de vez em quando, aplique um creme ou amaciador próprio para couro para manter a hidratação. Evite produtos químicos agressivos, lavar à máquina e fontes de calor direto (aquecedores ou sol forte). Se o artigo se molhar, deixe secar naturalmente.</p>"} }
+      ]
+    }
+  ]
+}
+{% endschema %}

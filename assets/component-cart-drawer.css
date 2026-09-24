@@ -29,6 +29,12 @@
   transition: transform var(--duration-default) ease;
 }
 
+@media screen and (min-width: 750px) {
+  .drawer__inner {
+    width: 33vw;
+  }
+}
+
 .drawer__inner-empty {
   height: 100%;
   padding: 0 1.5rem;
@@ -311,6 +317,7 @@ cart-drawer-items {
 .cart-drawer .tax-note {
   margin: 1.2rem 0 2rem auto;
   text-align: left;
+  font-size: 1.1rem;
 }
 
 .cart-drawer .product-option dd {

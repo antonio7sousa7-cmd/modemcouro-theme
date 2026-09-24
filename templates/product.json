@@ -140,10 +140,64 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "product_faq": {
+      "type": "product-faq",
+      "blocks": {
+        "faq_item_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Qual o tempo de envio?",
+            "answer": "<p>Normalmente 2 a 4 dias úteis para Portugal Continental, com envio gratuito através dos CTT. Para as ilhas (Açores e Madeira), o prazo estimado é de 5 a 8 dias úteis.</p>"
+          }
+        },
+        "faq_item_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Posso devolver?",
+            "answer": "<p>Sim, as devoluções são fáceis. Tem 14 dias após a receção da encomenda para devolver o artigo, desde que esteja na embalagem original, com as etiquetas e sem sinais de uso.</p>"
+          }
+        },
+        "faq_item_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "O couro é genuíno?",
+            "answer": "<p>Sim, 100% pele legítima. Todos os nossos artigos são fabricados em Portugal com couro genuíno de alta qualidade — nunca usamos couro sintético, PU ou reconstituído.</p>"
+          }
+        },
+        "faq_item_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Quais os métodos de pagamento?",
+            "answer": "<p>Aceitamos MB Way, Multibanco (referência) e cartões de crédito e débito (Visa e Mastercard). Todas as transações são encriptadas.</p>"
+          }
+        },
+        "faq_item_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Como cuidar do artigo?",
+            "answer": "<p>Limpe com um pano macio e ligeiramente húmido e, de vez em quando, aplique um creme ou amaciador próprio para couro para manter a hidratação. Evite produtos químicos agressivos, lavar à máquina e fontes de calor direto (aquecedores ou sol forte). Se o artigo se molhar, deixe secar naturalmente.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_1",
+        "faq_item_2",
+        "faq_item_3",
+        "faq_item_4",
+        "faq_item_5"
+      ],
+      "settings": {
+        "heading": "Perguntas Frequentes",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "related-products",
+    "product_faq"
   ]
 }

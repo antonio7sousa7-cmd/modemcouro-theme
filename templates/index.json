@@ -326,8 +326,7 @@
         "heading": "Comprar o Look",
         "heading_size": "h1",
         "color_scheme": "scheme-2",
-        "padding_top": 56,
-        "padding_bottom": 56
+        "padding_top": 32
       }
     },
     "image_with_text_fabricar": {

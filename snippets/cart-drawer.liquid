@@ -15,7 +15,141 @@
   .drawer {
     visibility: hidden;
   }
+
+  /* Só no carrinho lateral (não afeta a página do carrinho). */
+
+  /* Cabeçalhos "Produto" e "Total" escondidos visualmente, mas mantidos
+     para leitores de ecrã (a tabela continua a referenciá-los via
+     headers=""). Inclui a linha/margem que o tema desenha em mobile
+     por baixo deles. */
+  cart-drawer .cart-items thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Seletor de quantidade sem borda (a moldura é um box-shadow no
+     :after, controlado por estas duas variáveis). */
+  cart-drawer .quantity {
+    --inputs-border-width: 0px;
+    --inputs-border-opacity: 0;
+  }
+
+  /* Ícones de pagamento por baixo do botão de finalizar compra:
+     centrados, pequenos e discretos. */
+  cart-drawer .ss-drawer-payment {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+  }
+
+  cart-drawer .ss-drawer-payment__item {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  cart-drawer .ss-drawer-payment__item .icon {
+    width: auto;
+    height: 2rem;
+  }
+
+  /* O fundo branco das fotografias funde-se com o creme do carrinho. */
+  cart-drawer .cart-item__image {
+    mix-blend-mode: darken;
+  }
+
+  /* Barra de reserva no topo da lista de produtos: minimalista, fundo
+     suave (foreground a 5%), texto pequeno em maiúsculas espaçadas. */
+  cart-drawer .ss-reserve-timer {
+    margin: 0 0 2rem;
+    padding: 1rem 1.6rem;
+    background-color: rgba(var(--color-foreground), 0.05);
+    color: rgba(var(--color-foreground), 0.75);
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  cart-drawer .ss-reserve-timer[hidden] {
+    display: none;
+  }
+
+  cart-drawer .ss-reserve-timer__time {
+    margin-left: 0.4rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: rgb(var(--color-foreground));
+  }
 </style>
+
+<script>
+  /* Contagem decrescente de 10 minutos para a barra de reserva do carrinho
+     lateral. O #CartDrawer é substituído por AJAX sempre que o carrinho
+     muda, por isso este script vive fora dele e, a cada segundo, procura
+     as barras que existirem no DOM. O instante de fim fica em
+     sessionStorage, para o tempo não reiniciar ao mudar de página.
+     Sem barra no DOM (carrinho vazio) o tempo é limpo; quando chega a
+     zero a barra esconde-se até o carrinho voltar a ficar vazio. */
+  (function () {
+    if (window.ssCartReserveTimer) return;
+    window.ssCartReserveTimer = true;
+
+    var KEY = 'ssCartReserveEnd';
+    var DURATION_MS = 10 * 60 * 1000;
+
+    function pad(n) {
+      return n < 10 ? '0' + n : String(n);
+    }
+
+    function tick() {
+      var bars = document.querySelectorAll('.ss-reserve-timer');
+      var end = null;
+
+      try {
+        end = Number(sessionStorage.getItem(KEY)) || null;
+      } catch (e) {}
+
+      if (!bars.length) {
+        try {
+          sessionStorage.removeItem(KEY);
+        } catch (e) {}
+        return;
+      }
+
+      if (!end) {
+        end = Date.now() + DURATION_MS;
+        try {
+          sessionStorage.setItem(KEY, String(end));
+        } catch (e) {}
+      }
+
+      var remaining = Math.max(0, Math.round((end - Date.now()) / 1000));
+      var text = pad(Math.floor(remaining / 60)) + ':' + pad(remaining % 60);
+
+      bars.forEach(function (bar) {
+        bar.hidden = remaining === 0;
+        var time = bar.querySelector('.ss-reserve-timer__time');
+        if (time && time.textContent !== text) time.textContent = text;
+      });
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
   <div id="CartDrawer" class="cart-drawer">
@@ -88,6 +222,10 @@
           <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
             {%- if cart != empty -%}
               <div class="drawer__cart-items-wrapper">
+                <p class="ss-reserve-timer" role="timer">
+                  A sua encomenda está reservada por
+                  <strong class="ss-reserve-timer__time">10:00</strong>
+                </p>
                 <table class="cart-items" role="table">
                   <thead role="rowgroup">
                     <tr role="row">
@@ -142,27 +280,6 @@
                           <a href="{{ item.url }}" class="cart-item__name h4 break">
                             {{- item.product.title | escape -}}
                           </a>
-
-                          {%- if item.original_price != item.final_price -%}
-                            <div class="cart-item__discounted-prices">
-                              <span class="visually-hidden">
-                                {{ 'products.product.price.regular_price' | t }}
-                              </span>
-                              <s class="cart-item__old-price product-option">
-                                {{- item.original_price | money -}}
-                              </s>
-                              <span class="visually-hidden">
-                                {{ 'products.product.price.sale_price' | t }}
-                              </span>
-                              <strong class="cart-item__final-price product-option">
-                                {{ item.final_price | money }}
-                              </strong>
-                            </div>
-                          {%- else -%}
-                            <div class="product-option">
-                              {{ item.original_price | money }}
-                            </div>
-                          {%- endif -%}
 
                           {%- if item.product.has_only_default_variant == false
                             or item.properties.size != 0
@@ -555,6 +672,26 @@
             {{ 'sections.cart.checkout' | t }}
           </button>
         </div>
+
+        {%- comment -%}
+          Lista fixa, igual à do rodapé: shop.enabled_payment_types devolve
+          uma lista vazia nesta loja (MB Way e Multibanco não são expostos).
+        {%- endcomment -%}
+        <ul class="ss-drawer-payment list-unstyled" role="list">
+          <li class="visually-hidden">{{ 'sections.footer.payment' | t }}</li>
+          <li class="ss-drawer-payment__item">
+            {{ 'visa' | payment_type_svg_tag: class: 'icon icon--full-color' }}
+          </li>
+          <li class="ss-drawer-payment__item">
+            {{ 'master' | payment_type_svg_tag: class: 'icon icon--full-color' }}
+          </li>
+          <li class="ss-drawer-payment__item">
+            {{ 'icon-mbway.svg' | inline_asset_content }}
+          </li>
+          <li class="ss-drawer-payment__item">
+            {{ 'icon-multibanco.svg' | inline_asset_content }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>

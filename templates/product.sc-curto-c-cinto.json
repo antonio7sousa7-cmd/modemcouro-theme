@@ -194,11 +194,70 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "product_reviews": {
+      "type": "product-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review": "Qualidade impressionante. O couro é mesmo genuíno, sente-se a diferença assim que se pega na peça. Chegou super bem embalado e mais rápido do que esperava.",
+            "customer_name": "Ana P."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review": "Já tinha comprado noutras marcas e nada se compara. Pele 100% verdadeira, acabamento impecável. O envio foi rapidíssimo, chegou em 2 dias.",
+            "customer_name": "Ricardo M."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review": "Encomendei um casaco e superou todas as expectativas — couro genuíno, macio e resistente. Entrega rápida e sem complicações.",
+            "customer_name": "Sofia L."
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review": "Comprei uma mala e é simplesmente linda. Sente-se a qualidade do couro genuíno em cada detalhe. Recomendo sem hesitar.",
+            "customer_name": "Marta C."
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review": "Atendimento excelente e entrega super rápida. O produto chegou impecável e o couro é de facto verdadeiro, nada a ver com imitações.",
+            "customer_name": "João F."
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5"
+      ],
+      "settings": {
+        "heading": "O Que Dizem os Nossos Clientes",
+        "color_scheme": "scheme-1",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
     "main",
     "related-products",
-    "product_faq"
+    "product_faq",
+    "product_reviews"
   ]
 }

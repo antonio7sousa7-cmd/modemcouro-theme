@@ -39,18 +39,14 @@
     }
 
     /* Galeria de fotos colada à margem esquerda do ecrã no mobile
-       (<750px): cancela o padding-left de 1.5rem herdado de .page-width
-       (crescendo a largura do wrapper na mesma medida, para não afetar
-       a margem direita) e remove o margin-left de 1.5rem que o Dawn
-       aplica nativamente ao primeiro slide do carrossel "peek". O
-       "espreitar" nativo da foto seguinte no lado direito mantém-se
-       intacto — só o lado esquerdo fica edge-to-edge. */
+       (<750px). O Dawn já puxa o <slider-component> para o bordo do ecrã
+       (margin-left: -1.5rem em section-main-product.css, a cancelar o
+       padding do .page-width); só falta remover o margin-left de 1.5rem
+       que ele aplica ao primeiro slide do carrossel "peek", para a foto
+       começar exatamente no bordo. NÃO somar aqui outra margem negativa
+       no .product__media-wrapper: empurra a galeria 1.5rem para fora do
+       ecrã e corta o lado esquerdo das fotos. */
     @media screen and (max-width: 749px) {
-      #MainProduct-{{ section.id }} .product__media-wrapper {
-        width: calc(100% + 1.5rem);
-        margin-left: -1.5rem;
-      }
-
       #MainProduct-{{ section.id }} .grid--peek.slider .grid__item:first-of-type {
         margin-left: 0;
       }

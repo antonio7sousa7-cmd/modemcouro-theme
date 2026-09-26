@@ -1,15 +1,6 @@
 <!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
   <head>
-    <!-- Event snippet for Visualização de página conversion page -->
-<script>
-  gtag('event', 'conversion', {
-      'send_to': 'AW-17561345639/yStJCLzup5sbEOe887VB',
-      'value': 1.0,
-      'currency': 'EUR'
-  });
-</script>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -48,7 +39,83 @@
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
+    {%- comment -%}
+      Google Ads (gtag.js) com Consent Mode v2. Tem de vir ANTES do
+      content_for_header e de qualquer chamada gtag():
+      1) define gtag() e declara TODO o consentimento como "denied" por
+         defeito (wait_for_update dá tempo ao passo 3 de o atualizar);
+      2) carrega o gtag.js e configura a conta;
+      3) mais abaixo, depois de content_for_header (que traz a Customer
+         Privacy API da Shopify), o consentimento é atualizado conforme a
+         escolha do visitante no banner de cookies.
+      Sem consentimento o Google só recebe pings sem cookies nem
+      identificadores (modelação de conversões).
+    {%- endcomment -%}
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+      });
+      gtag('set', 'url_passthrough', true);
+      gtag('set', 'ads_data_redaction', true);
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17561345639"></script>
+    <script>
+      gtag('js', new Date());
+      gtag('config', 'AW-17561345639');
+
+      /* Conversão "Visualização de página" (Google Ads). Estava solta no
+         topo do <head>, antes de o gtag() existir — por isso nunca chegava
+         a disparar. Agora corre já com o gtag definido e com o consentimento
+         em "denied" até o visitante aceitar. */
+      gtag('event', 'conversion', {
+        'send_to': 'AW-17561345639/yStJCLzup5sbEOe887VB',
+        'value': 1.0,
+        'currency': 'EUR'
+      });
+    </script>
+
     {{ content_for_header }}
+
+    <script>
+      /* Consent Mode <-> Customer Privacy API da Shopify. Mapeia as escolhas
+         do banner de cookies para o Google: marketing -> ad_*, estatísticas
+         -> analytics_storage. Em regiões onde a Shopify não exige
+         consentimento, as funções devolvem true e fica tudo "granted". */
+      (function () {
+        function update() {
+          var cp = window.Shopify && window.Shopify.customerPrivacy;
+          if (!cp || typeof cp.marketingAllowed !== 'function') return;
+          var ads = cp.marketingAllowed() ? 'granted' : 'denied';
+          var stats = cp.analyticsProcessingAllowed() ? 'granted' : 'denied';
+          gtag('consent', 'update', {
+            ad_storage: ads,
+            ad_user_data: ads,
+            ad_personalization: ads,
+            analytics_storage: stats
+          });
+        }
+
+        // Escolha feita (ou alterada) no banner.
+        document.addEventListener('visitorConsentCollected', update);
+
+        // Consentimento já guardado de visitas anteriores.
+        function whenReady() {
+          if (window.Shopify && window.Shopify.customerPrivacy) { update(); return; }
+          if (window.Shopify && typeof window.Shopify.loadFeatures === 'function') {
+            window.Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function (error) {
+              if (!error) update();
+            });
+          }
+        }
+        whenReady();
+      })();
+    </script>
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'

@@ -38,6 +38,13 @@
             "swatch_shape": "circle"
           }
         },
+        "popup_size_guide": {
+          "type": "popup",
+          "settings": {
+            "text": "Guia de Tamanhos",
+            "page": ""
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -88,13 +95,6 @@
           "type": "custom_liquid",
           "settings": {
             "custom_liquid": "<style>\n .table_component {overflow:auto;width:100%;} .table_component table {border:1px solid #dededf;height:100%;width:100%;table-layout:fixed;border-collapse:collapse;border-spacing:1px;text-align:center;} .table_component caption {caption-side:top;text-align:left;} .table_component th {border:1px solid #dededf;background-color:#354ea4;color:#ffffff;padding:5px;} .table_component td {border:1px solid #dededf;background-color:#ffffff;color:#000000;padding:5px;}\n</style>\n<div class=\"table_component\" role=\"region\" tabindex=\"0\"><table><caption>Tabela de Tamanhos</caption><thead><tr><th>Zona</th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th></tr></thead><tbody><tr><td>Peito</td><td>46</td><td>48</td><td>50</td><td>52</td><td>54</td><td>56</td></tr><tr><td>Fundo</td><td>43</td><td>45</td><td>47</td><td>49</td><td>51</td><td>53</td></tr><tr><td>Manga</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td></tr><tr><td>Costas</td><td>43</td><td>44</td><td>45</td><td>46</td><td>47</td><td>48</td></tr></tbody></table>"
-          }
-        },
-        "popup_size_guide": {
-          "type": "popup",
-          "settings": {
-            "text": "Guia de Tamanhos",
-            "page": ""
           }
         }
       },
@@ -256,7 +256,7 @@
           "type": "review",
           "settings": {
             "rating": 5,
-            "review": "Presente para o meu marido e adorou. A embalagem é cuidada, a pele cheira a couro verdadeiro e o acabamento é digno de marca de luxo.",
+            "review": "Presente para o meu pai e adorou. A embalagem é cuidada, a pele cheira a couro verdadeiro e o acabamento é digno de marca de luxo.",
             "customer_name": "Tiago R."
           }
         },

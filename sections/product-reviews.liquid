@@ -31,22 +31,53 @@
     color: rgb(var(--color-foreground));
   }
 
+  /* Carrossel: scroll-snap nativo (arrasta com o dedo; o rato é tratado pelo
+     script no fim do ficheiro). 1 cartão + "espreitadela" no telemóvel,
+     2 em tablet, 3 em desktop. */
   #ProductReviews-{{ section.id }} .ss-reviews__list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2.4rem;
+    --ss-gap: 1.6rem;
+    --ss-visible: 1.15;
+    display: flex;
+    gap: var(--ss-gap);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding-bottom: 0.4rem;
+    cursor: grab;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__list.is-dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
   }
 
   @media screen and (min-width: 750px) {
     #ProductReviews-{{ section.id }} .ss-reviews__list {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem;
+      --ss-gap: 2.4rem;
+      --ss-visible: 2;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #ProductReviews-{{ section.id }} .ss-reviews__list {
+      --ss-gap: 3rem;
+      --ss-visible: 3;
     }
   }
 
   #ProductReviews-{{ section.id }} .ss-review-card {
     display: flex;
     flex-direction: column;
+    flex: 0 0 calc((100% - var(--ss-gap) * (var(--ss-visible) - 1)) / var(--ss-visible));
+    box-sizing: border-box;
+    scroll-snap-align: start;
     padding: 2.4rem;
     border: 1px solid rgba(var(--color-foreground), 0.1);
   }
@@ -57,14 +88,15 @@
     margin-bottom: 1.4rem;
   }
 
+  /* Estrela preenchida: o icon-star.svg do tema é só contorno (path evenodd
+     com "buraco"), por isso aqui usa-se um svg sólido próprio. A classe --empty
+     fica no <span> à volta do svg, daí o seletor descer até ao svg. */
   #ProductReviews-{{ section.id }} .ss-review-card__stars svg {
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 1.6rem;
+    height: 1.6rem;
     fill: #d4af37;
   }
 
-  /* A classe fica no <span> que envolve a estrela "vazia" (rating < 5);
-     o seletor tem de descer até ao svg lá dentro para lhe mudar o fill. */
   #ProductReviews-{{ section.id }} .ss-review-card__star--empty svg {
     fill: rgba(212, 175, 55, 0.25);
   }
@@ -103,6 +135,10 @@
   }
 {%- endstyle -%}
 
+{%- capture star_svg -%}
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 1.2l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.3 1.4-6.3L1 7.7l6.4-.6z"/></svg>
+{%- endcapture -%}
+
 <div id="ProductReviews-{{ section.id }}" class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   <div class="page-width">
     {%- if section.settings.heading != blank -%}
@@ -117,9 +153,9 @@
               <div class="ss-review-card__stars" role="img" aria-label="{{ block.settings.rating }} de 5 estrelas">
                 {%- for i in (1..5) -%}
                   {%- if i <= block.settings.rating -%}
-                    {{- 'icon-star.svg' | inline_asset_content -}}
+                    <span>{{ star_svg }}</span>
                   {%- else -%}
-                    <span class="ss-review-card__star--empty">{{- 'icon-star.svg' | inline_asset_content -}}</span>
+                    <span class="ss-review-card__star--empty">{{ star_svg }}</span>
                   {%- endif -%}
                 {%- endfor -%}
               </div>
@@ -137,11 +173,37 @@
   </div>
 </div>
 
+<script>
+  (function () {
+    var list = document.querySelector('#ProductReviews-{{ section.id }} .ss-reviews__list');
+    if (!list) return;
+    var startX = 0, startScroll = 0, down = false, moved = false;
+
+    list.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse') return; // toque usa o scroll nativo
+      down = true; moved = false;
+      startX = e.clientX; startScroll = list.scrollLeft;
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - startX;
+      if (!moved && Math.abs(dx) > 4) { moved = true; list.classList.add('is-dragging'); }
+      if (moved) list.scrollLeft = startScroll - dx;
+    });
+    window.addEventListener('pointerup', function () {
+      if (!down) return;
+      down = false;
+      list.classList.remove('is-dragging'); // o snap volta a assentar no cartão mais próximo
+    });
+    list.addEventListener('dragstart', function (e) { e.preventDefault(); });
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Avaliações",
   "class": "section",
-  "max_blocks": 6,
+  "max_blocks": 12,
   "disabled_on": {
     "groups": ["header", "footer"]
   },
@@ -216,6 +278,9 @@
     {
       "name": "Avaliações",
       "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
         { "type": "review" },
         { "type": "review" },
         { "type": "review" }

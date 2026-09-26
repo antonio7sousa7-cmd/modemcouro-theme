@@ -230,6 +230,30 @@
             "review": "Atendimento excelente e entrega super rápida. O produto chegou impecável e o couro é de facto verdadeiro, nada a ver com imitações.",
             "customer_name": "João F."
           }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review": "Ao fim de meses de uso o casaco continua com um aspeto fantástico. O couro amaciou na medida certa e o corte assenta na perfeição.",
+            "customer_name": "Beatriz S."
+          }
+        },
+        "review_7": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review": "Presente para o meu marido e adorou. A embalagem é cuidada, a pele cheira a couro verdadeiro e o acabamento é digno de marca de luxo.",
+            "customer_name": "Tiago R."
+          }
+        },
+        "review_8": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "review": "Tive dúvidas com o tamanho e a equipa ajudou-me de imediato. A peça serviu na perfeição e a qualidade é exatamente a que era prometida.",
+            "customer_name": "Inês V."
+          }
         }
       },
       "block_order": [
@@ -237,7 +261,10 @@
         "review_2",
         "review_3",
         "review_4",
-        "review_5"
+        "review_5",
+        "review_6",
+        "review_7",
+        "review_8"
       ],
       "settings": {
         "heading": "O Que Dizem os Nossos Clientes",

@@ -27,6 +27,10 @@
           "type": "price",
           "settings": {}
         },
+        "sibling_colors_RKQTkP": {
+          "type": "sibling_colors",
+          "settings": {}
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -44,6 +48,10 @@
             "show_dynamic_checkout": false,
             "show_gift_card_recipient": true
           }
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
         },
         "description": {
           "type": "description",
@@ -81,16 +89,13 @@
           "settings": {
             "custom_liquid": "<style>\n .table_component {overflow:auto;width:100%;} .table_component table {border:1px solid #dededf;height:100%;width:100%;table-layout:fixed;border-collapse:collapse;border-spacing:1px;text-align:center;} .table_component caption {caption-side:top;text-align:left;} .table_component th {border:1px solid #dededf;background-color:#354ea4;color:#ffffff;padding:5px;} .table_component td {border:1px solid #dededf;background-color:#ffffff;color:#000000;padding:5px;}\n</style>\n<div class=\"table_component\" role=\"region\" tabindex=\"0\"><table><caption>Tabela de Tamanhos</caption><thead><tr><th>Zona</th><th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th></tr></thead><tbody><tr><td>Peito</td><td>46</td><td>48</td><td>50</td><td>52</td><td>54</td><td>56</td></tr><tr><td>Fundo</td><td>43</td><td>45</td><td>47</td><td>49</td><td>51</td><td>53</td></tr><tr><td>Manga</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td></tr><tr><td>Costas</td><td>43</td><td>44</td><td>45</td><td>46</td><td>47</td><td>48</td></tr></tbody></table>"
           }
-        },
-        "pickup_availability": {
-          "type": "pickup_availability",
-          "settings": {}
         }
       },
       "block_order": [
         "vendor",
         "title",
         "price",
+        "sibling_colors_RKQTkP",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
@@ -268,6 +273,9 @@
       ],
       "settings": {
         "heading": "Avaliações de Clientes",
+        "button_label": "Escrever uma avaliação",
+        "button_link": "",
+        "button_color": "#5c4033",
         "color_scheme": "scheme-1",
         "padding_top": 20,
         "padding_bottom": 56

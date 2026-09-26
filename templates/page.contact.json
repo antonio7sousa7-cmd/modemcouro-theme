@@ -16,15 +16,6 @@
         "padding_bottom": 36
       }
     },
-    "custom_liquid_48pG7m": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "",
-        "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
-    },
     "custom_liquid_Cqjz9X": {
       "type": "custom-liquid",
       "custom_css": [
@@ -52,7 +43,6 @@
   "order": [
     "main",
     "form",
-    "custom_liquid_48pG7m",
     "custom_liquid_Cqjz9X"
   ]
 }

@@ -1,3 +1,10 @@
+{%- comment -%}
+  Formulário de contacto nativo da Shopify (form 'contact'), com estética
+  "silent luxury": campos só com linha inferior, etiquetas pequenas em maiúsculas,
+  sem cantos arredondados e sem qualquer marca de água. Substitui o widget POWR.
+  Os campos personalizados chegam ao email da loja como "Nome: valor".
+{%- endcomment -%}
+
 {{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
@@ -12,126 +19,335 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  #ContactSection-{{ section.id }} {
+    --ss-contact-accent: {% if section.settings.button_color != blank %}{{ section.settings.button_color }}{% else %}rgb(var(--color-button)){% endif %};
+    --ss-contact-accent-text: {% if section.settings.button_color != blank %}#ffffff{% else %}rgb(var(--color-button-text)){% endif %};
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact {
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    #ContactSection-{{ section.id }} .ss-contact__grid {
+      grid-template-columns: 1fr 1fr;
+      column-gap: 4rem;
+    }
+
+    #ContactSection-{{ section.id }} .ss-contact__field--full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__label,
+  #ContactSection-{{ section.id }} .ss-contact__legend {
+    display: block;
+    margin: 0 0 0.8rem;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 1.1rem;
+    color: rgba(var(--color-foreground), 0.65);
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__required {
+    color: var(--ss-contact-accent);
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0.9rem 0;
+    border: 0;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.3);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    font: inherit;
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+    transition: border-color 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  #ContactSection-{{ section.id }} textarea.ss-contact__input {
+    min-height: 12rem;
+    resize: vertical;
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__input:focus {
+    outline: none;
+    border-bottom-color: rgb(var(--color-foreground));
+    box-shadow: 0 1px 0 0 rgb(var(--color-foreground));
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__input[aria-invalid='true'] {
+    border-bottom-color: #a4382f;
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__error {
+    display: block;
+    margin-top: 0.6rem;
+    font-size: 1.2rem;
+    color: #a4382f;
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__choices {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__choice-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem 3rem;
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__checkbox {
+    position: relative;
+    flex-shrink: 0;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin: 0;
+    border: 1px solid rgba(var(--color-foreground), 0.5);
+    border-radius: 0;
+    background: transparent;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__checkbox:checked {
+    border-color: var(--ss-contact-accent);
+    background: var(--ss-contact-accent);
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__checkbox:checked::after {
+    content: '';
+    position: absolute;
+    top: 0.2rem;
+    left: 0.55rem;
+    width: 0.45rem;
+    height: 0.9rem;
+    border: solid var(--ss-contact-accent-text);
+    border-width: 0 0.15rem 0.15rem 0;
+    transform: rotate(45deg);
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__checkbox:focus-visible,
+  #ContactSection-{{ section.id }} .ss-contact__submit:focus-visible {
+    outline: 0.2rem solid rgb(var(--color-foreground));
+    outline-offset: 0.3rem;
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__actions {
+    margin-top: 4rem;
+    text-align: center;
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 5rem;
+    padding: 0 4rem;
+    border: 1px solid var(--ss-contact-accent);
+    border-radius: 0;
+    background: var(--ss-contact-accent);
+    color: var(--ss-contact-accent-text);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font: inherit;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__submit:hover {
+    opacity: 0.85;
+  }
+
+  @media screen and (min-width: 750px) {
+    #ContactSection-{{ section.id }} .ss-contact__submit {
+      width: auto;
+      min-width: 24rem;
+    }
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__status {
+    margin: 0 0 3rem;
+    padding: 1.6rem 2rem;
+    border: 1px solid rgba(var(--color-foreground), 0.2);
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: rgb(var(--color-foreground));
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__status--error {
+    border-color: #a4382f;
+  }
+
+  #ContactSection-{{ section.id }} .ss-contact__status a {
+    color: inherit;
+    text-underline-offset: 0.4rem;
+  }
 {%- endstyle -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
+<div id="ContactSection-{{ section.id }}" class="color-{{ section.settings.color_scheme }} gradient">
   <div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        {{ section.settings.heading }}
-      </h2>
-    {%- else -%}
-      <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
-    {%- endif -%}
-    {%- liquid
-      assign contact_form_class = 'isolate'
-      if settings.animations_reveal_on_scroll
-        assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
-      endif
-    -%}
-    {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
-      {%- if form.posted_successfully? -%}
-        <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
-          {{- 'icon-success.svg' | inline_asset_content -}}
-          {{ 'templates.contact.form.post_success' | t }}
+    <div class="ss-contact">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.heading }}
         </h2>
-      {%- elsif form.errors -%}
-        <div class="form__message">
-          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
-            {{- 'icon-error.svg' | inline_asset_content -}}
-            {{ 'templates.contact.form.error_heading' | t }}
-          </h2>
-        </div>
-        <ul class="form-status-list caption-large" role="list">
-          <li>
-            <a href="#ContactForm-email" class="link">
+      {%- else -%}
+        <h2 class="visually-hidden">Contacto</h2>
+      {%- endif -%}
+
+      {%- liquid
+        assign contact_form_class = 'isolate'
+        if settings.animations_reveal_on_scroll
+          assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
+        endif
+      -%}
+
+      {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
+        {%- if form.posted_successfully? -%}
+          <p class="ss-contact__status" role="status" tabindex="-1" autofocus>
+            Obrigado por entrar em contacto connosco. Responder-lhe-emos logo que possível.
+          </p>
+        {%- elsif form.errors -%}
+          <div class="ss-contact__status ss-contact__status--error" role="alert" tabindex="-1" autofocus>
+            Não foi possível enviar a mensagem.
+            <a href="#ContactForm-email">
               {{ form.errors.translated_fields.email | capitalize }}
               {{ form.errors.messages.email }}
             </a>
-          </li>
-        </ul>
-      {%- endif -%}
-      <div class="contact__fields">
-        <div class="field">
-          <input
-            class="field__input"
-            autocomplete="name"
-            type="text"
-            id="ContactForm-name"
-            name="contact[{{ 'templates.contact.form.name' | t }}]"
-            value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
-            placeholder="{{ 'templates.contact.form.name' | t }}"
-          >
-          <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
-        </div>
-        <div class="field field--with-error">
-          <input
-            autocomplete="email"
-            type="email"
-            id="ContactForm-email"
-            class="field__input"
-            name="contact[email]"
-            spellcheck="false"
-            autocapitalize="off"
-            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-            aria-required="true"
-            {% if form.errors contains 'email' %}
-              aria-invalid="true"
-              aria-describedby="ContactForm-email-error"
-            {% endif %}
-            placeholder="{{ 'templates.contact.form.email' | t }}"
-          >
-          <label class="field__label" for="ContactForm-email">
-            {{- 'templates.contact.form.email' | t }}
-            <span aria-hidden="true">*</span></label
-          >
-          {%- if form.errors contains 'email' -%}
-            <small class="contact__field-error" id="ContactForm-email-error">
-              <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
-              <span class="form__message">
-                <span class="svg-wrapper">
-                  {{- 'icon-error.svg' | inline_asset_content -}}
-                </span>
-                {{- form.errors.translated_fields.email | capitalize }}
-                {{ form.errors.messages.email -}}
-              </span>
-            </small>
+          </div>
+        {%- endif -%}
+
+        <div class="ss-contact__grid">
+          <div class="ss-contact__field">
+            <label class="ss-contact__label" for="ContactForm-name">Nome</label>
+            <input
+              class="ss-contact__input"
+              type="text"
+              id="ContactForm-name"
+              name="contact[Nome]"
+              autocomplete="name"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+            >
+          </div>
+
+          <div class="ss-contact__field">
+            <label class="ss-contact__label" for="ContactForm-email">
+              Email <span class="ss-contact__required" aria-hidden="true">*</span>
+            </label>
+            <input
+              class="ss-contact__input"
+              type="email"
+              id="ContactForm-email"
+              name="contact[email]"
+              autocomplete="email"
+              spellcheck="false"
+              autocapitalize="off"
+              required
+              aria-required="true"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                aria-describedby="ContactForm-email-error"
+              {% endif %}
+            >
+            {%- if form.errors contains 'email' -%}
+              <small class="ss-contact__error" id="ContactForm-email-error">
+                <span class="visually-hidden">Erro:</span>
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}
+              </small>
+            {%- endif -%}
+          </div>
+
+          <div class="ss-contact__field">
+            <label class="ss-contact__label" for="ContactForm-phone">Número de Telemóvel</label>
+            <input
+              class="ss-contact__input"
+              type="tel"
+              id="ContactForm-phone"
+              name="contact[Telemóvel]"
+              autocomplete="tel"
+              inputmode="tel"
+              pattern="[0-9+\-\s]*"
+              value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            >
+          </div>
+
+          <fieldset class="ss-contact__field ss-contact__choices">
+            <legend class="ss-contact__legend">Método de Contacto Preferido</legend>
+            <div class="ss-contact__choice-list">
+              <label class="ss-contact__choice">
+                <input
+                  class="ss-contact__checkbox"
+                  type="checkbox"
+                  name="contact[Método de contacto preferido: Email]"
+                  value="Sim"
+                >
+                Email
+              </label>
+              <label class="ss-contact__choice">
+                <input
+                  class="ss-contact__checkbox"
+                  type="checkbox"
+                  name="contact[Método de contacto preferido: Telemóvel]"
+                  value="Sim"
+                >
+                Telemóvel
+              </label>
+            </div>
+          </fieldset>
+
+          {%- if section.settings.show_message -%}
+            <div class="ss-contact__field ss-contact__field--full">
+              <label class="ss-contact__label" for="ContactForm-body">Mensagem</label>
+              <textarea
+                class="ss-contact__input"
+                id="ContactForm-body"
+                name="contact[body]"
+                rows="5"
+              >{{ form.body }}</textarea>
+            </div>
           {%- endif -%}
         </div>
-      </div>
-      <div class="field">
-        <input
-          type="tel"
-          id="ContactForm-phone"
-          class="field__input"
-          autocomplete="tel"
-          name="contact[{{ 'templates.contact.form.phone' | t }}]"
-          pattern="[0-9\-]*"
-          value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-          placeholder="{{ 'templates.contact.form.phone' | t }}"
-        >
-        <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
-      </div>
-      <div class="field">
-        <textarea
-          rows="10"
-          id="ContactForm-body"
-          class="text-area field__input"
-          name="contact[{{ 'templates.contact.form.comment' | t }}]"
-          placeholder="{{ 'templates.contact.form.comment' | t }}"
-        >
-          {{- form.body -}}
-        </textarea>
-        <label class="form__label field__label" for="ContactForm-body">
-          {{- 'templates.contact.form.comment' | t -}}
-        </label>
-      </div>
-      <div class="contact__button">
-        <button type="submit" class="button">
-          {{ 'templates.contact.form.send' | t }}
-        </button>
-      </div>
-    {%- endform -%}
+
+        <div class="ss-contact__actions">
+          <button type="submit" class="ss-contact__submit">Enviar</button>
+        </div>
+      {%- endform -%}
+    </div>
   </div>
 </div>
 
@@ -177,6 +393,18 @@
       ],
       "default": "h1",
       "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_message",
+      "label": "Mostrar campo \"Mensagem\"",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Cor do botão e das caixas",
+      "info": "Se ficar vazio, usa a cor de botão do esquema de cor (a mesma dos restantes botões do site)."
     },
     {
       "type": "color_scheme",

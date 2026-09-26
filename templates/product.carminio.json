@@ -70,19 +70,42 @@
         "pickup_availability": {
           "type": "pickup_availability",
           "settings": {}
+        },
+        "sibling_colors_DLjKKM": {
+          "type": "sibling_colors",
+          "settings": {}
+        },
+        "popup_size_guide": {
+          "type": "popup",
+          "settings": {
+            "text": "Guia de Tamanhos",
+            "page": ""
+          }
+        },
+        "collapsible_tab_bPT7K7": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Acabamento Resistente e Impecável",
+            "icon": "fire",
+            "content": "<p>Feito em couro macio e resistente, proporciona conforto durante o dia todo.</p>",
+            "page": ""
+          }
         }
       },
       "block_order": [
         "vendor",
         "title",
         "price",
+        "sibling_colors_DLjKKM",
         "variant_picker",
+        "popup_size_guide",
         "quantity_selector",
         "buy_buttons",
         "pickup_availability",
         "description",
         "collapsible_tab_epCQwM",
-        "collapsible_tab_RVHTFm"
+        "collapsible_tab_RVHTFm",
+        "collapsible_tab_bPT7K7"
       ],
       "settings": {
         "enable_sticky_info": true,

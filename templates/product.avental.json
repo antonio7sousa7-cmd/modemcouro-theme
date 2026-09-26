@@ -79,13 +79,26 @@
         "pickup_availability": {
           "type": "pickup_availability",
           "settings": {}
+        },
+        "sibling_colors_DLjKKM": {
+          "type": "sibling_colors",
+          "settings": {}
+        },
+        "popup_size_guide": {
+          "type": "popup",
+          "settings": {
+            "text": "Guia de Tamanhos",
+            "page": ""
+          }
         }
       },
       "block_order": [
         "vendor",
         "title",
         "price",
+        "sibling_colors_DLjKKM",
         "variant_picker",
+        "popup_size_guide",
         "quantity_selector",
         "buy_buttons",
         "pickup_availability",

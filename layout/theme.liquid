@@ -68,16 +68,6 @@
     <script>
       gtag('js', new Date());
       gtag('config', 'AW-17561345639');
-
-      /* Conversão "Visualização de página" (Google Ads). Estava solta no
-         topo do <head>, antes de o gtag() existir — por isso nunca chegava
-         a disparar. Agora corre já com o gtag definido e com o consentimento
-         em "denied" até o visitante aceitar. */
-      gtag('event', 'conversion', {
-        'send_to': 'AW-17561345639/yStJCLzup5sbEOe887VB',
-        'value': 1.0,
-        'currency': 'EUR'
-      });
     </script>
 
     {{ content_for_header }}

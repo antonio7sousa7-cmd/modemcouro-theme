@@ -55,20 +55,33 @@
         margin-left: 0;
       }
 
-      /* Cada foto encaixa no ecrã na totalidade, sem corte lateral:
-         - scroll-padding-left a 0: o Dawn define 1.5rem, o que desloca as
-           fotos seguintes 0.75rem para a direita ao assentar o scroll-snap
-           (aparece um bocado da foto anterior à esquerda e a atual perde
-           o lado direito);
-         - object-fit: contain: fotos com proporção diferente da primeira
-           deixam de ser cortadas (o fundo da secção já é branco). */
+      /* scroll-padding-left a 0: o Dawn define 1.5rem, o que desloca as
+         fotos seguintes 0.75rem para a direita ao assentar o scroll-snap
+         (aparece um bocado da foto anterior à esquerda e a atual perde
+         o lado direito). */
       #MainProduct-{{ section.id }} slider-component .slider.slider--mobile {
         scroll-padding-left: 0;
       }
+    }
 
-      #MainProduct-{{ section.id }} .product__media-item .media > img {
-        object-fit: contain;
-      }
+    /* Galeria sem cortes, em qualquer largura de ecrã: as fotografias
+       (malas com alças incluídas) aparecem sempre inteiras.
+       - object-fit: contain nas fotos principais e nas miniaturas (as
+         miniaturas usavam cover e cortavam as alças);
+       - a caixa de cada foto já segue o rácio nativo dela, por isso não
+         há barras; se alguma foto tiver rácio diferente, o espaço que
+         sobra fica branco (o fundo da secção é branco puro);
+       - o "Ajuste de imagem" dos templates passou a "Conter", para o tema
+         não esticar a caixa (media-fit-cover) nem recortar. */
+    #MainProduct-{{ section.id }} .product-media-container .media > img,
+    #MainProduct-{{ section.id }} .product__modal-opener .media > img {
+      object-fit: contain;
+      object-position: center center;
+    }
+
+    #MainProduct-{{ section.id }} .thumbnail img {
+      object-fit: contain;
+      background: #ffffff;
     }
 
     /* Remove a moldura (border) e a sombra (box-shadow, aplicada via o

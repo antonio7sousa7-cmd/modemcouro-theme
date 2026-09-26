@@ -54,6 +54,21 @@
       #MainProduct-{{ section.id }} .grid--peek.slider .grid__item:first-of-type {
         margin-left: 0;
       }
+
+      /* Cada foto encaixa no ecrã na totalidade, sem corte lateral:
+         - scroll-padding-left a 0: o Dawn define 1.5rem, o que desloca as
+           fotos seguintes 0.75rem para a direita ao assentar o scroll-snap
+           (aparece um bocado da foto anterior à esquerda e a atual perde
+           o lado direito);
+         - object-fit: contain: fotos com proporção diferente da primeira
+           deixam de ser cortadas (o fundo da secção já é branco). */
+      #MainProduct-{{ section.id }} slider-component .slider.slider--mobile {
+        scroll-padding-left: 0;
+      }
+
+      #MainProduct-{{ section.id }} .product__media-item .media > img {
+        object-fit: contain;
+      }
     }
 
     /* Remove a moldura (border) e a sombra (box-shadow, aplicada via o

@@ -185,7 +185,7 @@
         "review_2": {
           "type": "review",
           "settings": {
-            "rating": 5,
+            "rating": 4,
             "review": "Já tinha comprado noutras marcas e nada se compara. Pele 100% verdadeira, acabamento impecável. O envio foi rapidíssimo, chegou em 2 dias.",
             "customer_name": "Ricardo M."
           }
@@ -209,7 +209,7 @@
         "review_5": {
           "type": "review",
           "settings": {
-            "rating": 5,
+            "rating": 4,
             "review": "Atendimento excelente e entrega super rápida. O produto chegou impecável e o couro é de facto verdadeiro, nada a ver com imitações.",
             "customer_name": "João F."
           }
@@ -233,7 +233,7 @@
         "review_8": {
           "type": "review",
           "settings": {
-            "rating": 5,
+            "rating": 4,
             "review": "Tive dúvidas com o tamanho e a equipa ajudou-me de imediato. A peça serviu na perfeição e a qualidade é exatamente a que era prometida.",
             "customer_name": "Inês V."
           }
@@ -250,7 +250,7 @@
         "review_8"
       ],
       "settings": {
-        "heading": "O Que Dizem os Nossos Clientes",
+        "heading": "Avaliações de Clientes",
         "color_scheme": "scheme-1",
         "padding_top": 56,
         "padding_bottom": 56

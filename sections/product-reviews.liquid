@@ -20,7 +20,7 @@
   }
 
   #ProductReviews-{{ section.id }} .ss-reviews__heading {
-    margin: 0 0 3rem;
+    margin: 0 0 2.4rem;
     text-align: center;
     text-transform: uppercase;
     font-family: var(--font-heading-family);
@@ -29,6 +29,192 @@
     font-size: 1.6rem;
     letter-spacing: 0.15em;
     color: rgb(var(--color-foreground));
+  }
+
+  /* Cabeçalho-resumo: nota média, distribuição de estrelas e botão. A média e
+     as barras são calculadas a partir das próprias avaliações (blocos). */
+  #ProductReviews-{{ section.id }} .ss-reviews__summary {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+    align-items: center;
+    justify-items: center;
+    margin: 0 0 3.6rem;
+    padding: 0 0 3.2rem;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+    text-align: center;
+  }
+
+  @media screen and (min-width: 750px) {
+    #ProductReviews-{{ section.id }} .ss-reviews__summary {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 4rem;
+      justify-items: stretch;
+      text-align: left;
+    }
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    #ProductReviews-{{ section.id }} .ss-reviews__score {
+      align-items: flex-start;
+    }
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__score-value {
+    font-family: var(--font-heading-family);
+    font-size: 5.2rem;
+    line-height: 1;
+    color: rgb(var(--color-foreground));
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__score-stars {
+    position: relative;
+    display: inline-flex;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__score-stars-row {
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  /* Camada preenchida por cima da vazia, cortada à largura da média (ex. 92%). */
+  #ProductReviews-{{ section.id }} .ss-reviews__score-stars-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__score-stars-fill .ss-reviews__score-stars-row {
+    width: max-content;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__score-stars svg {
+    display: block;
+    flex-shrink: 0;
+    width: 1.8rem;
+    height: 1.8rem;
+    fill: rgba(212, 175, 55, 0.25);
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__score-stars-fill svg {
+    fill: #d4af37;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__count {
+    margin: 0;
+    font-size: 1.3rem;
+    letter-spacing: 0.04em;
+    color: rgba(var(--color-foreground), 0.65);
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+    padding: 0.4rem 1.1rem 0.4rem 0.5rem;
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    border-radius: 10rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 1.05rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__badge svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    padding: 0.3rem;
+    border-radius: 50%;
+    background: #d4af37;
+    box-sizing: border-box;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+    max-width: 42rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__bar {
+    display: grid;
+    grid-template-columns: 2.6rem 1fr 2.4rem;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: 1.3rem;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__bar-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__bar-label svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    fill: #d4af37;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__bar-track {
+    height: 0.8rem;
+    border-radius: 0.4rem;
+    background: rgba(var(--color-foreground), 0.1);
+    overflow: hidden;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__bar-fill {
+    display: block;
+    height: 100%;
+    border-radius: 0.4rem;
+    background: #d4af37;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__bar-count {
+    text-align: right;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__write {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4.6rem;
+    padding: 0 3rem;
+    border: 1px solid {{ section.settings.button_color }};
+    background: {{ section.settings.button_color }};
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  #ProductReviews-{{ section.id }} .ss-reviews__write:hover,
+  #ProductReviews-{{ section.id }} .ss-reviews__write:focus-visible {
+    background: color-mix(in srgb, {{ section.settings.button_color }} 80%, #000);
+    border-color: color-mix(in srgb, {{ section.settings.button_color }} 80%, #000);
+    color: #fff;
   }
 
   /* Carrossel: scroll-snap nativo (arrasta com o dedo; o rato, as setas e os
@@ -221,6 +407,45 @@
   }
 {%- endstyle -%}
 
+{%- liquid
+  assign review_count = 0
+  assign rating_total = 0
+  assign c5 = 0
+  assign c4 = 0
+  assign c3 = 0
+  assign c2 = 0
+  assign c1 = 0
+  for block in section.blocks
+    if block.type == 'review'
+      assign r = block.settings.rating
+      assign review_count = review_count | plus: 1
+      assign rating_total = rating_total | plus: r
+      case r
+        when 5
+          assign c5 = c5 | plus: 1
+        when 4
+          assign c4 = c4 | plus: 1
+        when 3
+          assign c3 = c3 | plus: 1
+        when 2
+          assign c2 = c2 | plus: 1
+        when 1
+          assign c1 = c1 | plus: 1
+      endcase
+    endif
+  endfor
+  if review_count > 0
+    assign average = rating_total | times: 1.0 | divided_by: review_count
+    assign average_label = average | round: 1
+    assign average_pct = average | times: 20.0 | round: 1
+  endif
+  assign write_link = section.settings.button_link
+  if write_link == blank
+    assign write_subject = 'Avaliação: ' | append: product.title | url_encode
+    assign write_link = 'mailto:' | append: shop.email | append: '?subject=' | append: write_subject
+  endif
+-%}
+
 {%- capture star_svg -%}
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 1.2l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3L10 15l-5.6 3.3 1.4-6.3L1 7.7l6.4-.6z"/></svg>
 {%- endcapture -%}
@@ -229,6 +454,58 @@
   <div class="page-width">
     {%- if section.settings.heading != blank -%}
       <h2 class="ss-reviews__heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    {%- if review_count > 0 -%}
+      <div class="ss-reviews__summary">
+        <div class="ss-reviews__score">
+          <span class="ss-reviews__score-value">{{ average_label }}</span>
+          <span class="ss-reviews__score-stars" role="img" aria-label="{{ average_label }} de 5 estrelas">
+            <span class="ss-reviews__score-stars-row">
+              {%- for i in (1..5) -%}{{ star_svg }}{%- endfor -%}
+            </span>
+            <span class="ss-reviews__score-stars-fill" style="width: {{ average_pct }}%">
+              <span class="ss-reviews__score-stars-row">
+                {%- for i in (1..5) -%}{{ star_svg }}{%- endfor -%}
+              </span>
+            </span>
+          </span>
+          <p class="ss-reviews__count">
+            {{ review_count }} {% if review_count == 1 %}avaliação{% else %}avaliações{% endif %}
+          </p>
+          <span class="ss-reviews__badge">
+            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 8.5l3 3 6-6.5"/></svg>
+            Verificado
+          </span>
+        </div>
+
+        <ul class="ss-reviews__bars" aria-label="Distribuição das avaliações">
+          {%- for n in (1..5) reversed -%}
+            {%- liquid
+              case n
+                when 5
+                  assign n_count = c5
+                when 4
+                  assign n_count = c4
+                when 3
+                  assign n_count = c3
+                when 2
+                  assign n_count = c2
+                else
+                  assign n_count = c1
+              endcase
+              assign n_pct = n_count | times: 100.0 | divided_by: review_count | round: 1
+            -%}
+            <li class="ss-reviews__bar">
+              <span class="ss-reviews__bar-label">{{ n }} {{ star_svg }}</span>
+              <span class="ss-reviews__bar-track"><span class="ss-reviews__bar-fill" style="width: {{ n_pct }}%"></span></span>
+              <span class="ss-reviews__bar-count">{{ n_count }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <a class="ss-reviews__write" href="{{ write_link }}">{{ section.settings.button_label | escape }}</a>
+      </div>
     {%- endif -%}
 
     <div class="ss-reviews__viewport">
@@ -366,7 +643,25 @@
       "type": "text",
       "id": "heading",
       "label": "Título",
-      "default": "O Que Dizem os Nossos Clientes"
+      "default": "Avaliações de Clientes"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botão",
+      "default": "Escrever uma avaliação"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link do botão",
+      "info": "Se ficar vazio, abre um email para o endereço da loja com o nome do produto."
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Cor do botão",
+      "default": "#5c4033"
     },
     {
       "type": "color_scheme",

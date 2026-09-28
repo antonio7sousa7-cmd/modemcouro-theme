@@ -16,94 +16,22 @@
         "padding_bottom": 12
       }
     },
-    "luxury_faq_ihmfGt": {
-      "type": "luxury-faq",
-      "blocks": {
-        "faq_item_p4G94m": {
-          "type": "faq_item",
-          "settings": {
-            "question": "O couro utilizado nos vossos produtos é 100% verdadeiro?",
-            "answer": "<p>Sim, todos os nossos produtos são fabricados exclusivamente com couro genuíno de alta qualidade. Não utilizamos \"couro sintético\", \"PU\" ou couro reconstituído. Podes ter a certeza de que estás a adquirir uma peça autêntica.</p>"
-          }
-        },
-        "faq_item_dfHJzd": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Os vossos artigos de couro são à prova de água?",
-            "answer": "<p>O couro genuíno tem alguma resistência natural à água, mas não é impermeável. Para proteção extra, sugerimos a aplicação de um spray impermeabilizante de alta qualidade. Se o artigo se molhar, deixa-o secar naturalmente, longe de fontes de calor direto (como aquecedores ou sol forte), pois isso pode danificar o material.</p>"
-          }
-        },
-        "faq_item_hjTiyj": {
-          "type": "faq_item",
-          "settings": {
-            "question": "O meu produto tem pequenas variações de cor ou marcas. Isso é um defeito?",
-            "answer": "<p>Pelo contrário! Cicatrizes ligeiras, marcas naturais ou pequenas variações de tonalidade são características intrínsecas do couro genuíno e são prova da sua autenticidade. Cada peça é única e conta a sua própria história. Estas \"imperfeições\" são parte da beleza de um produto natural.</p>"
-          }
-        },
-        "faq_item_kiyJ7h": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Como devo limpar e cuidar do meu casaco/mala de couro?",
-            "answer": "<p>Para limpeza diária, basta um pano macio e ligeiramente húmido. Periodicamente, recomendamos a aplicação de um creme ou amaciador específico para couro para manter a hidratação e evitar que resseque. Evita usar produtos químicos agressivos ou lavar na máquina. Consulta o nosso [Guia de Cuidados com o Couro] no rodapé para mais detalhes.</p>"
-          }
-        },
-        "faq_item_6QL4m8": {
-          "type": "faq_item",
-          "settings": {
-            "question": "De onde provém o vosso couro e como garantem práticas sustentáveis?",
-            "answer": "<p>Preocupamo-nos com a origem dos nossos materiais. O nosso couro é proveniente de fornecedores certificados que seguem rigorosos padrões ambientais e de bem-estar animal. Damos prioridade a processos de curtimenta que minimizam o uso de produtos químicos nocivos.</p>"
-          }
-        },
-        "faq_item_xCCYHk": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Quais são os prazos e custos de envio?",
-            "answer": "<p>Os envios para Portugal Continental demoram habitualmente entre 2 a 3 dias úteis. Os portes são para Portugal continental. Para as ilhas (Açores e Madeira), o prazo estimado é de 5 a 8 dias úteis.</p>"
-          }
-        },
-        "faq_item_dhPJtV": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Como posso acompanhar a minha encomenda?",
-            "answer": "<p>Assim que o teu pedido for expedido, receberás um e-mail com o número de rastreio e um link para acompanhares a entrega em tempo real através da nossa transportadora parceira.</p>"
-          }
-        },
-        "faq_item_pmPRJ6": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Qual é a política de devoluções da Modem Couro?",
-            "answer": "<p>Aceitamos trocas e devoluções num prazo de 14 dias após a receção da encomenda. O artigo deve ser devolvido na sua embalagem original, com as respetivas etiquetas e sem quaisquer marcas de uso ou arranhões.</p>"
-          }
-        },
-        "faq_item_itazKf": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Quais são os métodos de pagamento aceites?",
-            "answer": "<p>Para tua total comodidade e segurança, aceitamos pagamentos via MB Way, Referência Multibanco, Cartões de Crédito (Visa/Mastercard) e PayPal. Todas as transações são encriptadas.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "faq_item_p4G94m",
-        "faq_item_dfHJzd",
-        "faq_item_hjTiyj",
-        "faq_item_kiyJ7h",
-        "faq_item_6QL4m8",
-        "faq_item_xCCYHk",
-        "faq_item_dhPJtV",
-        "faq_item_pmPRJ6",
-        "faq_item_itazKf"
-      ],
-      "name": "FAQ de Luxo",
+    "contact_form_paiVTw": {
+      "type": "contact-form",
+      "name": "t:sections.contact-form.presets.name",
       "settings": {
+        "heading": "Formulário de contacto",
+        "heading_size": "h1",
+        "show_message": true,
+        "button_color": "",
         "color_scheme": "",
-        "padding_top": 8,
-        "padding_bottom": 52
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     }
   },
   "order": [
     "main",
-    "luxury_faq_ihmfGt"
+    "contact_form_paiVTw"
   ]
 }

@@ -28,6 +28,7 @@
   {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
   {{ 'component-badge-sale.css' | asset_url | stylesheet_tag }}
+  {{ 'component-badge-last-unit.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
 {%- if card_product and card_product != empty -%}
   {%- liquid
@@ -139,6 +140,14 @@
                 class="badge badge--bottom-left ss-badge-sale color-{{ settings.sale_badge_color_scheme }}"
               >
                 {{- 'products.product.on_sale' | t -}}
+              </span>
+            {%- elsif card_product.tags contains 'ultima-unidade' and card_product.available -%}
+              <span
+                id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+                class="badge badge--bottom-left ss-badge-last-unit color-{{ settings.sold_out_badge_color_scheme }}"
+              >
+                {{- 'icon-last-unit.svg' | inline_asset_content -}}
+                Apenas 1 disponível
               </span>
             {%- endif -%}
           </div>
@@ -563,6 +572,14 @@
               class="badge badge--bottom-left ss-badge-sale color-{{ settings.sale_badge_color_scheme }}"
             >
               {{- 'products.product.on_sale' | t -}}
+            </span>
+          {%- elsif card_product.tags contains 'ultima-unidade' and card_product.available -%}
+            <span
+              id="Badge-{{ section_id }}-{{ card_product.id }}"
+              class="badge badge--bottom-left ss-badge-last-unit color-{{ settings.sold_out_badge_color_scheme }}"
+            >
+              {{- 'icon-last-unit.svg' | inline_asset_content -}}
+              Apenas 1 disponível
             </span>
           {%- endif -%}
         </div>

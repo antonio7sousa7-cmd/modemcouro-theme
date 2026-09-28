@@ -1,0 +1,27 @@
+/* Etiqueta "Apenas 1 disponível" (produtos com a tag "ultima-unidade") nas
+   grelhas de coleção. Discreta de propósito — contorno fino e fundo
+   translúcido em tom terra/bordô suave, ao contrário do preenchimento
+   sólido a vermelho da etiqueta de saldo — para não competir com ela nem
+   com o resto da imagem. Reutiliza a classe .badge do tema (base.css),
+   por isso só substitui cor/fundo/borda, sempre com !important porque o
+   esquema de cor do cartão (color-{{ settings... }}) define as mesmas
+   propriedades com a mesma especificidade. */
+.ss-badge-last-unit {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(250, 247, 242, 0.94) !important;
+  border-color: #6b2b2b !important;
+  color: #6b2b2b !important;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.ss-badge-last-unit svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex-shrink: 0;
+}

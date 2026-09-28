@@ -570,6 +570,37 @@
     #MainProduct-{{ section.id }} .ss-sibling-colors__swatch--link:hover {
       border-color: rgba(var(--color-foreground), 0.4);
     }
+
+    /* Aviso "Apenas 1 disponível" (produtos com a tag "ultima-unidade"),
+       logo acima do botão de compra. Itálico, maiúsculas espaçadas e um
+       tom bordô/terra sóbrio — discreto, não um alerta vermelho vivo —
+       para se manter dentro do registo "silent luxury" do resto da buy
+       box. */
+    #MainProduct-{{ section.id }} .ss-last-unit {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 0 0 1.6rem;
+      font-family: var(--font-heading-family);
+      font-style: italic;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 1.15rem;
+      color: #6b2b2b;
+    }
+
+    #MainProduct-{{ section.id }} .ss-last-unit__icon {
+      display: inline-flex;
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    #MainProduct-{{ section.id }} .ss-last-unit__icon svg {
+      width: 100%;
+      height: 100%;
+    }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
@@ -1048,6 +1079,12 @@
                 %}
               {%- when 'buy_buttons' -%}
                 {%- render 'product-trust-icons' -%}
+                {%- if product.tags contains 'ultima-unidade' -%}
+                  <p class="ss-last-unit" role="status">
+                    <span class="ss-last-unit__icon">{{- 'icon-last-unit.svg' | inline_asset_content -}}</span>
+                    <span>Apenas 1 disponível</span>
+                  </p>
+                {%- endif -%}
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,

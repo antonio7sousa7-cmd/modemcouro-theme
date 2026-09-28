@@ -189,7 +189,7 @@
         "category_7": {
           "type": "category",
           "settings": {
-            "collection": "",
+            "collection": "mulher-casacos",
             "image": "shopify://shop_images/IMG_0060.png",
             "title": "CASACOS MULHER"
           }
@@ -213,7 +213,7 @@
         "category_5": {
           "type": "category",
           "settings": {
-            "collection": "",
+            "collection": "calcas-e-saias",
             "image": "shopify://shop_images/2_0bb7e39c-c7a4-4550-9830-5325defe0120.png",
             "title": "CALÇAS"
           }
@@ -229,7 +229,7 @@
         "category_6": {
           "type": "category",
           "settings": {
-            "collection": "",
+            "collection": "cintos-mulher",
             "image": "shopify://shop_images/7_32e8782c-fad0-4e73-a380-560f5ad5ade1.webp",
             "title": "Cintos"
           }
@@ -237,7 +237,7 @@
         "category_8": {
           "type": "category",
           "settings": {
-            "collection": "",
+            "collection": "calcas-e-saias",
             "image": "shopify://shop_images/IMG_0262.jpg",
             "title": "SAIAS"
           }

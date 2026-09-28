@@ -121,6 +121,19 @@
     }
   }
 
+  /* Corrige o texto invisível do submenu mobile da app "Buddha Mega Menu
+     Navigation" (ex.: Início > Homem > Casacos). A app usa a mesma folha de
+     estilo para o painel horizontal de desktop (fundo escuro) e para o
+     desdobrável do menu mobile — mas o mobile herda fundo creme do tema,
+     por isso o texto branco definido pela app fica praticamente invisível
+     sobre o mesmo creme. #menu-drawer dá especificidade suficiente para
+     vencer os !important da app sem lhe tocar diretamente. */
+  #menu-drawer .mm-submenu a,
+  #menu-drawer .mm-submenu .mm-title,
+  #menu-drawer .mm-submenu .mm-label {
+    color: rgb(var(--color-foreground)) !important;
+  }
+
   /* Premium dropdown menu */
   .header .header__submenu.global-settings-popup {
     background-color: rgb(var(--color-background));

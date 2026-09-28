@@ -16,18 +16,47 @@
   .main-page-title {
     text-align: center !important;
     font-size: 2.6rem !important;
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 2rem !important;
   }
 
   @media screen and (min-width: 750px) {
     .main-page-title {
       font-size: 4rem !important;
-      margin-bottom: 0.75rem !important;
+      margin-bottom: 3rem !important;
     }
+  }
+
+  /* Harmoniza o corpo da página com o título, que é sempre centrado: o
+     texto descritivo e as listas (ex.: morada, telemóvel) passam a
+     centrar-se também, em vez de ficarem alinhados à esquerda por baixo
+     de um título centrado. Escopado a #MainPage-{{ section.id }} — .rte
+     é a classe genérica de texto rico do tema, usada noutras secções
+     (artigos, descrição de produto, etc.) onde não deve ser tocada. */
+  #MainPage-{{ section.id }} .rte {
+    text-align: center;
+  }
+
+  /* Mais respiração entre parágrafos e antes/depois de listas (ex.: a
+     lista de Morada/Telemóvel), para o texto não parecer um bloco denso.
+     .rte > *:first-child/:last-child (base.css) zera as pontas, por isso
+     isto só afeta os espaços realmente entre elementos. */
+  #MainPage-{{ section.id }} .rte p {
+    margin: 0 0 1.8rem;
+  }
+
+  #MainPage-{{ section.id }} .rte ul,
+  #MainPage-{{ section.id }} .rte ol {
+    margin: 2rem 0;
+    padding-left: 0;
+    list-style-position: inside;
+  }
+
+  #MainPage-{{ section.id }} .rte li {
+    margin-bottom: 0.8rem;
   }
 {%- endstyle -%}
 
-<div class="page-width page-width--narrow section-{{ section.id }}-padding">
+<div id="MainPage-{{ section.id }}" class="page-width page-width--narrow section-{{ section.id }}-padding">
   <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {{ page.title | escape }}
   </h1>

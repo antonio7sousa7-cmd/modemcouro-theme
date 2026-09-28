@@ -149,6 +149,49 @@ details[open].menu-opening > .menu-drawer__submenu {
   overflow-y: auto;
 }
 
+/* Secção de links secundários (políticas, FAQ, preferências de cookies) no
+   fundo do menu de navegação mobile, logo abaixo das categorias principais.
+   Design deliberadamente mais discreto do que os itens do menu principal:
+   texto mais pequeno, sem negrito, sem as setas laterais (que os itens
+   principais têm via .svg-wrapper) e cor mais suave — para parecer uma
+   faixa de rodapé dentro do próprio menu. */
+.menu-drawer__secondary-nav {
+  margin-top: 1rem;
+  padding: 1.5rem 3rem 0;
+  border-top: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.menu-drawer__secondary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-drawer__secondary-link {
+  display: inline-block;
+  padding: 0.7rem 0;
+  font-size: 1.3rem;
+  font-weight: 400;
+  text-decoration: none;
+  color: rgba(var(--color-foreground), 0.6);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.menu-drawer__secondary-link:hover,
+.menu-drawer__secondary-link:focus-visible {
+  color: rgb(var(--color-foreground));
+}
+
+.menu-drawer__secondary-link--active {
+  color: rgb(var(--color-foreground));
+}
+
 .menu-drawer__close-button {
   margin-top: 1.5rem;
   padding: 1.2rem 2.6rem 1.2rem 3rem;

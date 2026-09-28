@@ -135,6 +135,53 @@
               {%- endfor -%}
             </ul>
           </nav>
+
+          {%- if linklists['footer'] != blank -%}
+            {%- comment -%}
+              Links secundários (políticas, FAQ, preferências de cookies),
+              no fundo do menu de navegação, logo abaixo das categorias
+              principais. Lê diretamente o menu de navegação "footer"
+              (linklists['footer']) — o mesmo que o rodapé usa — para os
+              URLs virem sempre corretos do admin, sem duplicar links aqui.
+              Não é um setting da secção porque o Shopify só permite um
+              setting do tipo link_list por secção, e "menu" já usa esse
+              lugar.
+
+              Esse menu "footer" tem mais itens (Sobre, Pesquisar, Blog),
+              por isso filtra-se pelo título para mostrar só os 5 pedidos
+              aqui, pela mesma ordem em que já aparecem nesse menu.
+            {%- endcomment -%}
+            {%- assign ss_secondary_titles = 'Política de Privacidade,Política de Reembolso,Termos de serviço,Perguntas Frequentes' | split: ',' -%}
+            <nav class="menu-drawer__secondary-nav" aria-label="Links secundários">
+              <ul class="menu-drawer__secondary-list list-unstyled" role="list">
+                {%- for link in linklists['footer'].links -%}
+                  {%- if ss_secondary_titles contains link.title -%}
+                    <li>
+                      <a
+                        href="{{ link.url }}"
+                        class="menu-drawer__secondary-link link link--text{% if link.current %} menu-drawer__secondary-link--active{% endif %}"
+                        {% if link.current %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        {{ link.title | escape }}
+                      </a>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+                <li>
+                  <button
+                    type="button"
+                    class="menu-drawer__secondary-link link link--text"
+                    onclick="window.Shopify && window.Shopify.customerPrivacy && window.Shopify.customerPrivacy.showPreferences && window.Shopify.customerPrivacy.showPreferences()"
+                  >
+                    Preferências de cookies
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          {%- endif -%}
+
           <div class="menu-drawer__utility-links">
             {%- if shop.customer_accounts_enabled -%}
               <a

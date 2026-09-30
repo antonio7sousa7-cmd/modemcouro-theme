@@ -571,7 +571,8 @@
       border-color: rgba(var(--color-foreground), 0.4);
     }
 
-    /* Aviso "Apenas 1 disponível" (produtos com a tag "ultima-unidade"),
+    /* Aviso "Apenas 1 disponível" (metacampo custom.ultima_unidade, gerido no
+       admin em Produtos > [produto] > Última unidade — não uma etiqueta),
        logo acima do botão de compra. Itálico, maiúsculas espaçadas e um
        tom bordô/terra sóbrio — discreto, não um alerta vermelho vivo —
        para se manter dentro do registo "silent luxury" do resto da buy
@@ -1079,7 +1080,7 @@
                 %}
               {%- when 'buy_buttons' -%}
                 {%- render 'product-trust-icons' -%}
-                {%- if product.tags contains 'ultima-unidade' -%}
+                {%- if product.metafields.custom.ultima_unidade == true -%}
                   <p class="ss-last-unit" role="status">
                     <span class="ss-last-unit__icon">{{- 'icon-last-unit.svg' | inline_asset_content -}}</span>
                     <span>Apenas 1 disponível</span>

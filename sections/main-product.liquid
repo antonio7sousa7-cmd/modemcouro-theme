@@ -10,6 +10,7 @@
   {% endif %}
 >
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'component-badge-last-unit.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -572,35 +573,13 @@
     }
 
     /* Aviso "Apenas 1 disponível" (metacampo custom.ultima_unidade, gerido no
-       admin em Produtos > [produto] > Última unidade — não uma etiqueta),
-       logo acima do botão de compra. Itálico, maiúsculas espaçadas e um
-       tom bordô/terra sóbrio — discreto, não um alerta vermelho vivo —
-       para se manter dentro do registo "silent luxury" do resto da buy
-       box. */
+       admin em Produtos > [produto] > Última unidade), logo acima do botão
+       de compra. Mesma etiqueta sólida em pílula que a "Em promoção"
+       (.ss-badge-last-unit, partilhada com as grelhas de coleção via
+       component-badge-last-unit.css) — só a cor muda — para ler como a
+       mesma família de avisos em toda a loja. */
     #MainProduct-{{ section.id }} .ss-last-unit {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
       margin: 0 0 1.6rem;
-      font-family: var(--font-heading-family);
-      font-style: italic;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 1.15rem;
-      color: #6b2b2b;
-    }
-
-    #MainProduct-{{ section.id }} .ss-last-unit__icon {
-      display: inline-flex;
-      flex-shrink: 0;
-      width: 1.5rem;
-      height: 1.5rem;
-    }
-
-    #MainProduct-{{ section.id }} .ss-last-unit__icon svg {
-      width: 100%;
-      height: 100%;
     }
   {%- endstyle -%}
 
@@ -1082,8 +1061,10 @@
                 {%- render 'product-trust-icons' -%}
                 {%- if product.metafields.custom.ultima_unidade == true -%}
                   <p class="ss-last-unit" role="status">
-                    <span class="ss-last-unit__icon">{{- 'icon-last-unit.svg' | inline_asset_content -}}</span>
-                    <span>Apenas 1 disponível</span>
+                    <span class="badge ss-badge-last-unit">
+                      {{- 'icon-last-unit.svg' | inline_asset_content -}}
+                      Apenas 1 disponível
+                    </span>
                   </p>
                 {%- endif -%}
                 {%- render 'buy-buttons',

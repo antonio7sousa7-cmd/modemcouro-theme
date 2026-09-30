@@ -1,23 +1,18 @@
-/* Etiqueta "Apenas 1 disponível" (produtos com a tag "ultima-unidade") nas
-   grelhas de coleção. Discreta de propósito — contorno fino e fundo
-   translúcido em tom terra/bordô suave, ao contrário do preenchimento
-   sólido a vermelho da etiqueta de saldo — para não competir com ela nem
-   com o resto da imagem. Reutiliza a classe .badge do tema (base.css),
-   por isso só substitui cor/fundo/borda, sempre com !important porque o
-   esquema de cor do cartão (color-{{ settings... }}) define as mesmas
-   propriedades com a mesma especificidade. */
+/* Etiqueta "Apenas 1 disponível" (produtos com o metacampo custom.ultima_unidade
+   a Verdadeiro). Mesmo formato sólido em pílula da etiqueta "Em promoção"
+   (.ss-badge-sale) — reutiliza a classe .badge do tema, só muda a cor — para
+   as duas se lerem como a mesma família de avisos. Usada tanto nas grelhas de
+   coleção como, com um ícone extra, na página de produto (ver main-product.liquid).
+   Sempre com !important porque o esquema de cor do cartão/secção
+   (color-{{ settings... }}) define as mesmas propriedades com a mesma
+   especificidade — o mesmo motivo por que .ss-badge-sale já precisa dele. */
 .ss-badge-last-unit {
   display: inline-flex !important;
   align-items: center;
   gap: 0.5rem;
-  background-color: rgba(250, 247, 242, 0.94) !important;
+  background-color: #6b2b2b !important;
   border-color: #6b2b2b !important;
-  color: #6b2b2b !important;
-  font-family: var(--font-heading-family);
-  font-style: italic;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  color: #ffffff !important;
 }
 
 .ss-badge-last-unit svg {

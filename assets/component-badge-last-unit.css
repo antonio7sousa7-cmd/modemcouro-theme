@@ -1,17 +1,18 @@
 /* Etiqueta "Apenas 1 disponível" (produtos com o metacampo custom.ultima_unidade
-   a Verdadeiro). Mesmo formato sólido em pílula da etiqueta "Em promoção"
-   (.ss-badge-sale) — reutiliza a classe .badge do tema, só muda a cor — para
-   as duas se lerem como a mesma família de avisos. Usada tanto nas grelhas de
-   coleção como, com um ícone extra, na página de produto (ver main-product.liquid).
-   Sempre com !important porque o esquema de cor do cartão/secção
-   (color-{{ settings... }}) define as mesmas propriedades com a mesma
-   especificidade — o mesmo motivo por que .ss-badge-sale já precisa dele. */
+   a Verdadeiro). Mesmo formato sólido em pílula e a mesma cor vermelha da
+   etiqueta "Em promoção" (.ss-badge-sale, #b22222) — reutiliza a classe
+   .badge do tema — para as duas se lerem como a mesma família de avisos.
+   Usada tanto nas grelhas de coleção como, com um ícone extra, na página de
+   produto (ver main-product.liquid). Sempre com !important porque o esquema
+   de cor do cartão/secção (color-{{ settings... }}) define as mesmas
+   propriedades com a mesma especificidade — o mesmo motivo por que
+   .ss-badge-sale já precisa dele. */
 .ss-badge-last-unit {
   display: inline-flex !important;
   align-items: center;
   gap: 0.5rem;
-  background-color: #6b2b2b !important;
-  border-color: #6b2b2b !important;
+  background-color: #b22222 !important;
+  border-color: #b22222 !important;
   color: #ffffff !important;
 }
 

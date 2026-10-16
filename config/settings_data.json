@@ -173,6 +173,11 @@
         "type": "shopify://apps/essential-trust-badges/blocks/app-embed/0ff65b25-07e1-408e-950f-f54dd3d1751b",
         "disabled": true,
         "settings": {}
+      },
+      "3991723993231535834": {
+        "type": "shopify://apps/trackbee-connect/blocks/trackbee/4ee1d514-671e-48bf-bd4e-9373f4af089a",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {

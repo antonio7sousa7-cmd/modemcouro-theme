@@ -167,13 +167,13 @@
           || i={{ forloop.index }} title={{ product.title }}
         {%- endfor -%}
         ENDLIMITFORLOOP
-        PAGINATETEST:
-        {%- paginate dbg_products by 10 -%}
-          {%- for product in dbg_products limit: 10 -%}
+        PAGINATE_HARDCODED_BY:
+        {%- paginate section.settings.collection.products by 10 -%}
+          {%- for product in section.settings.collection.products limit: 10 -%}
             || i={{ forloop.index }} title={{ product.title }}
           {%- endfor -%}
         {%- endpaginate -%}
-        ENDPAGINATETEST
+        ENDPAGINATE_HARDCODED_BY
       </p>
       <ul
         id="Slider-{{ section.id }}"

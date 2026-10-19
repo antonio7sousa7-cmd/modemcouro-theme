@@ -27,16 +27,63 @@
     data-section-id="{{ section.id }}"
     data-product-id="{{ product.id }}"
   >
-    {% if recommendations.performed and recommendations.products_count > 0 %}
-      <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
-        {{ section.settings.heading }}
-      </h2>
-      <ul
-        class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
-        role="list"
-      >
-        {% assign skip_card_product_styles = false %}
-        {% for recommendation in recommendations.products %}
+    {%- liquid
+      assign products_to_show = section.settings.products_to_show
+
+      assign category_collection = blank
+      for collection in product.collections
+        if collection.handle != 'best-selling-products' and collection.handle != 'newest-products'
+          assign category_collection = collection
+          break
+        endif
+      endfor
+    -%}
+
+    {% capture related_products_html %}
+      {% assign rendered_count = 0 %}
+      {% assign rendered_ids = '' %}
+      {% assign skip_card_product_styles = false %}
+
+      {%- if category_collection != blank -%}
+        {%- for item in category_collection.products -%}
+          {%- if rendered_count >= products_to_show -%}
+            {%- break -%}
+          {%- endif -%}
+          {%- if item.id == product.id -%}
+            {%- continue -%}
+          {%- endif -%}
+          {%- if item.metafields.custom.ocultar_no_catalogo == true -%}
+            {%- continue -%}
+          {%- endif -%}
+          <li class="grid__item">
+            {% render 'card-product',
+              card_product: item,
+              media_aspect_ratio: section.settings.image_ratio,
+              image_shape: section.settings.image_shape,
+              show_secondary_image: section.settings.show_secondary_image,
+              show_vendor: section.settings.show_vendor,
+              show_rating: section.settings.show_rating,
+              skip_styles: skip_card_product_styles
+            %}
+          </li>
+          {%- assign skip_card_product_styles = true -%}
+          {%- assign rendered_count = rendered_count | plus: 1 -%}
+          {%- assign rendered_ids = rendered_ids | append: item.id | append: ',' -%}
+        {%- endfor -%}
+      {%- endif -%}
+
+      {%- if rendered_count < products_to_show and recommendations.performed -%}
+        {%- for recommendation in recommendations.products -%}
+          {%- if rendered_count >= products_to_show -%}
+            {%- break -%}
+          {%- endif -%}
+          {%- if recommendation.id == product.id -%}
+            {%- continue -%}
+          {%- endif -%}
+          {%- assign recommendation_marker = recommendation.id | append: ',' -%}
+          {%- if rendered_ids contains recommendation_marker -%}
+            {%- continue -%}
+          {%- endif -%}
           <li class="grid__item">
             {% render 'card-product',
               card_product: recommendation,
@@ -49,7 +96,20 @@
             %}
           </li>
           {%- assign skip_card_product_styles = true -%}
-        {% endfor %}
+          {%- assign rendered_count = rendered_count | plus: 1 -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {% endcapture %}
+
+    {% if rendered_count > 0 %}
+      <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
+        {{ section.settings.heading }}
+      </h2>
+      <ul
+        class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
+        role="list"
+      >
+        {{ related_products_html }}
       </ul>
     {% endif %}
   </product-recommendations>

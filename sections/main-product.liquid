@@ -1076,6 +1076,7 @@
                 {%- render 'product-secure-checkout' -%}
               {%- when 'pickup_availability' -%}
                 {%- render 'product-pickup-availability', product: product -%}
+                {%- render 'product-highlights' -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">

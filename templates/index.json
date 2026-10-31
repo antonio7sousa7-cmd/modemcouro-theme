@@ -205,7 +205,7 @@
         "category_3": {
           "type": "category",
           "settings": {
-            "collection": "",
+            "collection": "malas",
             "image": "shopify://shop_images/7.webp",
             "title": "Malas"
           }

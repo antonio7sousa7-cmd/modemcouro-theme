@@ -6,40 +6,32 @@
 
 {%- style -%}
   .ss-product-highlights {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding-left: 1.4rem;
+    list-style: disc;
   }
 
   .ss-product-highlights__item {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    margin-bottom: 1rem;
   }
 
-  .ss-product-highlights__item .svg-wrapper svg {
-    width: 1.3rem;
-    height: 1.3rem;
-    flex-shrink: 0;
+  .ss-product-highlights__item::marker {
+    color: rgb(0, 0, 0);
+  }
+
+  .ss-product-highlights__item:last-child {
+    margin-bottom: 0;
   }
 {%- endstyle -%}
 
-<ul class="ss-product-highlights list-unstyled" role="list">
-  <li class="ss-product-highlights__item caption">
-    <span class="svg-wrapper">{{- 'icon-tick.svg' | inline_asset_content -}}</span>
-    Pele 100% genuína
-  </li>
-  <li class="ss-product-highlights__item caption">
-    <span class="svg-wrapper">{{- 'icon-tick.svg' | inline_asset_content -}}</span>
-    Fabricado em Portugal
-  </li>
-  <li class="ss-product-highlights__item caption">
-    <span class="svg-wrapper">{{- 'icon-tick.svg' | inline_asset_content -}}</span>
-    Devolução grátis até 14 dias
-  </li>
-  <li class="ss-product-highlights__item caption">
-    <span class="svg-wrapper">{{- 'icon-tick.svg' | inline_asset_content -}}</span>
-    Pagamento 100% seguro
-  </li>
+<ul class="ss-product-highlights" role="list">
+  <li class="ss-product-highlights__item">Pele 100% genuína</li>
+  <li class="ss-product-highlights__item">Fabricado em Portugal</li>
+  <li class="ss-product-highlights__item">Devolução grátis até 14 dias</li>
+  <li class="ss-product-highlights__item">Pagamento 100% seguro</li>
 </ul>

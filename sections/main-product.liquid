@@ -1076,7 +1076,7 @@
                 {%- render 'product-secure-checkout' -%}
               {%- when 'pickup_availability' -%}
                 {%- render 'product-pickup-availability', product: product -%}
-                {%- render 'product-highlights' -%}
+                {%- render 'product-highlights', content: section.settings.product_highlights -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
@@ -2692,6 +2692,12 @@
     }
   ],
   "settings": [
+    {
+      "type": "richtext",
+      "id": "product_highlights",
+      "default": "<ul><li>Pele 100% genuína</li><li>Fabricado em Portugal</li><li>Devolução grátis até 14 dias</li><li>Pagamento 100% seguro</li></ul>",
+      "label": "Texto formatado"
+    },
     {
       "type": "checkbox",
       "id": "enable_sticky_info",

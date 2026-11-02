@@ -2,36 +2,34 @@
   Lista de destaques do produto, mostrada por baixo do bloco de
   disponibilidade/envio ("Envios grátis com CTT"), reforçando os
   principais pontos de venda junto ao botão de compra.
+  Conteúdo vem de section.settings.product_highlights (richtext).
 {%- endcomment -%}
 
 {%- style -%}
   .ss-product-highlights {
     margin-top: 1.5rem;
-    padding-left: 1.4rem;
+  }
+
+  .ss-product-highlights ul {
     list-style: disc;
   }
 
-  .ss-product-highlights__item {
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 1.15rem;
-    line-height: 1.5;
-    letter-spacing: 0.01em;
+  .ss-product-highlights li {
     margin-bottom: 1rem;
+    font-weight: normal;
   }
 
-  .ss-product-highlights__item::marker {
+  .ss-product-highlights li::marker {
     color: rgb(0, 0, 0);
   }
 
-  .ss-product-highlights__item:last-child {
+  .ss-product-highlights li:last-child {
     margin-bottom: 0;
   }
 {%- endstyle -%}
 
-<ul class="ss-product-highlights" role="list">
-  <li class="ss-product-highlights__item">Pele 100% genuína</li>
-  <li class="ss-product-highlights__item">Fabricado em Portugal</li>
-  <li class="ss-product-highlights__item">Devolução grátis até 14 dias</li>
-  <li class="ss-product-highlights__item">Pagamento 100% seguro</li>
-</ul>
+{%- if content != blank -%}
+  <div class="ss-product-highlights">
+    {{ content }}
+  </div>
+{%- endif -%}

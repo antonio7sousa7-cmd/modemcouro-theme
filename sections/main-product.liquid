@@ -1076,7 +1076,21 @@
                 {%- render 'product-secure-checkout' -%}
               {%- when 'pickup_availability' -%}
                 {%- render 'product-pickup-availability', product: product -%}
-                {%- render 'product-highlights', content: section.settings.product_highlights -%}
+              {%- when 'bullets_editaveis' -%}
+                {%- style -%}
+                  #bullets-editaveis-{{ block.id }} ul {
+                    list-style-type: disc outside;
+                    margin-left: 20px;
+                  }
+
+                  #bullets-editaveis-{{ block.id }} li {
+                    margin-bottom: 12px;
+                    font-weight: normal;
+                  }
+                {%- endstyle -%}
+                <div id="bullets-editaveis-{{ block.id }}" {{ block.shopify_attributes }}>
+                  {{ block.settings.bullet_text }}
+                </div>
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
@@ -1386,6 +1400,17 @@
       "type": "pickup_availability",
       "name": "Recolha em Loja",
       "limit": 1
+    },
+    {
+      "type": "bullets_editaveis",
+      "name": "Bullets Editáveis",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "bullet_text",
+          "label": "Texto (bullets)"
+        }
+      ]
     },
     {
       "type": "price",
@@ -2692,12 +2717,6 @@
     }
   ],
   "settings": [
-    {
-      "type": "richtext",
-      "id": "product_highlights",
-      "default": "<ul><li>Pele 100% genuína</li><li>Fabricado em Portugal</li><li>Devolução grátis até 14 dias</li><li>Pagamento 100% seguro</li></ul>",
-      "label": "Texto formatado"
-    },
     {
       "type": "checkbox",
       "id": "enable_sticky_info",

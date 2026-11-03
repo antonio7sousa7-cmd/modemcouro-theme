@@ -1468,7 +1468,7 @@
           gap: 1rem;
           left: auto;
           max-width: 450px;
-          padding: 1rem 1.25rem;
+          padding: 15px;
           right: 20px;
           width: max-content;
         }
@@ -1476,6 +1476,18 @@
         #StickyAtc-{{ section.id }} .sticky-atc__info {
           display: flex;
           flex-direction: column;
+          gap: 2px;
+          justify-content: center;
+        }
+
+        #StickyAtc-{{ section.id }} .sticky-atc__title,
+        #StickyAtc-{{ section.id }} .sticky-atc__variant,
+        #StickyAtc-{{ section.id }} .sticky-atc__price {
+          margin: 0 !important;
+          padding: 0;
+          line-height: 1.2;
+          white-space: normal;
+          text-align: left;
         }
       }
     {%- endstyle -%}

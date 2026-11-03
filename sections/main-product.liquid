@@ -1447,6 +1447,29 @@
           font-size: 11px;
         }
       }
+
+      @media screen and (min-width: 769px) {
+        #StickyAtc-{{ section.id }} {
+          align-items: center;
+          background: white;
+          border-radius: 8px;
+          border-top: none;
+          bottom: 20px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          display: flex;
+          gap: 1rem;
+          left: auto;
+          max-width: 450px;
+          padding: 1rem 1.25rem;
+          right: 20px;
+          width: max-content;
+        }
+
+        #StickyAtc-{{ section.id }} .sticky-atc__info {
+          display: flex;
+          flex-direction: column;
+        }
+      }
     {%- endstyle -%}
 
     <div id="StickyAtc-{{ section.id }}" class="sticky-atc" aria-hidden="true">

@@ -1412,6 +1412,41 @@
         margin: 0;
         width: auto;
       }
+
+      @media screen and (max-width: 768px) {
+        #StickyAtc-{{ section.id }} {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        #StickyAtc-{{ section.id }} .sticky-atc__media img {
+          width: 45px;
+          height: 45px;
+        }
+
+        #StickyAtc-{{ section.id }} .sticky-atc__info {
+          display: flex;
+          flex-direction: column;
+        }
+
+        #StickyAtc-{{ section.id }} .sticky-atc__title,
+        #StickyAtc-{{ section.id }} .sticky-atc__variant,
+        #StickyAtc-{{ section.id }} .sticky-atc__price {
+          font-size: 12px;
+          line-height: 1.2;
+          margin: 0;
+        }
+
+        #StickyAtc-{{ section.id }} .sticky-atc__title {
+          font-weight: bold;
+        }
+
+        #StickyAtc-{{ section.id }} .sticky-atc__variant,
+        #StickyAtc-{{ section.id }} .sticky-atc__price {
+          font-size: 11px;
+        }
+      }
     {%- endstyle -%}
 
     <div id="StickyAtc-{{ section.id }}" class="sticky-atc" aria-hidden="true">
@@ -1428,6 +1463,9 @@
       </div>
       <div class="sticky-atc__info">
         <p class="sticky-atc__title">{{ product.title | escape }}</p>
+        {%- unless product.has_only_default_variant -%}
+          <p class="sticky-atc__variant">{{ product.selected_or_first_available_variant.title | escape }}</p>
+        {%- endunless -%}
         <p class="sticky-atc__price">{{ product.selected_or_first_available_variant.price | money }}</p>
       </div>
       <button

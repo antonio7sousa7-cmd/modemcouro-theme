@@ -1415,36 +1415,44 @@
 
       @media screen and (max-width: 768px) {
         #StickyAtc-{{ section.id }} {
-          display: flex;
           align-items: center;
-          justify-content: space-between;
+          display: grid;
+          gap: 10px;
+          grid-template-columns: 40px 1fr auto;
+          padding: 10px;
+          z-index: 99;
         }
 
         #StickyAtc-{{ section.id }} .sticky-atc__media img {
-          width: 45px;
-          height: 45px;
+          height: auto;
+          max-width: 40px;
+          width: 100%;
         }
 
         #StickyAtc-{{ section.id }} .sticky-atc__info {
           display: flex;
           flex-direction: column;
+          overflow: hidden;
         }
 
         #StickyAtc-{{ section.id }} .sticky-atc__title,
         #StickyAtc-{{ section.id }} .sticky-atc__variant,
         #StickyAtc-{{ section.id }} .sticky-atc__price {
-          font-size: 12px;
+          font-size: 11px;
           line-height: 1.2;
           margin: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         #StickyAtc-{{ section.id }} .sticky-atc__title {
           font-weight: bold;
         }
 
-        #StickyAtc-{{ section.id }} .sticky-atc__variant,
-        #StickyAtc-{{ section.id }} .sticky-atc__price {
-          font-size: 11px;
+        #StickyAtc-{{ section.id }} .sticky-atc__button {
+          font-size: 12px;
+          padding: 8px 12px;
         }
       }
 

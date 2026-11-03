@@ -1464,8 +1464,9 @@
           border-top: none;
           bottom: 20px;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-          display: flex;
-          gap: 1rem;
+          display: grid;
+          gap: 15px;
+          grid-template-columns: 50px 1fr auto;
           left: auto;
           max-width: 450px;
           padding: 15px;
@@ -1477,17 +1478,20 @@
           display: flex;
           flex-direction: column;
           gap: 2px;
-          justify-content: center;
         }
 
         #StickyAtc-{{ section.id }} .sticky-atc__title,
         #StickyAtc-{{ section.id }} .sticky-atc__variant,
         #StickyAtc-{{ section.id }} .sticky-atc__price {
-          margin: 0 !important;
-          padding: 0;
+          margin: 0;
           line-height: 1.2;
+          font-size: 13px;
           white-space: normal;
           text-align: left;
+        }
+
+        #StickyAtc-{{ section.id }} .sticky-atc__title {
+          font-weight: bold;
         }
       }
     {%- endstyle -%}

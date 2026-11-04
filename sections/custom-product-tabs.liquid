@@ -1,22 +1,27 @@
 {%- style -%}
   #CustomProductTabs-{{ section.id }} .custom-product-tabs__headers {
     display: flex;
-    border-bottom: 1px solid #eee;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
   }
 
   #CustomProductTabs-{{ section.id }} .custom-product-tabs__tab-button {
-    background: none;
+    background-color: #fff;
     border: none;
-    border-bottom: 3px solid transparent;
+    border-right: 1px solid #e5e5e5;
     color: inherit;
     cursor: pointer;
     font: inherit;
-    padding: 0.75rem 1.25rem;
+    padding: 12px 20px;
+  }
+
+  #CustomProductTabs-{{ section.id }} .custom-product-tabs__tab-button:last-child {
+    border-right: none;
   }
 
   #CustomProductTabs-{{ section.id }} .custom-product-tabs__tab-button.active {
-    border-bottom-color: currentColor;
-    font-weight: bold;
+    background-color: #eee9e0;
+    font-weight: 600;
   }
 
   #CustomProductTabs-{{ section.id }} .custom-product-tabs__panel {

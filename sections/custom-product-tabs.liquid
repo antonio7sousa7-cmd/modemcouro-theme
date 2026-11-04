@@ -1,0 +1,155 @@
+{%- style -%}
+  #CustomProductTabs-{{ section.id }} .custom-product-tabs__headers {
+    display: flex;
+    border-bottom: 1px solid #eee;
+  }
+
+  #CustomProductTabs-{{ section.id }} .custom-product-tabs__tab-button {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    padding: 0.75rem 1.25rem;
+  }
+
+  #CustomProductTabs-{{ section.id }} .custom-product-tabs__tab-button.active {
+    border-bottom-color: currentColor;
+    font-weight: bold;
+  }
+
+  #CustomProductTabs-{{ section.id }} .custom-product-tabs__panel {
+    display: none;
+    padding: 1.5rem 0;
+  }
+
+  #CustomProductTabs-{{ section.id }} .custom-product-tabs__panel.active {
+    display: block;
+  }
+
+  @media screen and (max-width: 749px) {
+    #CustomProductTabs-{{ section.id }} .custom-product-tabs__headers {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    #CustomProductTabs-{{ section.id }} .custom-product-tabs__tab-button {
+      flex-shrink: 0;
+    }
+  }
+{%- endstyle -%}
+
+<div id="CustomProductTabs-{{ section.id }}" class="custom-product-tabs page-width">
+  <div class="custom-product-tabs__headers" role="tablist">
+    {%- for block in section.blocks -%}
+      <button
+        type="button"
+        id="CustomProductTabs-Tab-{{ block.id }}"
+        class="custom-product-tabs__tab-button{% if forloop.first %} active{% endif %}"
+        data-tab-target="CustomProductTabs-Panel-{{ block.id }}"
+        role="tab"
+        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+        aria-controls="CustomProductTabs-Panel-{{ block.id }}"
+        {{ block.shopify_attributes }}
+      >
+        {{ block.settings.title }}
+      </button>
+    {%- endfor -%}
+  </div>
+
+  <div class="custom-product-tabs__panels">
+    {%- for block in section.blocks -%}
+      <div
+        id="CustomProductTabs-Panel-{{ block.id }}"
+        class="custom-product-tabs__panel{% if forloop.first %} active{% endif %}"
+        role="tabpanel"
+        aria-labelledby="CustomProductTabs-Tab-{{ block.id }}"
+      >
+        {{ block.settings.text_content }}
+        {{ block.settings.custom_html }}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('CustomProductTabs-{{ section.id }}');
+    if (!root) return;
+
+    var buttons = root.querySelectorAll('.custom-product-tabs__tab-button');
+    var panels = root.querySelectorAll('.custom-product-tabs__panel');
+
+    buttons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        buttons.forEach(function (b) {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(function (p) {
+          p.classList.remove('active');
+        });
+
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+
+        var target = document.getElementById(button.getAttribute('data-tab-target'));
+        if (target) {
+          target.classList.add('active');
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Abas de Produto",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Aba",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título da Aba"
+        },
+        {
+          "type": "richtext",
+          "id": "text_content",
+          "label": "Texto principal"
+        },
+        {
+          "type": "html",
+          "id": "custom_html",
+          "label": "HTML extra para layouts complexos"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Abas de Produto",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Aba 1"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Aba 2"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

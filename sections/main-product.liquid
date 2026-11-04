@@ -304,6 +304,25 @@
       text-underline-offset: 0.4rem;
     }
 
+    /* Alinhamento vertical do triângulo de "Stock limitado!": o
+       contentor da linha passa a inline-flex com align-items: center,
+       para alinhar o ícone ao centro do texto em vez de depender do
+       vertical-align (que só afeta as outras linhas, com o visto
+       verde). Usa a classe dedicada pickup-availability-line--alert
+       (adicionada em pickup-availability.liquid) para não afetar as
+       outras linhas, que partilham .pickup-availability-line. Fica
+       fora da media query de desktop abaixo para se aplicar também em
+       mobile/tablet. */
+    #MainProduct-{{ section.id }} .pickup-availability-line--alert {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #MainProduct-{{ section.id }} .pickup-availability-line--alert .svg-wrapper {
+      margin: 0;
+    }
+
     /* ---------------------------------------------------------------
        Layout editorial 50/50 em desktop (>=990px): a galeria de
        imagem e a coluna de informação passam a ocupar exatamente
@@ -495,17 +514,6 @@
         width: 1.4rem;
         vertical-align: -0.25em;
         margin-right: 0.5rem;
-      }
-
-      /* Alinhamento vertical do triângulo de "Stock limitado!": o
-         contentor da linha passa a inline-flex com align-items: center,
-         para alinhar o ícone ao centro do texto em vez de depender do
-         vertical-align acima (que só afeta as outras linhas, com o
-         visto verde). */
-      #MainProduct-{{ section.id }} .pickup-availability-line:has(.stock-alert-icon) {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
       }
 
       #MainProduct-{{ section.id }} .pickup-availability-button {

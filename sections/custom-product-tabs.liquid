@@ -1,4 +1,9 @@
 {%- style -%}
+  #CustomProductTabs-{{ section.id }} {
+    margin: 0 auto;
+    max-width: 900px;
+  }
+
   #CustomProductTabs-{{ section.id }} .custom-product-tabs__headers {
     display: flex;
     border-top: 1px solid #e5e5e5;
@@ -6,12 +11,13 @@
   }
 
   #CustomProductTabs-{{ section.id }} .custom-product-tabs__tab-button {
-    background-color: #fff;
+    background-color: transparent;
     border: none;
     border-right: 1px solid #e5e5e5;
     color: inherit;
     cursor: pointer;
     font: inherit;
+    font-weight: 600;
     padding: 12px 20px;
   }
 
@@ -20,8 +26,7 @@
   }
 
   #CustomProductTabs-{{ section.id }} .custom-product-tabs__tab-button.active {
-    background-color: #eee9e0;
-    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.04);
   }
 
   #CustomProductTabs-{{ section.id }} .custom-product-tabs__panel {

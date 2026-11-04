@@ -68,6 +68,7 @@
       >
         {{ block.settings.text_content }}
         {{ block.settings.custom_html }}
+        {% if block.settings.tab_image %}{{ block.settings.tab_image | image_url: width: 600 | image_tag: loading: 'lazy', style: 'max-width: 100%; height: auto; margin-top: 15px;' }}{% endif %}
       </div>
     {%- endfor -%}
   </div>
@@ -128,6 +129,11 @@
           "type": "html",
           "id": "custom_html",
           "label": "HTML extra para layouts complexos"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_image",
+          "label": "Imagem auxiliar (Envios/Pagamentos)"
         }
       ]
     }

@@ -253,6 +253,7 @@
 
     #MainProduct-{{ section.id }} .stock-alert-icon {
       animation: ss-stock-alert-pulse 2s ease-in-out infinite;
+      margin: 0;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -494,6 +495,17 @@
         width: 1.4rem;
         vertical-align: -0.25em;
         margin-right: 0.5rem;
+      }
+
+      /* Alinhamento vertical do triângulo de "Stock limitado!": o
+         contentor da linha passa a inline-flex com align-items: center,
+         para alinhar o ícone ao centro do texto em vez de depender do
+         vertical-align acima (que só afeta as outras linhas, com o
+         visto verde). */
+      #MainProduct-{{ section.id }} .pickup-availability-line:has(.stock-alert-icon) {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
       }
 
       #MainProduct-{{ section.id }} .pickup-availability-button {

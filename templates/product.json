@@ -60,10 +60,6 @@
           "type": "pickup_availability",
           "settings": {}
         },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
         "collapsible_tab_epCQwM": {
           "type": "collapsible_tab",
           "settings": {
@@ -87,9 +83,13 @@
           "settings": {
             "heading": "Acabamento Resistente e Impecável",
             "icon": "fire",
-            "content": "<p>Feito em couro macio e resistente, proporciona conforto durante o dia todo.</p>",
+            "content": "<ul><li><strong>Feito em camurça macia e resistente</strong>, proporciona conforto durante o dia todo.</li></ul>",
             "page": ""
           }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
         }
       },
       "block_order": [

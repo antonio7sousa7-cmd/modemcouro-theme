@@ -197,7 +197,7 @@
         "category_2": {
           "type": "category",
           "settings": {
-            "collection": "",
+            "collection": "coletes",
             "image": "shopify://shop_images/IMG_0272.jpg",
             "title": "Coletes"
           }

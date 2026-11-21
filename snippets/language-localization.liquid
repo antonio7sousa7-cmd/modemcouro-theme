@@ -3,17 +3,53 @@
 
   Accepts:
     - localPosition: pass in the position in which the form is coming up to create specific IDs
+    - abbreviate_mobile: when true, the closed button shows only a flag +
+      language code (e.g. "[PT flag] PT") below 750px, and the full
+      language name at 750px and up. The expanded list always shows full
+      names. Only opts in where explicitly passed, so other callers of
+      this snippet (footer, mobile drawer) keep showing the full name
+      everywhere.
+
+  Flags are drawn as inline SVG rather than regional-indicator emoji:
+  Windows renders those emoji as plain two-letter text everywhere (not
+  just in this theme), so an emoji flag never actually shows as a flag
+  for a large share of visitors.
 {%- endcomment -%}
+
+{%- liquid
+  assign current_language_code = localization.language.iso_code | split: '-' | first | downcase
+-%}
 
 <div class="disclosure">
   <button
     type="button"
-    class="disclosure__button localization-form__select localization-selector link link--text caption-large"
+    class="disclosure__button localization-form__select localization-selector link link--text caption-large{% if abbreviate_mobile %} localization-selector--abbreviate-mobile{% endif %}"
     aria-expanded="false"
     aria-controls="{{ localPosition }}List"
     aria-describedby="{{ localPosition }}Label"
   >
-    <span>{{ localization.language.endonym_name | capitalize }}</span>
+    <span class="localization-selector__label-full">{{ localization.language.endonym_name | capitalize }}</span>
+    {%- if abbreviate_mobile -%}
+      <span class="localization-selector__label-abbrev">
+        {%- case current_language_code -%}
+          {%- when 'pt' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#DA291C" />
+              <rect width="8" height="14" fill="#046A38" />
+              <circle cx="8" cy="7" r="2.6" fill="#FFCC00" stroke="#DA291C" stroke-width="0.6" />
+            </svg>
+          {%- when 'en' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#012169" />
+              <path d="M0,0 L20,14 M20,0 L0,14" stroke="#FFFFFF" stroke-width="2.4" />
+              <path d="M0,0 L20,14 M20,0 L0,14" stroke="#C8102E" stroke-width="1.2" />
+              <path d="M10,0 V14 M0,7 H20" stroke="#FFFFFF" stroke-width="4" />
+              <path d="M10,0 V14 M0,7 H20" stroke="#C8102E" stroke-width="2.4" />
+            </svg>
+        {%- endcase -%}
+        {{ current_language_code | upcase }}
+      </span>
+    {%- endif -%}
     {{ 'icon-caret.svg' | inline_asset_content }}
   </button>
   <div class="disclosure__list-wrapper language-selector" hidden>

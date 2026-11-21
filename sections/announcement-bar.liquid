@@ -118,6 +118,35 @@
     height: 1rem;
   }
 
+  /* Below 750px, show just a flag + language code ("🇵🇹 PT") instead of
+     the full endonym name ("Português (portugal)"), which is too wide
+     for the limited space next to the trust-message marquee. */
+  .ss-announcement-{{ section.id }} .localization-selector--abbreviate-mobile .localization-selector__label-full {
+    display: none;
+  }
+
+  .ss-announcement-{{ section.id }} .localization-selector__label-abbrev {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .ss-announcement-{{ section.id }} .localization-selector__flag {
+    display: block;
+    flex-shrink: 0;
+    border-radius: 0.2rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .ss-announcement-{{ section.id }} .localization-selector--abbreviate-mobile .localization-selector__label-full {
+      display: inline;
+    }
+
+    .ss-announcement-{{ section.id }} .localization-selector--abbreviate-mobile .localization-selector__label-abbrev {
+      display: none;
+    }
+  }
+
   .ss-announcement-{{ section.id }} .ss-announcement-marquee {
     display: none;
   }
@@ -134,11 +163,16 @@
     flex-wrap: nowrap;
     flex-shrink: 0;
     gap: 0.4em 1.4em;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     letter-spacing: 0.02em;
     line-height: 1;
     white-space: nowrap;
     padding-right: 1.4em;
+  }
+
+  .ss-announcement-{{ section.id }} .ss-announcement-marquee__group .ss-announcement-messages__item svg {
+    width: 1.7rem;
+    height: 1.7rem;
   }
 
   @keyframes ss-announcement-marquee-{{ section.id }} {
@@ -288,7 +322,7 @@
           <localization-form>
             {%- form 'localization', id: 'AnnouncementLanguageForm', class: 'localization-form' -%}
               <h2 class="visually-hidden" id="AnnouncementLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-              {%- render 'language-localization', localPosition: 'AnnouncementLanguage' -%}
+              {%- render 'language-localization', localPosition: 'AnnouncementLanguage', abbreviate_mobile: true -%}
             {%- endform -%}
           </localization-form>
         {%- endif -%}

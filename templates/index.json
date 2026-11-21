@@ -35,7 +35,7 @@
           "settings": {
             "image": "shopify://shop_images/model-with-leather-jacket-over-shoulders.jpg",
             "image_overlay_opacity": 0,
-            "heading": "<strong>Coleção de Casacos de Mulher</strong>",
+            "heading": "<strong>Coleção de Casacos de Mulher&nbsp;</strong>",
             "heading_size": "h2",
             "subheading": "",
             "button_label": "COMPRAR AGORA",

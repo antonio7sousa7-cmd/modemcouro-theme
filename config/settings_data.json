@@ -144,11 +144,6 @@
     },
     "content_for_index": [],
     "blocks": {
-      "9901917232353999808": {
-        "type": "shopify://apps/buddha-mega-menu-navigation/blocks/megamenu/dbb4ce56-bf86-4830-9b3d-16efbef51c6f",
-        "disabled": false,
-        "settings": {}
-      },
       "5091004626459974968": {
         "type": "shopify://apps/moose-whatsapp/blocks/whatsapp/b77db749-c44a-4265-8135-8b842af1b111",
         "disabled": false,
@@ -177,6 +172,11 @@
       "3991723993231535834": {
         "type": "shopify://apps/trackbee-connect/blocks/trackbee/4ee1d514-671e-48bf-bd4e-9373f4af089a",
         "disabled": false,
+        "settings": {}
+      },
+      "9901917232353999808": {
+        "type": "shopify://apps/buddha-mega-menu-navigation/blocks/megamenu/dbb4ce56-bf86-4830-9b3d-16efbef51c6f",
+        "disabled": true,
         "settings": {}
       }
     },

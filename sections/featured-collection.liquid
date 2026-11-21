@@ -164,6 +164,19 @@
         {% assign skip_card_product_styles = false %}
         {% assign products_to_show = section.settings.products_to_show %}
         {% assign rendered_products_count = 0 %}
+        {%- comment -%}
+          Products that only differ by color are separate products. Where
+          it's set, custom.outras_cores (the same metafield that powers the
+          "other colors" swatches on the product page) links them by id.
+          Many single-piece items never got that metafield filled in, but
+          still share the exact same title across colors (e.g. several
+          distinct "Mala em pele" products), so also dedupe by title as a
+          fallback. Either way, skip any later product once one with the
+          same id, a sibling id, or the same title has already been shown,
+          so the grid never shows two colorways of the same item.
+        {%- endcomment -%}
+        {% assign seen_product_ids = '' %}
+        {% assign seen_product_titles = '|' %}
 
         {%- if section.settings.collection.products.size > 0 -%}
           {% paginate section.settings.collection.products by 50 %}
@@ -174,6 +187,16 @@
               {%- if product.metafields.custom.ocultar_no_catalogo == true -%}
                 {%- continue -%}
               {%- endif -%}
+              {%- assign product_id_token = product.id | append: ',' -%}
+              {%- assign product_title_token = product.title | downcase | append: '|' -%}
+              {%- if seen_product_ids contains product_id_token or seen_product_titles contains product_title_token -%}
+                {%- continue -%}
+              {%- endif -%}
+              {%- assign seen_product_ids = seen_product_ids | append: product_id_token -%}
+              {%- assign seen_product_titles = seen_product_titles | append: product_title_token -%}
+              {%- for sibling in product.metafields.custom.outras_cores.value -%}
+                {%- assign seen_product_ids = seen_product_ids | append: sibling.id | append: ',' -%}
+              {%- endfor -%}
               <li
                 id="Slide-{{ section.id }}-{{ forloop.index }}"
                 class="grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"

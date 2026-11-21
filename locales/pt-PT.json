@@ -120,6 +120,7 @@
       "description": "Descrição",
       "on_sale": "Em promoção!",
       "product_variants": "Variantes de produtos",
+      "sibling_colors_label": "Cores disponíveis",
       "quantity": {
         "label": "Quantidade",
         "input_label": "Quantidade de {{ product }}",
@@ -153,7 +154,11 @@
         "pick_up_available_at_html": "Recolha disponível em <span class=\"color-foreground\">{{ location_name }}</span>",
         "pick_up_unavailable_at_html": "Recolha atualmente indisponível em <span class=\"color-foreground\">{{ location_name }}</span>",
         "unavailable": "Não foi possível carregar a disponibilidade de recolha",
-        "refresh": "Atualizar"
+        "refresh": "Atualizar",
+        "limited_stock": "Stock limitado!",
+        "free_shipping": "Envios grátis com CTT",
+        "ready_in_search": "pronto em",
+        "ready_to_ship_in": "pronto para envio em"
       },
       "media": {
         "open_media": "Abrir conteúdo multimédia {{ index }} em modal",
@@ -544,6 +549,71 @@
       "send_on_label": "Enviar a (opcional)",
       "expanded": "Formulário de destinatário do cartão de oferta expandido",
       "collapsed": "Formulário de destinatário do cartão de oferta fechado"
+    }
+  },
+  "custom": {
+    "contact_form": {
+      "error_status": "Não foi possível enviar a mensagem.",
+      "error_label": "Erro:",
+      "phone_label": "Número de Telemóvel",
+      "preferred_contact_method": "Método de Contacto Preferido",
+      "phone_short": "Telemóvel",
+      "message_label": "Mensagem"
+    },
+    "breadcrumbs": {
+      "home": "Início",
+      "nav_label": "Navegação estrutural"
+    },
+    "product_trust": {
+      "fast_shipping": "Envios Rápidos",
+      "made_in_portugal": "Fabrico em Portugal",
+      "easy_returns": "Devoluções sem complicações",
+      "genuine_leather": "Pele Genuína"
+    },
+    "product_secure_checkout": {
+      "secure_payment": "Pagamento Seguro"
+    },
+    "product_reviews": {
+      "stars_label": "de 5 estrelas",
+      "review_singular": "avaliação",
+      "review_plural": "avaliações",
+      "verified": "Verificado",
+      "distribution_label": "Distribuição das avaliações",
+      "previous_reviews": "Avaliações anteriores",
+      "next_reviews": "Avaliações seguintes",
+      "pagination_label": "Paginação das avaliações",
+      "verified_buyer": "Comprador verificado",
+      "go_to_review": "Ir para a avaliação",
+      "write_review_subject": "Avaliação: "
+    },
+    "luxury_faq": {
+      "search_placeholder": "Pesquisar perguntas frequentes"
+    },
+    "shop_the_look": {
+      "empty_state": "Escolhe os produtos deste look no editor de temas.",
+      "default_product_title": "Produto"
+    },
+    "category_grid": {
+      "default_label": "Categoria"
+    },
+    "instagram_gallery": {
+      "default_follow_label": "Seguir"
+    },
+    "header_drawer": {
+      "secondary_nav_label": "Links secundários",
+      "cookie_preferences": "Preferências de cookies"
+    },
+    "product_faq": {
+      "q1": "Qual o tempo de envio?",
+      "a1_html": "<p>Normalmente 2 a 4 dias úteis para Portugal Continental, com envio gratuito através dos CTT. Para as ilhas (Açores e Madeira), o prazo estimado é de 5 a 8 dias úteis.</p>",
+      "q2": "Posso devolver?",
+      "a2_html": "<p>Sim, as devoluções são fáceis. Tem 14 dias após a receção da encomenda para devolver o artigo, desde que esteja na embalagem original, com as etiquetas e sem sinais de uso.</p>",
+      "q3": "O couro é genuíno?",
+      "a3_html": "<p>Sim, 100% pele legítima. Todos os nossos artigos são fabricados em Portugal com couro genuíno de alta qualidade — nunca usamos couro sintético, PU ou reconstituído.</p>",
+      "q4": "Quais os métodos de pagamento?",
+      "a4_html": "<p>Aceitamos MB Way, Multibanco (referência) e cartões de crédito e débito (Visa e Mastercard). Todas as transações são encriptadas.</p>",
+      "q5": "Como cuidar do artigo?",
+      "a5_html": "<p>Limpe com um pano macio e ligeiramente húmido e, de vez em quando, aplique um creme ou amaciador próprio para couro para manter a hidratação. Evite produtos químicos agressivos, lavar à máquina e fontes de calor direto (aquecedores ou sol forte). Se o artigo se molhar, deixe secar naturalmente.</p>"
     }
   }
 }

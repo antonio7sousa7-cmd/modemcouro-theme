@@ -441,7 +441,8 @@
   endif
   assign write_link = section.settings.button_link
   if write_link == blank
-    assign write_subject = 'Avaliação: ' | append: product.title | url_encode
+    assign write_subject_prefix = 'custom.product_reviews.write_review_subject' | t
+    assign write_subject = write_subject_prefix | append: product.title | url_encode
     assign write_link = 'mailto:' | append: shop.email | append: '?subject=' | append: write_subject
   endif
 -%}
@@ -460,7 +461,7 @@
       <div class="ss-reviews__summary">
         <div class="ss-reviews__score">
           <span class="ss-reviews__score-value">{{ average_label }}</span>
-          <span class="ss-reviews__score-stars" role="img" aria-label="{{ average_label }} de 5 estrelas">
+          <span class="ss-reviews__score-stars" role="img" aria-label="{{ average_label }} {{ 'custom.product_reviews.stars_label' | t }}">
             <span class="ss-reviews__score-stars-row">
               {%- for i in (1..5) -%}{{ star_svg }}{%- endfor -%}
             </span>
@@ -471,15 +472,20 @@
             </span>
           </span>
           <p class="ss-reviews__count">
-            {{ review_count }} {% if review_count == 1 %}avaliação{% else %}avaliações{% endif %}
+            {{ review_count }}
+            {% if review_count == 1 %}
+              {{ 'custom.product_reviews.review_singular' | t }}
+            {% else %}
+              {{ 'custom.product_reviews.review_plural' | t }}
+            {% endif %}
           </p>
           <span class="ss-reviews__badge">
             <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 8.5l3 3 6-6.5"/></svg>
-            Verificado
+            {{ 'custom.product_reviews.verified' | t }}
           </span>
         </div>
 
-        <ul class="ss-reviews__bars" aria-label="Distribuição das avaliações">
+        <ul class="ss-reviews__bars" aria-label="{{ 'custom.product_reviews.distribution_label' | t }}">
           {%- for n in (1..5) reversed -%}
             {%- liquid
               case n
@@ -509,7 +515,7 @@
     {%- endif -%}
 
     <div class="ss-reviews__viewport">
-      <button type="button" class="ss-reviews__arrow ss-reviews__arrow--prev" aria-label="Avaliações anteriores">
+      <button type="button" class="ss-reviews__arrow ss-reviews__arrow--prev" aria-label="{{ 'custom.product_reviews.previous_reviews' | t }}">
         <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M12.5 4.5L7 10l5.5 5.5"/></svg>
       </button>
       <div class="ss-reviews__list">
@@ -517,7 +523,7 @@
           {%- case block.type -%}
             {%- when 'review' -%}
               <div class="ss-review-card" {{ block.shopify_attributes }}>
-                <div class="ss-review-card__stars" role="img" aria-label="{{ block.settings.rating }} de 5 estrelas">
+                <div class="ss-review-card__stars" role="img" aria-label="{{ block.settings.rating }} {{ 'custom.product_reviews.stars_label' | t }}">
                   {%- for i in (1..5) -%}
                     {%- if i <= block.settings.rating -%}
                       <span>{{ star_svg }}</span>
@@ -529,7 +535,7 @@
                 <p class="ss-review-card__quote">&ldquo;{{ block.settings.review }}&rdquo;</p>
                 <p class="ss-review-card__name">
                   {{ block.settings.customer_name | escape }}
-                  <span class="ss-review-card__verified" role="img" aria-label="Comprador verificado">
+                  <span class="ss-review-card__verified" role="img" aria-label="{{ 'custom.product_reviews.verified_buyer' | t }}">
                     {{- 'icon-tick.svg' | inline_asset_content -}}
                   </span>
                 </p>
@@ -537,11 +543,11 @@
           {%- endcase -%}
         {%- endfor -%}
       </div>
-      <button type="button" class="ss-reviews__arrow ss-reviews__arrow--next" aria-label="Avaliações seguintes">
+      <button type="button" class="ss-reviews__arrow ss-reviews__arrow--next" aria-label="{{ 'custom.product_reviews.next_reviews' | t }}">
         <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M7.5 4.5L13 10l-5.5 5.5"/></svg>
       </button>
     </div>
-    <div class="ss-reviews__dots" role="group" aria-label="Paginação das avaliações" hidden></div>
+    <div class="ss-reviews__dots" role="group" aria-label="{{ 'custom.product_reviews.pagination_label' | t }}" hidden></div>
   </div>
 </div>
 
@@ -549,6 +555,7 @@
   (function () {
     var root = document.getElementById('ProductReviews-{{ section.id }}');
     if (!root) return;
+    var goToReviewLabel = {{ 'custom.product_reviews.go_to_review' | t | json }};
     var list = root.querySelector('.ss-reviews__list');
     var prev = root.querySelector('.ss-reviews__arrow--prev');
     var next = root.querySelector('.ss-reviews__arrow--next');
@@ -573,7 +580,7 @@
         var b = document.createElement('button');
         b.type = 'button';
         b.className = 'ss-reviews__dot';
-        b.setAttribute('aria-label', 'Ir para a avaliação ' + (i + 1));
+        b.setAttribute('aria-label', goToReviewLabel + ' ' + (i + 1));
         b.addEventListener('click', function () { goTo(i); });
         dotsBox.appendChild(b);
         return b;

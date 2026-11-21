@@ -429,7 +429,7 @@
                   {%- render 'editorial-look-card', product: block.settings.product_3 -%}
                 </div>
               {%- else -%}
-                <p class="editorial-look__empty">Escolhe os produtos deste look no editor de temas.</p>
+                <p class="editorial-look__empty">{{ 'custom.shop_the_look.empty_state' | t }}</p>
               {%- endif -%}
             </div>
           {%- endfor -%}

@@ -695,7 +695,7 @@
                 </div>
               {%- when 'sibling_colors' -%}
                 <div {{ block.shopify_attributes }}>
-                  <p class="ss-sibling-colors__label">Cores disponíveis</p>
+                  <p class="ss-sibling-colors__label">{{ 'products.product.sibling_colors_label' | t }}</p>
                   <div class="ss-sibling-colors__list">
                     {%- if product.featured_image -%}
                       <div class="ss-sibling-colors__swatch ss-sibling-colors__swatch--active">

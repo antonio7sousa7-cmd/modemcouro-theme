@@ -94,13 +94,14 @@
           {{ section.settings.heading }}
         </h2>
         {%- if section.settings.instagram_url != blank -%}
+          {%- assign default_follow_label = 'custom.instagram_gallery.default_follow_label' | t -%}
           <a
             href="{{ section.settings.instagram_url }}"
             class="link underlined-link"
             target="_blank"
             rel="noopener"
           >
-            {{ section.settings.instagram_label | default: 'Seguir' }}
+            {{ section.settings.instagram_label | default: default_follow_label }}
           </a>
         {%- endif -%}
       </div>

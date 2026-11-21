@@ -124,20 +124,20 @@
           if use_built_in
             case i
               when 1
-                assign question = 'Qual o tempo de envio?'
-                assign default_answer = '<p>Normalmente 2 a 4 dias úteis para Portugal Continental, com envio gratuito através dos CTT. Para as ilhas (Açores e Madeira), o prazo estimado é de 5 a 8 dias úteis.</p>'
+                assign question = 'custom.product_faq.q1' | t
+                assign default_answer = 'custom.product_faq.a1_html' | t
               when 2
-                assign question = 'Posso devolver?'
-                assign default_answer = '<p>Sim, as devoluções são fáceis. Tem 14 dias após a receção da encomenda para devolver o artigo, desde que esteja na embalagem original, com as etiquetas e sem sinais de uso.</p>'
+                assign question = 'custom.product_faq.q2' | t
+                assign default_answer = 'custom.product_faq.a2_html' | t
               when 3
-                assign question = 'O couro é genuíno?'
-                assign default_answer = '<p>Sim, 100% pele legítima. Todos os nossos artigos são fabricados em Portugal com couro genuíno de alta qualidade — nunca usamos couro sintético, PU ou reconstituído.</p>'
+                assign question = 'custom.product_faq.q3' | t
+                assign default_answer = 'custom.product_faq.a3_html' | t
               when 4
-                assign question = 'Quais os métodos de pagamento?'
-                assign default_answer = '<p>Aceitamos MB Way, Multibanco (referência) e cartões de crédito e débito (Visa e Mastercard). Todas as transações são encriptadas.</p>'
+                assign question = 'custom.product_faq.q4' | t
+                assign default_answer = 'custom.product_faq.a4_html' | t
               when 5
-                assign question = 'Como cuidar do artigo?'
-                assign default_answer = '<p>Limpe com um pano macio e ligeiramente húmido e, de vez em quando, aplique um creme ou amaciador próprio para couro para manter a hidratação. Evite produtos químicos agressivos, lavar à máquina e fontes de calor direto (aquecedores ou sol forte). Se o artigo se molhar, deixe secar naturalmente.</p>'
+                assign question = 'custom.product_faq.q5' | t
+                assign default_answer = 'custom.product_faq.a5_html' | t
             endcase
           else
             assign block_index = i | minus: 1

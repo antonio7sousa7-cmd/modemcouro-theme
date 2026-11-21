@@ -166,7 +166,11 @@
         "pick_up_available_at_html": "Pickup available at <span class=\"color-foreground\">{{ location_name }}</span>",
         "pick_up_unavailable_at_html": "Pickup currently unavailable at <span class=\"color-foreground\">{{ location_name }}</span>",
         "unavailable": "Couldn't load pickup availability",
-        "refresh": "Refresh"
+        "refresh": "Refresh",
+        "limited_stock": "Limited stock!",
+        "free_shipping": "Free shipping",
+        "ready_in_search": "ready in",
+        "ready_to_ship_in": "ready to ship in"
       },
       "price": {
         "from_price_html": "From {{ price }}",
@@ -187,7 +191,8 @@
       "taxes_included": "Taxes included.",
       "duties_included": "Duties included.",
       "duties_and_taxes_included": "Duties and taxes included.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
+      "sibling_colors_label": "Available colors"
     },
     "modal": {
       "label": "Media gallery"
@@ -1242,6 +1247,71 @@
           "many": "{{count}} items"
         }
       }
+    }
+  },
+  "custom": {
+    "contact_form": {
+      "error_status": "We couldn't send your message.",
+      "error_label": "Error:",
+      "phone_label": "Phone Number",
+      "preferred_contact_method": "Preferred Contact Method",
+      "phone_short": "Mobile",
+      "message_label": "Message"
+    },
+    "breadcrumbs": {
+      "home": "Home",
+      "nav_label": "Breadcrumb"
+    },
+    "product_trust": {
+      "fast_shipping": "Fast Shipping",
+      "made_in_portugal": "Made in Portugal",
+      "easy_returns": "Hassle-Free Returns",
+      "genuine_leather": "Genuine Leather"
+    },
+    "product_secure_checkout": {
+      "secure_payment": "Secure Payment"
+    },
+    "product_reviews": {
+      "stars_label": "out of 5 stars",
+      "review_singular": "review",
+      "review_plural": "reviews",
+      "verified": "Verified",
+      "distribution_label": "Review ratings distribution",
+      "previous_reviews": "Previous reviews",
+      "next_reviews": "Next reviews",
+      "pagination_label": "Review pagination",
+      "verified_buyer": "Verified buyer",
+      "go_to_review": "Go to review",
+      "write_review_subject": "Review: "
+    },
+    "luxury_faq": {
+      "search_placeholder": "Search frequently asked questions"
+    },
+    "shop_the_look": {
+      "empty_state": "Choose the products for this look in the theme editor.",
+      "default_product_title": "Product"
+    },
+    "category_grid": {
+      "default_label": "Category"
+    },
+    "instagram_gallery": {
+      "default_follow_label": "Follow"
+    },
+    "header_drawer": {
+      "secondary_nav_label": "Secondary links",
+      "cookie_preferences": "Cookie preferences"
+    },
+    "product_faq": {
+      "q1": "What is the shipping time?",
+      "a1_html": "<p>Usually 2 to 4 business days for mainland Portugal, with free shipping via CTT. For the islands (Azores and Madeira), the estimated time is 5 to 8 business days.</p>",
+      "q2": "Can I return an item?",
+      "a2_html": "<p>Yes, returns are easy. You have 14 days after receiving your order to return the item, as long as it's in its original packaging, with the tags attached and showing no signs of use.</p>",
+      "q3": "Is the leather genuine?",
+      "a3_html": "<p>Yes, 100% genuine leather. All our items are made in Portugal with high-quality genuine leather — we never use synthetic, PU, or reconstituted leather.</p>",
+      "q4": "What payment methods do you accept?",
+      "a4_html": "<p>We accept MB Way, Multibanco (reference), and credit and debit cards (Visa and Mastercard). All transactions are encrypted.</p>",
+      "q5": "How do I care for the item?",
+      "a5_html": "<p>Clean with a soft, slightly damp cloth and occasionally apply a leather cream or conditioner to keep it moisturized. Avoid harsh chemicals, machine washing, and direct heat sources (heaters or strong sun). If the item gets wet, let it air dry naturally.</p>"
     }
   }
 }

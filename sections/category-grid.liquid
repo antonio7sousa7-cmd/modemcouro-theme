@@ -139,6 +139,7 @@
             assign category_title = block.settings.collection.title
           endif
           assign category_title_safe = category_title | escape
+          assign default_category_label = 'custom.category_grid.default_label' | t
 
           assign category_url = '#'
           if block.settings.collection != blank
@@ -169,7 +170,7 @@
                 {{ 'collection-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
               {%- endif -%}
               <div class="category-grid__label">
-                <span>{{ category_title_safe | default: 'Categoria' }}</span>
+                <span>{{ category_title_safe | default: default_category_label }}</span>
               </div>
             </div>
           </a>

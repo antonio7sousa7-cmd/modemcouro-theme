@@ -1,0 +1,29 @@
+{%- comment -%}
+  Renders a minimalist inline language switcher (e.g. "PT | EN") that
+  auto-submits the enclosing localization form on click. Unlike
+  language-localization.liquid, this has no dropdown disclosure, so it
+  does not rely on the localization-form custom element.
+
+  Accepts:
+    - localPosition: unique id prefix for this instance
+{%- endcomment -%}
+
+<language-selector-minimal class="language-selector-minimal" data-type="language-selector-minimal">
+  {%- for language in localization.available_languages -%}
+    <button
+      type="button"
+      class="language-selector-minimal__link link link--text{% if language.iso_code == localization.language.iso_code %} language-selector-minimal__link--active{% endif %}"
+      {% if language.iso_code == localization.language.iso_code %}
+        aria-current="true"
+      {% endif %}
+      data-value="{{ language.iso_code }}"
+      id="{{ localPosition }}-{{ language.iso_code }}"
+    >
+      {{- language.iso_code | slice: 0, 2 | upcase -}}
+    </button>
+    {%- unless forloop.last -%}
+      <span class="language-selector-minimal__separator" aria-hidden="true">|</span>
+    {%- endunless -%}
+  {%- endfor -%}
+</language-selector-minimal>
+<input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">

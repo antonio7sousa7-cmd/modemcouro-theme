@@ -188,10 +188,10 @@
   endif
 -%}
 
-<nav class="ss-breadcrumbs page-width" aria-label="Navegação estrutural">
+<nav class="ss-breadcrumbs page-width" aria-label="{{ 'custom.breadcrumbs.nav_label' | t }}">
   <ol class="ss-breadcrumbs__list">
     <li class="ss-breadcrumbs__item">
-      <a class="ss-breadcrumbs__link" href="{{ routes.root_url }}">Início</a>
+      <a class="ss-breadcrumbs__link" href="{{ routes.root_url }}">{{ 'custom.breadcrumbs.home' | t }}</a>
     </li>
     {%- if breadcrumb_l1_title != blank -%}
       <li class="ss-breadcrumbs__item">
@@ -224,7 +224,7 @@
   {
     "@type": "ListItem",
     "position": 1,
-    "name": "Início",
+    "name": {{ 'custom.breadcrumbs.home' | t | json }},
     "item": {{ shop.url | append: routes.root_url | json }}
   }
   {%- assign breadcrumb_position = 2 -%}

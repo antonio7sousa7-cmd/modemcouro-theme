@@ -148,14 +148,26 @@
               lugar.
 
               Esse menu "footer" tem mais itens (Sobre, Pesquisar, Blog),
-              por isso filtra-se pelo título para mostrar só os 5 pedidos
-              aqui, pela mesma ordem em que já aparecem nesse menu.
+              por isso filtra-se pelo URL (não pelo título, que muda
+              consoante o idioma via Translate & Adapt) para mostrar só os
+              4 pedidos aqui: as 3 políticas nativas da Shopify, que usam
+              sempre o mesmo URL em inglês independentemente do idioma da
+              loja, e a página de FAQ, cujo handle também não muda com o
+              idioma — só o título e o conteúdo mudam.
             {%- endcomment -%}
-            {%- assign ss_secondary_titles = 'Política de Privacidade,Política de Reembolso,Termos de serviço,Perguntas Frequentes' | split: ',' -%}
-            <nav class="menu-drawer__secondary-nav" aria-label="Links secundários">
+            {%- assign ss_secondary_url_fragments = 'privacy-policy,refund-policy,terms-of-service,perguntas-frequentes' | split: ',' -%}
+            <nav class="menu-drawer__secondary-nav" aria-label="{{ 'custom.header_drawer.secondary_nav_label' | t }}">
               <ul class="menu-drawer__secondary-list list-unstyled" role="list">
                 {%- for link in linklists['footer'].links -%}
-                  {%- if ss_secondary_titles contains link.title -%}
+                  {%- liquid
+                    assign ss_link_is_secondary = false
+                    for fragment in ss_secondary_url_fragments
+                      if link.url contains fragment
+                        assign ss_link_is_secondary = true
+                      endif
+                    endfor
+                  -%}
+                  {%- if ss_link_is_secondary -%}
                     <li>
                       <a
                         href="{{ link.url }}"
@@ -175,7 +187,7 @@
                     class="menu-drawer__secondary-link link link--text"
                     onclick="window.Shopify && window.Shopify.customerPrivacy && window.Shopify.customerPrivacy.showPreferences && window.Shopify.customerPrivacy.showPreferences()"
                   >
-                    Preferências de cookies
+                    {{ 'custom.header_drawer.cookie_preferences' | t }}
                   </button>
                 </li>
               </ul>

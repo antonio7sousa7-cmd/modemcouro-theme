@@ -134,6 +134,24 @@
     color: rgb(var(--color-foreground)) !important;
   }
 
+  /* Center the inline nav on the screen itself (same technique as the
+     top bar's trust messages), instead of centering it only within
+     the logo<->icons gap. The gap isn't symmetric around the page
+     center (the logo and icon cluster aren't the same width), so
+     gap-centering visibly drifted off true center. Taking the menu
+     out of grid flow and centering it on .header directly (already
+     position: relative, see below) fixes that regardless of how wide
+     the logo or icons end up being. */
+  @media screen and (min-width: 990px) {
+    .header--middle-left.header--has-menu .header__inline-menu {
+      position: absolute;
+      grid-area: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: 0;
+    }
+  }
+
   /* Premium dropdown menu */
   .header .header__submenu.global-settings-popup {
     background-color: rgb(var(--color-background));
@@ -164,6 +182,57 @@
   .header .header__icon--cart .icon {
     height: 2rem;
     width: 2rem;
+  }
+
+  /* This header's language switcher (markup below) now only renders
+     when enable_language_selector is on for this section, which it
+     isn't — the switcher moved to the top announcement bar instead.
+     .header still needs position: relative as the anchor for the
+     centered inline nav above. Dawn's own header__icons/cart spacing
+     (base.css) is left untouched, so search/account/cart sit the same
+     distance from the right edge as the logo does from the left. */
+  .header {
+    position: relative;
+  }
+
+  .header-language-selector-minimal-wrapper {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0.4rem;
+  }
+
+  .language-selector-minimal {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .language-selector-minimal__link {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    font-size: 1rem;
+    color: rgba(var(--color-foreground), 0.55);
+    cursor: pointer;
+  }
+
+  .language-selector-minimal__link:hover {
+    color: rgb(var(--color-foreground));
+  }
+
+  .language-selector-minimal__link--active {
+    font-weight: 700;
+    color: rgb(var(--color-foreground));
+    cursor: default;
+  }
+
+  .language-selector-minimal__separator {
+    color: rgba(var(--color-foreground), 0.35);
   }
 {%- endstyle -%}
 
@@ -303,16 +372,6 @@
           </localization-form>
         {% endif %}
 
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <localization-form class="small-hide medium-hide" data-prevent-hide>
-            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-                {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
       </div>
       {% render 'header-search', input_id: 'Search-In-Modal' %}
 
@@ -368,6 +427,15 @@
           </div>
         {%- endif -%}
       </a>
+
+      {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+        <div class="header-language-selector-minimal-wrapper">
+          {%- form 'localization', id: 'HeaderLanguageFormMinimal', class: 'localization-form' -%}
+            <h2 class="visually-hidden" id="HeaderLanguageMinimalLabel">{{ 'localization.language_label' | t }}</h2>
+            {%- render 'language-selector-minimal', localPosition: 'HeaderLanguageMinimal' -%}
+          {%- endform -%}
+        </div>
+      {%- endif -%}
     </div>
   </header>
 </{{ header_tag }}>
@@ -491,6 +559,29 @@
   }
 
   customElements.define('sticky-header', StickyHeader);
+
+  if (!customElements.get('language-selector-minimal')) {
+    class LanguageSelectorMinimal extends HTMLElement {
+      constructor() {
+        super();
+        this.querySelectorAll('[data-value]').forEach((button) => {
+          button.addEventListener('click', this.onLanguageClick.bind(this));
+        });
+      }
+
+      onLanguageClick(event) {
+        const button = event.currentTarget;
+        if (button.hasAttribute('aria-current')) return;
+        const form = this.closest('form');
+        if (!form) return;
+        const input = form.querySelector('input[name="locale_code"]');
+        if (input) input.value = button.dataset.value;
+        form.submit();
+      }
+    }
+
+    customElements.define('language-selector-minimal', LanguageSelectorMinimal);
+  }
 {% endjavascript %}
 
 <script type="application/ld+json">

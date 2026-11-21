@@ -207,7 +207,8 @@
                   {%- endif -%}
                 </div>
                 <div class="shop-the-look__product-info">
-                  <p class="shop-the-look__product-title">{{ product.title | escape | default: 'Produto' }}</p>
+                  {%- assign default_product_title = 'custom.shop_the_look.default_product_title' | t -%}
+                  <p class="shop-the-look__product-title">{{ product.title | escape | default: default_product_title }}</p>
                   {%- if product != blank -%}
                     {% render 'price', product: product %}
                   {%- endif -%}
@@ -216,7 +217,7 @@
             {%- endfor -%}
           </div>
         {%- else -%}
-          <p class="shop-the-look__empty">Escolhe os produtos deste look no editor de temas.</p>
+          <p class="shop-the-look__empty">{{ 'custom.shop_the_look.empty_state' | t }}</p>
         {%- endif -%}
       </div>
     </div>

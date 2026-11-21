@@ -7,17 +7,19 @@
 
     <div class="pickup-availability-info">
       {%- if closest_location.available -%}
+        {%- assign ready_in_search = 'products.product.pickup_availability.ready_in_search' | t -%}
+        {%- assign ready_to_ship_in = 'products.product.pickup_availability.ready_to_ship_in' | t -%}
         <p class="caption-large pickup-availability-line pickup-availability-line--alert">
           <span class="svg-wrapper stock-alert-icon">{{ 'icon-alert.svg' | inline_asset_content }}</span>
-          Stock limitado!
+          {{ 'products.product.pickup_availability.limited_stock' | t }}
         </p>
         <p class="caption pickup-availability-line">
           <span class="svg-wrapper">{{ 'icon-tick.svg' | inline_asset_content }}</span>
-          {{- closest_location.pick_up_time | replace: 'pronto em', 'pronto para envio em' -}}
+          {{- closest_location.pick_up_time | replace: ready_in_search, ready_to_ship_in -}}
         </p>
         <p class="caption pickup-availability-line">
           <span class="svg-wrapper">{{ 'icon-tick.svg' | inline_asset_content }}</span>
-          Envios grátis com CTT
+          {{ 'products.product.pickup_availability.free_shipping' | t }}
         </p>
       {%- else -%}
         <p class="caption-large">

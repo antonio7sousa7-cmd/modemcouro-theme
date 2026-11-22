@@ -14,6 +14,7 @@
     padding: 0 15px;
     gap: 1.6rem;
     flex-wrap: nowrap;
+    position: relative;
   }
 
   .ss-announcement-{{ section.id }} .ss-announcement-social {
@@ -53,28 +54,19 @@
     line-height: 1;
   }
 
-  /* Center the trust messages on the bar itself, independent of the
-     social icons and localization selector beside it. A 3-column grid
-     (1fr auto 1fr) looked centered only when the left (social) and
-     right (localization) content happened to be similar widths; the
-     localization block is much wider than the social icons, so the
-     "equal" 1fr columns weren't actually equal (grid tracks don't
-     shrink a 1fr column below its content's min width by default),
-     pulling the middle column off-center. Taking the messages out of
-     flex flow and centering them on .ss-announcement-bar__inner
-     directly keeps them dead-center no matter what's on either side,
-     and leaves the social/localization flex positions untouched. */
+  /* Dead-center the messages on the bar itself (not just on whatever
+     room happens to be left), since that's what reads as "centered"
+     to a visitor looking at the whole header — the reserved max-width
+     just needs to clear the localization selector on the far right
+     (now a single merged country/language control, not two), which is
+     wider than the social icons on the left. */
   @media screen and (min-width: 750px) {
-    .ss-announcement-{{ section.id }} .ss-announcement-bar__inner {
-      position: relative;
-    }
-
     .ss-announcement-{{ section.id }} .ss-announcement-messages {
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      max-width: calc(100% - 22rem);
+      max-width: calc(100% - 46rem);
     }
   }
 
@@ -102,10 +94,6 @@
     padding-left: 1.2rem;
   }
 
-  .ss-announcement-{{ section.id }} .ss-announcement-localization localization-form + localization-form {
-    margin-left: 1rem;
-  }
-
   .ss-announcement-{{ section.id }} .ss-announcement-localization .localization-selector {
     font-size: 1.1rem;
     padding: 0;
@@ -118,9 +106,9 @@
     height: 1rem;
   }
 
-  /* Below 750px, show just a flag + language code ("🇵🇹 PT") instead of
-     the full endonym name ("Português (portugal)"), which is too wide
-     for the limited space next to the trust-message marquee. */
+  /* Below 750px, show just a flag + country code + currency ("🇵🇹 PT ·
+     EUR") instead of the full "Country | CUR €" label, which is too
+     wide for the limited space next to the trust-message marquee. */
   .ss-announcement-{{ section.id }} .localization-selector--abbreviate-mobile .localization-selector__label-full {
     display: none;
   }
@@ -190,6 +178,15 @@
     }
   }
 
+  /* Below 750px, the static messages are swapped for the scrolling
+     marquee (full sentences don't fit next to the selector at this
+     width): social icons stay on the left and the single merged
+     selector on the right (its normal flex position, nothing
+     pinned), and the marquee fills the actual room left between them
+     via flex, rather than being symmetrically centered on the bar —
+     centering it would cap its width to twice the *smaller* of the
+     two gaps (the narrower selector side), wasting the slack on the
+     wider social-icon side instead of giving it to the marquee. */
   @media screen and (max-width: 749px) {
     .ss-announcement-{{ section.id }} .ss-announcement-messages {
       position: absolute;
@@ -206,8 +203,68 @@
     .ss-announcement-{{ section.id }} .ss-announcement-marquee {
       display: block;
       flex: 1 1 auto;
-      min-width: 0;
+      min-width: 6rem;
       overflow: hidden;
+    }
+
+    /* Trim the social icons' and selector's own padding/gaps/font-size
+       (not their position) to free up more width for the marquee,
+       since neither is actually interactive content people need extra
+       tap-target room around at this size. */
+    .ss-announcement-{{ section.id }} .ss-announcement-social .list-social__link {
+      padding: 0.1rem;
+    }
+
+    .ss-announcement-{{ section.id }} .ss-announcement-localization {
+      padding-left: 0;
+    }
+
+    .ss-announcement-{{ section.id }} .ss-announcement-localization .localization-selector {
+      font-size: 0.85rem;
+      gap: 0.1rem;
+      min-width: 0;
+      width: auto;
+    }
+
+    /* .js .header-localization:not(.menu-drawer__localization)
+       .localization-form__select in component-localization-form.css
+       sets padding: 0 2.7rem 0 1.2rem (4 classes of specificity) on
+       this exact button, which is what was leaving a visible dead gap
+       between the text and the caret no matter what padding this
+       file set on .localization-selector (3 classes) — out-specified
+       it entirely. Matching it with one more class here beats it
+       outright instead of relying on source-order luck. The caret
+       itself is position: absolute (out of flow), so it needs *some*
+       reserved right padding here to land next to the text instead of
+       on top of it — just enough for the caret plus a small gap, not
+       the original rule's much bigger 2.7rem. */
+    .ss-announcement-{{ section.id }} .ss-announcement-localization .localization-form__select.localization-selector {
+      padding: 0 1rem 0 0;
+      width: auto;
+    }
+
+    .ss-announcement-{{ section.id }} .ss-announcement-localization .icon-caret {
+      right: 0.2rem !important;
+    }
+
+    .ss-announcement-{{ section.id }} .localization-selector__label-abbrev {
+      gap: 0.3rem;
+    }
+
+    .ss-announcement-{{ section.id }} .ss-announcement-localization .localization-selector svg {
+      width: 0.65rem;
+      height: 0.65rem;
+    }
+
+    /* One extra class of specificity vs. the generic svg rule above
+       (which, being `... .localization-selector svg`, actually out-
+       specifies a plain `.localization-selector__flag` class rule —
+       a type selector counts as a specificity tie-breaker above a
+       rule with one fewer class) so the flag can be sized up on its
+       own without the caret following it. */
+    .ss-announcement-{{ section.id }} .ss-announcement-localization .localization-selector .localization-selector__flag {
+      width: 0.9rem;
+      height: 0.9rem;
     }
   }
 {% endstyle %}
@@ -307,26 +364,52 @@
         <div class="ss-announcement-marquee__group">{{ announcement_items }}</div>
       </div>
     </div>
-    {%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
+    {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
       <div class="ss-announcement-localization">
-        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-          <localization-form>
-            {%- form 'localization', id: 'AnnouncementCountryForm', class: 'localization-form' -%}
-              <h2 class="visually-hidden" id="AnnouncementCountryLabel">{{ 'localization.country_label' | t }}</h2>
-              {%- render 'country-localization', localPosition: 'AnnouncementCountry' -%}
-            {%- endform -%}
-          </localization-form>
-        {% endif %}
-
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <localization-form>
-            {%- form 'localization', id: 'AnnouncementLanguageForm', class: 'localization-form' -%}
-              <h2 class="visually-hidden" id="AnnouncementLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-              {%- render 'language-localization', localPosition: 'AnnouncementLanguage', abbreviate_mobile: true -%}
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
+        <localization-form>
+          {%- form 'localization', id: 'AnnouncementCountryForm', class: 'localization-form' -%}
+            <h2 class="visually-hidden" id="AnnouncementCountryLabel">{{ 'localization.country_label' | t }}</h2>
+            {%- render 'country-localization',
+              localPosition: 'AnnouncementCountry',
+              abbreviate_mobile: true,
+              merge_locale: true
+            -%}
+          {%- endform -%}
+        </localization-form>
       </div>
+      <script>
+        (function () {
+          var pendingLocale;
+          try {
+            pendingLocale = sessionStorage.getItem('ssPendingLocale');
+            sessionStorage.removeItem('ssPendingLocale');
+          } catch (e) {
+            return;
+          }
+          if (!pendingLocale || pendingLocale === document.documentElement.lang) return;
+
+          var form = document.createElement('form');
+          form.method = 'post';
+          form.action = window.location.pathname + '/localization';
+          form.hidden = true;
+          var fields = {
+            form_type: 'localization',
+            utf8: '✓',
+            _method: 'put',
+            return_to: window.location.pathname + window.location.search,
+            locale_code: pendingLocale,
+          };
+          for (var name in fields) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = fields[name];
+            form.appendChild(input);
+          }
+          document.body.appendChild(form);
+          form.submit();
+        })();
+      </script>
     {%- endif -%}
   </div>
 </div>

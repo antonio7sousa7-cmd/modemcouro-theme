@@ -147,7 +147,7 @@
                 class="badge badge--bottom-left ss-badge-last-unit color-{{ settings.sold_out_badge_color_scheme }}"
               >
                 {{- 'icon-last-unit.svg' | inline_asset_content -}}
-                Apenas 1 disponível!
+                {{- 'products.product.last_unit_available' | t -}}
               </span>
             {%- endif -%}
           </div>
@@ -579,7 +579,7 @@
               class="badge badge--bottom-left ss-badge-last-unit color-{{ settings.sold_out_badge_color_scheme }}"
             >
               {{- 'icon-last-unit.svg' | inline_asset_content -}}
-              Apenas 1 disponível!
+              {{- 'products.product.last_unit_available' | t -}}
             </span>
           {%- endif -%}
         </div>

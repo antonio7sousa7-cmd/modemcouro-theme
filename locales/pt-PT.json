@@ -119,6 +119,7 @@
       "add_to_cart": "Adicionar ao carrinho",
       "description": "Descrição",
       "on_sale": "Em promoção!",
+      "last_unit_available": "Apenas 1 disponível!",
       "product_variants": "Variantes de produtos",
       "sibling_colors_label": "Cores disponíveis",
       "quantity": {

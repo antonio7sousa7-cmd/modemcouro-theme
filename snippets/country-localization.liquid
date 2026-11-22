@@ -3,6 +3,23 @@
 
   Accepts:
     - localPosition: pass in the position in which the form is coming up to create specific IDs
+    - abbreviate_mobile: when true, the closed button shows just the
+      country code (e.g. "PT") below 750px, and the full "Country |
+      CUR $" label at 750px and up. The currency only shows in the
+      closed button at the full-label width; it's still visible per
+      country in the open dropdown list either way. Mirrors the same
+      param on language-localization.liquid, and reuses its CSS
+      (.localization-selector--abbreviate-mobile / __label-full /
+      __label-abbrev), so both selectors stay visually consistent.
+    - merge_locale: when true, each country link also carries a
+      data-locale (Portugal -> pt-PT, every other country -> en, since
+      there's no per-country translation yet). localization-form.js
+      picks that up and follows the country switch with a second,
+      automatic locale switch, so this one control replaces a separate
+      language picker. Only opt in where there's no language-
+      localization snippet alongside it, so the other callers (header,
+      footer, mobile drawer) keep their independent language selector
+      unaffected.
 {%- endcomment -%}
 
 {%- liquid
@@ -28,16 +45,184 @@
 <div class="disclosure">
   <button
     type="button"
-    class="disclosure__button localization-form__select localization-selector link link--text caption-large"
+    class="disclosure__button localization-form__select localization-selector link link--text caption-large{% if abbreviate_mobile %} localization-selector--abbreviate-mobile{% endif %}"
     aria-expanded="false"
     aria-controls="{{ localPosition }}-country-results"
     aria-describedby="{{ localPosition }}Label"
   >
-    <span>
+    {%- if abbreviate_mobile -%}
+      {%- case localization.country.iso_code -%}
+          {%- when 'PT' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#DA291C" />
+              <rect width="8" height="14" fill="#046A38" />
+              <circle cx="8" cy="7" r="2.6" fill="#FFCC00" stroke="#DA291C" stroke-width="0.6" />
+            </svg>
+          {%- when 'DE' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="4.67" fill="#000000" />
+              <rect y="4.67" width="20" height="4.67" fill="#DD0000" />
+              <rect y="9.33" width="20" height="4.67" fill="#FFCE00" />
+            </svg>
+          {%- when 'AT' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#ED2939" />
+              <rect y="4.67" width="20" height="4.67" fill="#FFFFFF" />
+            </svg>
+          {%- when 'BE' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#FDDA24" />
+              <rect width="6.67" height="14" fill="#000000" />
+              <rect x="13.33" width="6.67" height="14" fill="#EF3340" />
+            </svg>
+          {%- when 'BG' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#FFFFFF" />
+              <rect y="4.67" width="20" height="4.67" fill="#00966E" />
+              <rect y="9.33" width="20" height="4.67" fill="#D62612" />
+            </svg>
+          {%- when 'HR' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#FF0000" />
+              <rect y="4.67" width="20" height="4.67" fill="#FFFFFF" />
+              <rect y="9.33" width="20" height="4.67" fill="#0000FF" />
+            </svg>
+          {%- when 'CY' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#FFFFFF" />
+              <ellipse cx="10" cy="7" rx="5" ry="2.6" fill="#D57800" />
+            </svg>
+          {%- when 'CZ' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="7" fill="#FFFFFF" />
+              <rect y="7" width="20" height="7" fill="#D7141A" />
+              <polygon points="0,0 0,14 8,7" fill="#11457E" />
+            </svg>
+          {%- when 'DK' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#C8102E" />
+              <rect x="6.5" width="2.2" height="14" fill="#FFFFFF" />
+              <rect y="5.9" width="20" height="2.2" fill="#FFFFFF" />
+            </svg>
+          {%- when 'EE' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="4.67" fill="#0072CE" />
+              <rect y="4.67" width="20" height="4.67" fill="#000000" />
+              <rect y="9.33" width="20" height="4.67" fill="#FFFFFF" />
+            </svg>
+          {%- when 'FI' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#FFFFFF" />
+              <rect x="6.5" width="2.2" height="14" fill="#003580" />
+              <rect y="5.9" width="20" height="2.2" fill="#003580" />
+            </svg>
+          {%- when 'FR' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#FFFFFF" />
+              <rect width="6.67" height="14" fill="#0055A4" />
+              <rect x="13.33" width="6.67" height="14" fill="#EF4135" />
+            </svg>
+          {%- when 'GR' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#0D5EAF" />
+              <rect y="0" width="20" height="1.56" fill="#FFFFFF" />
+              <rect y="3.11" width="20" height="1.56" fill="#FFFFFF" />
+              <rect y="6.22" width="20" height="1.56" fill="#FFFFFF" />
+              <rect y="9.33" width="20" height="1.56" fill="#FFFFFF" />
+              <rect y="12.44" width="20" height="1.56" fill="#FFFFFF" />
+            </svg>
+          {%- when 'HU' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="4.67" fill="#CE2939" />
+              <rect y="4.67" width="20" height="4.67" fill="#FFFFFF" />
+              <rect y="9.33" width="20" height="4.67" fill="#477050" />
+            </svg>
+          {%- when 'IE' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#FFFFFF" />
+              <rect width="6.67" height="14" fill="#169B62" />
+              <rect x="13.33" width="6.67" height="14" fill="#FF883E" />
+            </svg>
+          {%- when 'IT' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#FFFFFF" />
+              <rect width="6.67" height="14" fill="#008C45" />
+              <rect x="13.33" width="6.67" height="14" fill="#CD212A" />
+            </svg>
+          {%- when 'LV' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#9E3039" />
+              <rect y="5.6" width="20" height="2.8" fill="#FFFFFF" />
+            </svg>
+          {%- when 'LT' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="4.67" fill="#FDB913" />
+              <rect y="4.67" width="20" height="4.67" fill="#006A44" />
+              <rect y="9.33" width="20" height="4.67" fill="#C1272D" />
+            </svg>
+          {%- when 'LU' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="4.67" fill="#ED2939" />
+              <rect y="4.67" width="20" height="4.67" fill="#FFFFFF" />
+              <rect y="9.33" width="20" height="4.67" fill="#00A1DE" />
+            </svg>
+          {%- when 'MT' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#FFFFFF" />
+              <rect x="10" width="10" height="14" fill="#CF142B" />
+            </svg>
+          {%- when 'NL' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="4.67" fill="#AE1C28" />
+              <rect y="4.67" width="20" height="4.67" fill="#FFFFFF" />
+              <rect y="9.33" width="20" height="4.67" fill="#21468B" />
+            </svg>
+          {%- when 'PL' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="7" fill="#FFFFFF" />
+              <rect y="7" width="20" height="7" fill="#DC143C" />
+            </svg>
+          {%- when 'RO' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#FCD116" />
+              <rect width="6.67" height="14" fill="#002B7F" />
+              <rect x="13.33" width="6.67" height="14" fill="#CE1126" />
+            </svg>
+          {%- when 'SK' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="4.67" fill="#FFFFFF" />
+              <rect y="4.67" width="20" height="4.67" fill="#0B4EA2" />
+              <rect y="9.33" width="20" height="4.67" fill="#EE1C25" />
+            </svg>
+          {%- when 'SI' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="4.67" fill="#FFFFFF" />
+              <rect y="4.67" width="20" height="4.67" fill="#005CE7" />
+              <rect y="9.33" width="20" height="4.67" fill="#ED1C24" />
+            </svg>
+          {%- when 'ES' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#AA151B" />
+              <rect y="3.5" width="20" height="7" fill="#F1BF00" />
+            </svg>
+          {%- when 'SE' -%}
+            <svg class="localization-selector__flag" viewBox="0 0 20 14" width="16" height="12" aria-hidden="true">
+              <rect width="20" height="14" fill="#006AA7" />
+              <rect x="6.5" width="2.2" height="14" fill="#FECC02" />
+              <rect y="5.9" width="20" height="2.2" fill="#FECC02" />
+            </svg>
+      {%- endcase -%}
+    {%- endif -%}
+    <span class="localization-selector__label-full">
       {{- localization.country.name }} |
       {{ localization.country.currency.iso_code }}
       {{ localization.country.currency.symbol -}}
     </span>
+    {%- if abbreviate_mobile -%}
+      <span class="localization-selector__label-abbrev">
+        {{- localization.country.iso_code -}}
+      </span>
+    {%- endif -%}
     {{ 'icon-caret.svg' | inline_asset_content }}
   </button>
   <div class="disclosure__list-wrapper country-selector" hidden>
@@ -102,6 +287,9 @@
                   aria-current="true"
                 {% endif %}
                 data-value="{{ country.iso_code }}"
+                {% if merge_locale %}
+                  data-locale="{% if country.iso_code == 'PT' %}pt-PT{% else %}en{% endif %}"
+                {% endif %}
                 id="{{ country.name }}"
               >
                 <span
@@ -131,6 +319,9 @@
                 aria-current="true"
               {% endif %}
               data-value="{{ country.iso_code }}"
+              {% if merge_locale %}
+                data-locale="{% if country.iso_code == 'PT' %}pt-PT{% else %}en{% endif %}"
+              {% endif %}
               id="{{ country.name }}"
             >
               <span

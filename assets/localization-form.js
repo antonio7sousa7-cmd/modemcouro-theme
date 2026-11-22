@@ -106,6 +106,19 @@ if (!customElements.get('localization-form')) {
         event.preventDefault();
         const form = this.querySelector('form');
         this.elements.input.value = event.currentTarget.dataset.value;
+        // Shopify's native localization form only acts on one field per
+        // submission: posting country_code and locale_code together
+        // silently changes the country and ignores the locale. Stash the
+        // locale we want so a second, automatic submission (see
+        // announcement-bar.liquid) can apply it right after this one
+        // reloads the page.
+        if (event.currentTarget.dataset.locale) {
+          try {
+            sessionStorage.setItem('ssPendingLocale', event.currentTarget.dataset.locale);
+          } catch (e) {
+            /* sessionStorage unavailable (private mode, etc.): locale just won't follow the country */
+          }
+        }
         if (form) form.submit();
       }
 

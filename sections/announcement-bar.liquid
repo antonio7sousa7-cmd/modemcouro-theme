@@ -247,6 +247,24 @@
       right: 0.2rem !important;
     }
 
+    /* .header-localization:not(.menu-drawer__localization)
+       .disclosure__list-wrapper in component-localization-form.css sets
+       top: 100%; bottom: initial; right: 0 unconditionally (3 classes),
+       which out-specifies this file's own mobile bottom-sheet rule
+       (.disclosure__list-wrapper.country-selector, 2 classes, sets
+       bottom: -1rem). The announcement bar carries .header-localization
+       (needed elsewhere, see the padding override above), so on mobile
+       the panel was opening pinned top: 100% of the *viewport* (it's
+       position: fixed) — i.e. just off the bottom edge of the screen,
+       behind the dark overlay, with nothing visible to tap. Restore the
+       bottom-sheet position at higher specificity than that rule. */
+    .ss-announcement-{{ section.id }} .ss-announcement-localization .localization-form .disclosure__list-wrapper {
+      top: initial;
+      bottom: -1rem;
+      right: initial;
+      left: 0;
+    }
+
     .ss-announcement-{{ section.id }} .localization-selector__label-abbrev {
       gap: 0.3rem;
     }

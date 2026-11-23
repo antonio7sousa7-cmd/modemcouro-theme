@@ -673,6 +673,39 @@
             {%- endif -%}
           {%- endfor -%}
 
+          {%- comment -%}
+            Size guide modal (snippets/size-guide-modal.liquid): only for
+            coats, identified by product type, tags, or collection
+            membership, not a manual per-product metafield — kept
+            hidden on bags/accessories by design.
+          {%- endcomment -%}
+          {%- liquid
+            assign is_coat_product = false
+            assign product_type_downcase = product.type | downcase
+            if product_type_downcase contains 'casaco' or product_type_downcase contains 'jacket'
+              assign is_coat_product = true
+            endif
+            unless is_coat_product
+              for tag in product.tags
+                assign tag_downcase = tag | downcase
+                if tag_downcase contains 'casaco' or tag_downcase contains 'jacket'
+                  assign is_coat_product = true
+                  break
+                endif
+              endfor
+            endunless
+            unless is_coat_product
+              for product_collection in product.collections
+                assign collection_title_downcase = product_collection.title | downcase
+                assign collection_handle_downcase = product_collection.handle | downcase
+                if collection_title_downcase contains 'casaco' or collection_title_downcase contains 'jacket' or collection_handle_downcase contains 'casaco' or collection_handle_downcase contains 'jacket'
+                  assign is_coat_product = true
+                  break
+                endif
+              endfor
+            endunless
+          -%}
+
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when '@app' -%}
@@ -1082,7 +1115,8 @@
                   product: product,
                   block: block,
                   product_form_id: product_form_id,
-                  size_guide_block: size_guide_block
+                  size_guide_block: size_guide_block,
+                  is_coat_product: is_coat_product
                 %}
               {%- when 'buy_buttons' -%}
                 {%- render 'product-trust-icons' -%}
@@ -1324,6 +1358,10 @@
     </div>
 
     {% render 'product-media-modal', variant_images: variant_images %}
+
+    {%- if is_coat_product -%}
+      {% render 'size-guide-modal' %}
+    {%- endif -%}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
     {%- for block in popups -%}

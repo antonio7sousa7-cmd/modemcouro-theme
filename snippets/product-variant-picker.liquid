@@ -9,8 +9,10 @@
     a "Tamanho"/"Size" option, its opener link is rendered aligned to the
     right of that option's label instead of wherever "popup" sits in the
     block order.
+  - is_coat_product: {Boolean} whether the size guide link/modal should
+    show at all (coats only).
   Usage:
-  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id, size_guide_block: size_guide_block %}
+  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id, size_guide_block: size_guide_block, is_coat_product: is_coat_product %}
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
   <variant-selects
@@ -24,7 +26,7 @@
         {%- continue -%}
       {%- endif -%}
       {%- assign show_size_guide = false -%}
-      {%- if size_guide_block and product.metafields.custom.guia_de_tamanhos != blank -%}
+      {%- if size_guide_block and is_coat_product -%}
         {%- if option_name_downcase == 'tamanho' or option_name_downcase == 'size' -%}
           {%- assign show_size_guide = true -%}
         {%- endif -%}

@@ -1,0 +1,227 @@
+{% comment %}
+  Renders the custom coat size-guide modal, opened by
+  product-size-guide-link.liquid's "modal-opener" button. Reuses the
+  <modal-dialog> custom element already defined in global.js (show/hide,
+  Esc to close, click outside the content to close, focus trap) but with
+  its own bespoke markup/styling instead of the generic page-content
+  "product-popup-modal" the "popup" block normally opens.
+
+  Usage:
+  {% render 'size-guide-modal' %}
+{% endcomment %}
+{%- liquid
+  assign contact_url = routes.root_url | append: 'pages/contact'
+  if pages.contact
+    assign contact_url = pages.contact.url
+  endif
+-%}
+
+{% style %}
+  .size-guide-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow-y: auto;
+    padding: 4rem 1.5rem;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .size-guide-modal[open] {
+    display: block;
+  }
+
+  .size-guide-modal__content {
+    position: relative;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    max-width: 540px;
+    width: 92%;
+    padding: 24px;
+  }
+
+  .size-guide-modal__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: transparent;
+    border: 0;
+    padding: 0.6rem;
+    line-height: 1;
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+
+  .size-guide-modal__close:hover {
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .size-guide-modal__title {
+    margin: 0 0 0.6rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: left;
+  }
+
+  .size-guide-modal__subtitle {
+    margin: 0 0 1.6rem;
+    font-size: 1.4rem;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.75);
+  }
+
+  .size-guide-modal__table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .size-guide-modal__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .size-guide-modal__table thead {
+    background: #f5f4f2;
+  }
+
+  .size-guide-modal__table th {
+    padding: 12px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .size-guide-modal__table td {
+    padding: 12px 14px;
+    background: #ffffff;
+    border-bottom: 1px solid #eeeeee;
+    text-align: center;
+    white-space: nowrap;
+  }
+{% endstyle %}
+
+<modal-dialog id="SizeGuideModal-{{ section.id }}" class="size-guide-modal">
+  <div
+    role="dialog"
+    aria-label="{{ 'products.product.size_guide_modal.title' | t }}"
+    aria-modal="true"
+    class="size-guide-modal__content"
+    tabindex="-1"
+  >
+    <button
+      id="ModalClose-SizeGuide-{{ section.id }}"
+      type="button"
+      class="size-guide-modal__close"
+      aria-label="{{ 'accessibility.close' | t }}"
+    >
+      &times;
+    </button>
+
+    <h2 class="size-guide-modal__title">{{ 'products.product.size_guide_modal.title' | t }}</h2>
+    <p class="size-guide-modal__subtitle">
+      {{ 'products.product.size_guide_modal.subtitle_html' | t: link: contact_url }}
+    </p>
+
+    <div class="size-guide-modal__table-wrapper">
+      <table class="size-guide-modal__table">
+        <thead>
+          <tr>
+            <th>{{ 'products.product.size_guide_modal.column_standard' | t }}</th>
+            <th>{{ 'products.product.size_guide_modal.column_uk' | t }}</th>
+            <th>{{ 'products.product.size_guide_modal.column_france' | t }}</th>
+            <th>{{ 'products.product.size_guide_modal.column_germany' | t }}</th>
+            <th>{{ 'products.product.size_guide_modal.column_usa' | t }}</th>
+            <th>{{ 'products.product.size_guide_modal.column_eu' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>XXXS</td>
+            <td>4</td>
+            <td>32</td>
+            <td>30</td>
+            <td>0</td>
+            <td>32</td>
+          </tr>
+          <tr>
+            <td>XXS</td>
+            <td>6</td>
+            <td>34</td>
+            <td>32</td>
+            <td>2</td>
+            <td>34</td>
+          </tr>
+          <tr>
+            <td>XS</td>
+            <td>8</td>
+            <td>36</td>
+            <td>34</td>
+            <td>4</td>
+            <td>36</td>
+          </tr>
+          <tr>
+            <td>S</td>
+            <td>10</td>
+            <td>38</td>
+            <td>36</td>
+            <td>6</td>
+            <td>38</td>
+          </tr>
+          <tr>
+            <td>M</td>
+            <td>12</td>
+            <td>40</td>
+            <td>38</td>
+            <td>8</td>
+            <td>40</td>
+          </tr>
+          <tr>
+            <td>L</td>
+            <td>14</td>
+            <td>42</td>
+            <td>40</td>
+            <td>10</td>
+            <td>42</td>
+          </tr>
+          <tr>
+            <td>XL</td>
+            <td>16</td>
+            <td>44</td>
+            <td>42</td>
+            <td>12</td>
+            <td>44</td>
+          </tr>
+          <tr>
+            <td>XXL</td>
+            <td>18</td>
+            <td>46</td>
+            <td>44</td>
+            <td>14</td>
+            <td>46</td>
+          </tr>
+          <tr>
+            <td>XXXL</td>
+            <td>20</td>
+            <td>48</td>
+            <td>46</td>
+            <td>16</td>
+            <td>48</td>
+          </tr>
+          <tr>
+            <td>4XL</td>
+            <td>22</td>
+            <td>50</td>
+            <td>48</td>
+            <td>18</td>
+            <td>50</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</modal-dialog>

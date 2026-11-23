@@ -129,6 +129,17 @@
       "sku": "SKU",
       "on_sale": "Sale",
       "last_unit_available": "Only 1 left!",
+      "size_guide": "Size Guide",
+      "size_guide_modal": {
+        "title": "Size Guide",
+        "subtitle_html": "Need a custom size or sizing advice? <a href=\"{{ link }}\" class=\"underlined-link\">Contact us!</a>",
+        "column_standard": "Standard",
+        "column_uk": "UK",
+        "column_france": "France",
+        "column_germany": "Germany",
+        "column_usa": "USA",
+        "column_eu": "EU"
+      },
       "product_variants": "Product variants",
       "media": {
         "gallery_viewer": "Gallery Viewer",

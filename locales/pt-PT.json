@@ -120,6 +120,17 @@
       "description": "Descrição",
       "on_sale": "Em promoção!",
       "last_unit_available": "Apenas 1 disponível!",
+      "size_guide": "Guia de Tamanhos",
+      "size_guide_modal": {
+        "title": "Guia de Tamanhos",
+        "subtitle_html": "Precisa de um tamanho personalizado ou aconselhamento sobre tamanhos? <a href=\"{{ link }}\" class=\"underlined-link\">Contacte-nos!</a>",
+        "column_standard": "Padrão",
+        "column_uk": "Reino Unido",
+        "column_france": "França",
+        "column_germany": "Alemanha",
+        "column_usa": "EUA",
+        "column_eu": "UE"
+      },
       "product_variants": "Variantes de produtos",
       "sibling_colors_label": "Cores disponíveis",
       "quantity": {
